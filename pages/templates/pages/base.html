@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="m-0 p-0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Heaven - Premium Athletic Wear</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+</head>
+<body class="m-0 p-0">
+    <!-- Top Bar -->
+    <div class="bg-gradient-to-b from-black to-gray-900 text-white text-xs py-0.5">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <span class="tracking-wide">FREE U.S. Standard Shipping Orders $99+ & FREE Returns</span>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-white hover:text-gray-300">Need Help?</a>
+                <a href="#" class="text-white hover:text-gray-300">US</a>
+                <a href="#" class="text-white hover:text-gray-300">English</a>
+                <a href="#" class="text-white hover:text-gray-300">Register</a>
+                <a href="#" class="text-white hover:text-gray-300">Log In</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-gray-900 text-white font-bold antialiased" style="font-family: 'Century Gothic', sans-serif;">
+        <div class="container mx-auto flex justify-between items-center py-4">
+            <a class="flex items-center" href="#">
+                <img src="{% static 'images/logo.png' %}" alt="Logo" class="h-8">
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a class="hover:text-gray-300" href="#">New & Featured</a>
+                <a class="hover:text-gray-300" href="#">Men</a>
+                <a class="hover:text-gray-300" href="#">Women</a>
+                <a class="hover:text-gray-300" href="#">Kids</a>
+                <a class="hover:text-gray-300" href="#">Shoes</a>
+                <a class="hover:text-gray-300" href="#">Curry</a>
+                <a class="hover:text-gray-300" href="#">Outlet</a>
+            </div>
+            <div class="flex items-center space-x-3">
+                <input class="border border-gray-600 bg-gray-800 text-white rounded px-2 py-1" type="search" placeholder="Search UA">
+                <button class="bg-gray-700 text-white px-3 py-1 rounded"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-5 mt-5">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <h5 class="font-bold">About Us</h5>
+                    <ul class="list-none">
+                        <li><a href="#" class="text-white">Our Story</a></li>
+                        <li><a href="#" class="text-white">Careers</a></li>
+                        <li><a href="#" class="text-white">Press</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold">Support</h5>
+                    <ul class="list-none">
+                        <li><a href="#" class="text-white">Contact Us</a></li>
+                        <li><a href="#" class="text-white">Shipping</a></li>
+                        <li><a href="#" class="text-white">Returns</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold">Shop</h5>
+                    <ul class="list-none">
+                        <li><a href="#" class="text-white">Men</a></li>
+                        <li><a href="#" class="text-white">Women</a></li>
+                        <li><a href="#" class="text-white">Kids</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold">Connect</h5>
+                    <div class="flex space-x-3">
+                        <a href="#" class="text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html> 
