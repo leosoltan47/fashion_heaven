@@ -1,8 +1,5 @@
 from django.db import models
 
-# TODO: Add collection table to add categories, collections and other groupings stored
-# in a single table
-
 
 class Features(models.Model):
     """
@@ -26,15 +23,29 @@ class Products(models.Model):
 
     Attributes:
         name (CharField): The name of the product.
+        category (CharField): Category product belongs to.
         price_in_dollars (DecimalField): The base price of the product in dollars.
         description (TextField): A detailed description of the product.
         feature (ManyToManyField): The features associated with this product.
+        gender_and_age (CharField): Target gender and age group of the product.
     """
 
+    class GenderAndAge(models.TextChoices):
+        WOMEN = "W", "Women"
+        MEN = "M", "Men"
+        UNISEX = "U", "Unisex"
+        GIRLS = "G", "Girls"
+        BOYS = "B", "Boys"
+        KIDS = "K", "Kids"
+
     name = models.CharField(max_length=50)
+    category = models.CharField(max_length=50, null=True)
     # Allow to store prices up to 99999,99 dollars
     price_in_dollars = models.DecimalField(
-        name="price", default=0, max_digits=7, decimal_places=2
+        name="price", default=0.00, max_digits=7, decimal_places=2
+    )
+    gender_and_age = models.CharField(
+        max_length=1, choices=GenderAndAge.choices, default=GenderAndAge.UNISEX
     )
     description = models.TextField()
     feature = models.ManyToManyField(Features)
@@ -77,3 +88,20 @@ class ProductImages(models.Model):
 
     content = models.ImageField()
     product_detail = models.ForeignKey(ProductDetails, on_delete=models.CASCADE)
+
+
+class Collections(models.Model):
+    """
+    Represents a curated grouping of products, such as a seasonal collection or a themed assortment.
+
+    This model enables :model:`pages.Products` to be associated with multiple collections, and collections to contain multiple products.
+
+    Attributes:
+        name (CharField): Name of the collection (e.g. 'Summer Sale', 'New Arrivals').
+        description (TextField): A detailed description of the collection
+        product (ManyToManyField): Products associated with this collection
+    """
+
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+    product = models.ManyToManyField(Products)
