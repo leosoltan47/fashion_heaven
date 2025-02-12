@@ -1,124 +1,109 @@
 {% extends 'pages/base.html' %}
 {% load static %}
-
 {% block content %}
-<!-- Hero Section -->
-<section class="hero-section position-relative">
-    <div class="hero-slider">
-        <div class="hero-slide">
-            <img src="{% static 'images/hero-1.jpg' %}" alt="Hero Image" class="w-100">
-            <div class="hero-content position-absolute top-50 start-50 translate-middle text-center text-light">
-                <h1 class="display-3 fw-bold">UA ICON COLLECTION</h1>
-                <p class="lead">Designed to push you beyond your limits</p>
-                <a href="/collection/ua-icon" class="btn btn-light btn-lg">Shop Now</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Featured Products -->
-<section class="featured-products py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">Featured</h2>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="product-card">
-                    <img src="{% static 'images/product-1.jpg' %}" alt="Product 1" class="img-fluid">
-                    <div class="product-info p-3">
-                        <h5>Men's UA Fleece Hoodie</h5>
-                        <p class="text-muted">$65.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product-card">
-                    <img src="{% static 'images/product-2.jpg' %}" alt="Product 2" class="img-fluid">
-                    <div class="product-info p-3">
-                        <h5>UA Training Pants</h5>
-                        <p class="text-muted">$55.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product-card">
-                    <img src="{% static 'images/product-3.jpg' %}" alt="Product 3" class="img-fluid">
-                    <div class="product-info p-3">
-                        <h5>Women's UA Tech™ Crew</h5>
-                        <p class="text-muted">$45.00</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product-card">
-                    <img src="{% static 'images/product-4.jpg' %}" alt="Product 4" class="img-fluid">
-                    <div class="product-info p-3">
-                        <h5>UA Training Joggers</h5>
-                        <p class="text-muted">$75.00</p>
-                    </div>
+    <!-- Hero Section -->
+    <section class="hero-section position-relative">
+        <div class="hero-slider">
+            <div class="hero-slide">
+                <img src="{% static 'images/hero-1.jpg' %}" alt="Hero Image" class="w-100">
+                <div class="hero-content position-absolute top-50 start-50 translate-middle text-center text-light">
+                    <h1 class="display-3 fw-bold">UA ICON COLLECTION</h1>
+                    <p class="lead">Designed to push you beyond your limits</p>
+                    <a href="/collection/ua-icon" class="btn btn-light btn-lg">Shop Now</a>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-<!-- Collections Banner -->
-<section class="collections-banner py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="collection-card position-relative mb-4">
-                    <img src="{% static 'images/collection-1.jpg' %}" alt="Project Rock" class="img-fluid">
-                    <div class="collection-content position-absolute bottom-0 start-0 p-4 text-light">
-                        <h3>PROJECT ROCK</h3>
-                        <p>'DRIVER'S SEAT' COLLECTION</p>
-                        <a href="/collection/project-rock" class="btn btn-outline-light">Shop Now</a>
+    </section>
+    <!-- Featured Products -->
+    <section class="featured-products py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Featured</h2>
+            <div class="row">
+                {% for index, product in enumerated_products %}
+                    <div class="col-md-3">
+                        <div class="product-card">
+                            <img src="{% static 'images/product-1.jpg' %}"
+                                 alt="Product {{ index }}"
+                                 class="img-fluid">
+                            <div class="product-info p-3">
+                                <h5>{{ product.name }}</h5>
+                                <p class="text-muted">${{ product.price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Collections Banner -->
+    <section class="collections-banner py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="collection-card position-relative mb-4">
+                        <img src="{% static 'images/collection-1.jpg' %}"
+                             alt="Project Rock"
+                             class="img-fluid">
+                        <div class="collection-content position-absolute bottom-0 start-0 p-4 text-light">
+                            <h3>PROJECT ROCK</h3>
+                            <p>'DRIVER'S SEAT' COLLECTION</p>
+                            <a href="/collection/project-rock" class="btn btn-outline-light">Shop Now</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="collection-card position-relative">
-                    <img src="{% static 'images/collection-2.jpg' %}" alt="Training Collection" class="img-fluid">
-                    <div class="collection-content position-absolute bottom-0 start-0 p-4 text-light">
-                        <h3>TRAINING COLLECTION</h3>
-                        <p>ENGINEERED FOR PERFORMANCE</p>
-                        <a href="/collection/training" class="btn btn-outline-light">Shop Now</a>
+                <div class="col-md-6">
+                    <div class="collection-card position-relative">
+                        <img src="{% static 'images/collection-2.jpg' %}"
+                             alt="Training Collection"
+                             class="img-fluid">
+                        <div class="collection-content position-absolute bottom-0 start-0 p-4 text-light">
+                            <h3>TRAINING COLLECTION</h3>
+                            <p>ENGINEERED FOR PERFORMANCE</p>
+                            <a href="/collection/training" class="btn btn-outline-light">Shop Now</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-<!-- Shop by Sport -->
-<section class="shop-by-sport py-5">
-    <div class="container">
-        <h2 class="text-center mb-4">Shop by Sport</h2>
-        <div class="row">
-            <div class="col-md-3">
-                <a href="/sport/running" class="sport-card text-decoration-none">
-                    <img src="{% static 'images/sport-1.jpg' %}" alt="Running" class="img-fluid mb-2">
-                    <h5 class="text-center text-dark">Running</h5>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a href="/sport/training" class="sport-card text-decoration-none">
-                    <img src="{% static 'images/sport-2.jpg' %}" alt="Training" class="img-fluid mb-2">
-                    <h5 class="text-center text-dark">Training</h5>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a href="/sport/basketball" class="sport-card text-decoration-none">
-                    <img src="{% static 'images/sport-3.jpg' %}" alt="Basketball" class="img-fluid mb-2">
-                    <h5 class="text-center text-dark">Basketball</h5>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a href="/sport/golf" class="sport-card text-decoration-none">
-                    <img src="{% static 'images/sport-4.jpg' %}" alt="Golf" class="img-fluid mb-2">
-                    <h5 class="text-center text-dark">Golf</h5>
-                </a>
+    </section>
+    <!-- Shop by Sport -->
+    <section class="shop-by-sport py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Shop by Sport</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="/sport/running" class="sport-card text-decoration-none">
+                        <img src="{% static 'images/sport-1.jpg' %}"
+                             alt="Running"
+                             class="img-fluid mb-2">
+                        <h5 class="text-center text-dark">Running</h5>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/sport/training" class="sport-card text-decoration-none">
+                        <img src="{% static 'images/sport-2.jpg' %}"
+                             alt="Training"
+                             class="img-fluid mb-2">
+                        <h5 class="text-center text-dark">Training</h5>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/sport/basketball" class="sport-card text-decoration-none">
+                        <img src="{% static 'images/sport-3.jpg' %}"
+                             alt="Basketball"
+                             class="img-fluid mb-2">
+                        <h5 class="text-center text-dark">Basketball</h5>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/sport/golf" class="sport-card text-decoration-none">
+                        <img src="{% static 'images/sport-4.jpg' %}"
+                             alt="Golf"
+                             class="img-fluid mb-2">
+                        <h5 class="text-center text-dark">Golf</h5>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-{% endblock %} 
+    </section>
+{% endblock %}
