@@ -1,8 +1,5 @@
 from django.db import models
 
-# NOTE: `type: ignore` comment disables pyright linting on that line. It's needed to
-# remove linting error caused by assigning 0 to default field in `PositiveIntegerField`
-
 # TODO: Add collection table to add categories, collections and other groupings stored
 # in a single table
 
@@ -29,13 +26,16 @@ class Products(models.Model):
 
     Attributes:
         name (CharField): The name of the product.
-        price_in_dollars (PositiveIntegerField): The base price of the product in dollars.
+        price_in_dollars (DecimalField): The base price of the product in dollars.
         description (TextField): A detailed description of the product.
         feature (ManyToManyField): The features associated with this product.
     """
 
     name = models.CharField(max_length=50)
-    price_in_dollars = models.PositiveIntegerField(name="price", default=0)  # type: ignore
+    # Allow to store prices up to 99999,99 dollars
+    price_in_dollars = models.DecimalField(
+        name="price", default=0, max_digits=7, decimal_places=2
+    )
     description = models.TextField()
     feature = models.ManyToManyField(Features)
 
@@ -57,6 +57,9 @@ class ProductDetails(models.Model):
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
     color = models.CharField(max_length=15)
     size = models.CharField(max_length=10)
+
+    # NOTE: `type: ignore` comment disables pyright linting on that line. It's needed to
+    # remove linting error caused by assigning 0 to default field in `PositiveIntegerField`
     stock = models.PositiveIntegerField(default=0)  # type: ignore
 
 
