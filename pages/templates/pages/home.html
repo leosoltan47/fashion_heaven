@@ -24,181 +24,26 @@
         <div class="max-w-[1800px] mx-auto px-6 lg:px-24">
             <h2 class="text-3xl font-bold mb-12 text-gray-900">Featured</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-                <!-- Card 1 -->
-                <div class="group">
-                    <div class="aspect-[4/3] bg-gray-200 mb-4 relative">
-                        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
+                <!-- Product Cards -->
+                {% for product in products %}
+                    <div class="group">
+                        <div class="aspect-[4/3] bg-gray-200 mb-4 relative">
+                            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex gap-2 mb-3">
+                            <div class="w-4 h-4 rounded-full bg-gray-300"></div>
+                            <div class="w-4 h-4 rounded-full bg-gray-400"></div>
+                            <div class="w-4 h-4 rounded-full bg-gray-500"></div>
+                            <div class="w-4 h-4 rounded-full bg-gray-600"></div>
+                        </div>
+                        <h3 class="text-sm font-medium text-gray-700 mb-1">{{ product.name }}</h3>
+                        <p class="text-sm text-gray-500">${{ product.price }}</p>
                     </div>
-                    <div class="flex gap-2 mb-3">
-                        <div class="w-4 h-4 rounded-full bg-gray-300"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-500"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-600"></div>
-                    </div>
-                    <h3 class="text-sm font-medium text-gray-700 mb-1">Men's UA Icon Fleece Hoodie</h3>
-                    <p class="text-sm text-gray-500">$35.97 - $60</p>
-                </div>
-                <!-- Card 2 -->
-                <div class="group">
-                    <div class="aspect-[4/3] bg-gray-200 mb-4 relative">
-                        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="flex gap-2 mb-3">
-                        <div class="w-4 h-4 rounded-full bg-gray-300"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-500"></div>
-                    </div>
-                    <h3 class="text-sm font-medium text-gray-700 mb-1">Men's UA Icon Fleece Joggers</h3>
-                    <p class="text-sm text-gray-500">$51.97 - $60</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="group">
-                    <div class="aspect-[4/3] bg-gray-200 mb-4 relative">
-                        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="flex gap-2 mb-3">
-                        <div class="w-4 h-4 rounded-full bg-gray-300"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-500"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-600"></div>
-                    </div>
-                    <h3 class="text-sm font-medium text-gray-700 mb-1">Women's UA Icon Fleece Oversized Crew</h3>
-                    <p class="text-sm text-gray-500">$55</p>
-                </div>
-                <!-- Card 4 -->
-                <div class="group">
-                    <div class="aspect-[4/3] bg-gray-200 mb-4 relative">
-                        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="flex gap-2 mb-3">
-                        <div class="w-4 h-4 rounded-full bg-gray-300"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-500"></div>
-                    </div>
-                    <h3 class="text-sm font-medium text-gray-700 mb-1">Women's UA Icon Fleece Wide Leg Pants</h3>
-                    <p class="text-sm text-gray-500">$60</p>
-                </div>
-                <!-- Card 5 -->
-                <div class="group">
-                    <div class="aspect-[4/3] bg-gray-200 mb-4 relative">
-                        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="flex gap-2 mb-3">
-                        <div class="w-4 h-4 rounded-full bg-gray-300"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-500"></div>
-                    </div>
-                    <h3 class="text-sm font-medium text-gray-700 mb-1">Men's UA Training Performance Tee</h3>
-                    <p class="text-sm text-gray-500">$30</p>
-                </div>
-                <!-- Card 6 -->
-                <div class="group">
-                    <div class="aspect-[4/3] bg-gray-200 mb-4 relative">
-                        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="flex gap-2 mb-3">
-                        <div class="w-4 h-4 rounded-full bg-gray-300"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-500"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-600"></div>
-                    </div>
-                    <h3 class="text-sm font-medium text-gray-700 mb-1">Women's UA Tech™ Twist V-Neck</h3>
-                    <p class="text-sm text-gray-500">$25</p>
-                </div>
-                <!-- Card 7 -->
-                <div class="group">
-                    <div class="aspect-[4/3] bg-gray-200 mb-4 relative">
-                        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="flex gap-2 mb-3">
-                        <div class="w-4 h-4 rounded-full bg-gray-300"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-500"></div>
-                    </div>
-                    <h3 class="text-sm font-medium text-gray-700 mb-1">Kids' UA Sportstyle Shorts</h3>
-                    <p class="text-sm text-gray-500">$25</p>
-                </div>
-                <!-- Card 8 -->
-                <div class="group">
-                    <div class="aspect-[4/3] bg-gray-200 mb-4 relative">
-                        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="flex gap-2 mb-3">
-                        <div class="w-4 h-4 rounded-full bg-gray-300"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-500"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-600"></div>
-                    </div>
-                    <h3 class="text-sm font-medium text-gray-700 mb-1">UA Charged Assert 9 Running Shoes</h3>
-                    <p class="text-sm text-gray-500">$70</p>
-                </div>
-                <!-- Card 9 -->
-                <div class="group">
-                    <div class="aspect-[4/3] bg-gray-200 mb-4 relative">
-                        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="flex gap-2 mb-3">
-                        <div class="w-4 h-4 rounded-full bg-gray-300"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-500"></div>
-                    </div>
-                    <h3 class="text-sm font-medium text-gray-700 mb-1">UA HOVR™ Rise 4 Training Shoes</h3>
-                    <p class="text-sm text-gray-500">$100</p>
-                </div>
-                <!-- Card 10 -->
-                <div class="group">
-                    <div class="aspect-[4/3] bg-gray-200 mb-4 relative">
-                        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="flex gap-2 mb-3">
-                        <div class="w-4 h-4 rounded-full bg-gray-300"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-500"></div>
-                        <div class="w-4 h-4 rounded-full bg-gray-600"></div>
-                    </div>
-                    <h3 class="text-sm font-medium text-gray-700 mb-1">UA Project Rock 5 Training Shoes</h3>
-                    <p class="text-sm text-gray-500">$150</p>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
