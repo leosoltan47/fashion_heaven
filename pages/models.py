@@ -1,3 +1,4 @@
+from colorfield.fields import ColorField
 from django.db import models
 
 
@@ -58,13 +59,13 @@ class ProductDetails(models.Model):
 
     Attributes:
         product (ForeignKey): The product that this variant belongs to.
-        color (CharField): The color of the variant.
+        color (ColorField): The color of the variant.
         size (CharField): The size of the variant (e.g. '10' for shoes, 'XL' for clothes).
         stock (PositiveIntegerField): The number of items remaining in stock for this variant.
     """
 
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
-    color = models.CharField(max_length=15)
+    color = ColorField(default="#FF0000")
     size = models.CharField(max_length=10)
 
     # NOTE: `type: ignore` comment disables pyright linting on that line. It's needed to

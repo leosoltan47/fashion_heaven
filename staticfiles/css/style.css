@@ -1,0 +1,188 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+/* Global Styles */
+:root {
+    --primary-color: #1d1d1d;
+    --secondary-color: #red;
+    --text-color: #333;
+    --light-gray: #f8f9fa;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: var(--text-color);
+    padding-top: 76px;
+}
+
+/* Top Bar */
+.top-bar {
+    font-size: 0.9rem;
+}
+
+.top-bar a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.top-bar a:hover {
+    color: #ccc;
+}
+
+/* Navbar */
+.navbar {
+    background-color: white !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.navbar-brand img {
+    max-height: 30px;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: #333;
+}
+
+.nav-link:hover {
+    color: #000;
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+.btn-outline-dark {
+    border-radius: 0;
+}
+
+/* Hero Section */
+.hero-section {
+    height: calc(100vh - 76px);
+    overflow: hidden;
+}
+
+.hero-slide img {
+    object-fit: cover;
+    height: 100%;
+}
+
+.hero-content {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Product Cards */
+.product-card {
+    transition: transform 0.3s ease;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-info {
+    background: white;
+}
+
+.product-info h5 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Collection Cards */
+.collection-card {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.collection-card img {
+    transition: transform 0.3s ease;
+}
+
+.collection-card:hover img {
+    transform: scale(1.05);
+}
+
+.collection-content {
+    background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+    width: 100%;
+}
+
+/* Sport Cards */
+.sport-card {
+    transition: opacity 0.3s ease;
+}
+
+.sport-card:hover {
+    opacity: 0.8;
+}
+
+.sport-card img {
+    border-radius: 8px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+}
+
+footer a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #fff !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 60vh;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .collection-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Button Styles */
+.btn-outline-light:hover {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+/* Utility Classes */
+.img-fluid {
+    width: 100%;
+    height: auto;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.hero-content {
+    animation: fadeIn 1s ease-in;
+} 
