@@ -64,7 +64,9 @@ class ProductDetails(models.Model):
         stock (PositiveIntegerField): The number of items remaining in stock for this variant.
     """
 
-    product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        Products, on_delete=models.CASCADE, related_name="details"
+    )
     color = ColorField(default="#FF0000")
     size = models.CharField(max_length=10)
 
