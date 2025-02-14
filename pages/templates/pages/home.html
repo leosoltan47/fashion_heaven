@@ -35,10 +35,10 @@
                             </button>
                         </div>
                         <!-- Variant colors -->
-                        {% if product.productdetails_set.all %}
+                        {% if product.details %}
                             <div class="flex gap-2 mb-3">
-                                {% for variant in product.productdetails_set.all %}
-                                    <div class="w-4 h-4 rounded-full bg-[{{ variant.color|lower }}]"></div>
+                                {% for detail in product.details.all %}
+                                <div class="w-4 h-4 rounded-full" style="background-color:{{ detail.color|lower }}"></div>
                                 {% endfor %}
                             </div>
                         {% endif %}
