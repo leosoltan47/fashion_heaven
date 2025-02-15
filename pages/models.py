@@ -17,6 +17,12 @@ class Features(models.Model):
 
     name = models.CharField(max_length=50)
 
+    def __str__(self) -> str:
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Features"
+
 
 class Products(models.Model):
     """
@@ -33,6 +39,9 @@ class Products(models.Model):
         feature (ManyToManyField): The features associated with this product.
         gender_and_age (CharField): Target gender and age group of the product.
     """
+
+    class Meta:
+        verbose_name_plural = "Products"
 
     class GenderAndAge(models.TextChoices):
         WOMEN = "W", "Women"
@@ -53,6 +62,9 @@ class Products(models.Model):
     )
     description = models.TextField()
     feature = models.ManyToManyField(Features)
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class ProductDetails(models.Model):
@@ -77,6 +89,9 @@ class ProductDetails(models.Model):
 
     stock = models.PositiveIntegerField(default=0)
 
+    class Meta:
+        verbose_name_plural = "Product Details"
+
     @admin.display
     def color(self):
         return format_html(
@@ -97,6 +112,9 @@ class ProductImages(models.Model):
         product_detail (ForeignKey): The product variant that this image belongs to.
     """
 
+    class Meta:
+        verbose_name_plural = "Product Images"
+
     content = models.ImageField()
     product_detail = models.ForeignKey(ProductDetails, on_delete=models.CASCADE)
 
@@ -113,6 +131,12 @@ class Collections(models.Model):
         product (ManyToManyField): Products associated with this collection
     """
 
+    class Meta:
+        verbose_name_plural = "Collections"
+
     name = models.CharField(max_length=50)
     description = models.TextField()
     product = models.ManyToManyField(Products)
+
+    def __str__(self) -> str:
+        return self.name
