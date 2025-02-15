@@ -1,3 +1,4 @@
+from decimal import Decimal
 from colorfield.fields import ColorField
 from django.db import models
 
@@ -42,7 +43,9 @@ class Products(models.Model):
     name = models.CharField(max_length=50)
     category = models.CharField(max_length=50, null=True)
     # Allow to store prices up to 99999,99 dollars
-    price_in_dollars = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
+    price_in_dollars = models.DecimalField(
+        default=Decimal(0.00), max_digits=7, decimal_places=2
+    )
     gender_and_age = models.CharField(
         max_length=1, choices=GenderAndAge.choices, default=GenderAndAge.UNISEX
     )
