@@ -1,6 +1,8 @@
 from decimal import Decimal
 from colorfield.fields import ColorField
 from django.db import models
+from django.contrib import admin
+from django.utils.html import format_html
 
 
 class Features(models.Model):
@@ -70,12 +72,17 @@ class ProductDetails(models.Model):
     product = models.ForeignKey(
         Products, on_delete=models.CASCADE, related_name="details"
     )
-    color = ColorField(default="#FF0000")
+    color_code = ColorField(default="#FF0000")
     size = models.CharField(max_length=10)
 
-    # NOTE: `type: ignore` comment disables pyright linting on that line. It's needed to
-    # remove linting error caused by assigning 0 to default field in `PositiveIntegerField`
-    stock = models.PositiveIntegerField(default=0)  # type: ignore
+    stock = models.PositiveIntegerField(default=0)
+
+    @admin.display
+    def color(self):
+        return format_html(
+            '<svg width="20px" height="20px"><rect width = "20" height = "20" fill = "{}"/></svg>',
+            self.color_code,
+        )
 
 
 class ProductImages(models.Model):
