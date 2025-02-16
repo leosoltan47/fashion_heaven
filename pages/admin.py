@@ -29,8 +29,12 @@ class ProductDetailsAdmin(admin.ModelAdmin):
 
 @admin.register(Products)
 class ProductsAdmin(admin.ModelAdmin):
-    list_display = ["name", "category", "price_in_dollars", "gender_and_age"]
-    list_filter = ["category", "gender_and_age"]
+    list_display = ["name", "category", "displayed_price", "gender_and_age"]
+    list_filter = ["category", "gender_and_age", "currency"]
+
+    @admin.display(description="Price")
+    def displayed_price(self, obj):
+        return f"{obj.price:.2f} {obj.currency}"
 
     def changelist_view(self, request, extra_context=None):
         """

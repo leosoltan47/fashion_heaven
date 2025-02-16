@@ -3,6 +3,7 @@ from colorfield.fields import ColorField
 from django.db import models
 from django.contrib import admin
 from django.utils.html import format_html
+from currency_converter import CurrencyConverter
 
 
 class Features(models.Model):
@@ -35,10 +36,17 @@ class Products(models.Model):
         name (CharField): The name of the product.
         category (CharField): Category product belongs to.
         price_in_dollars (DecimalField): The base price of the product in dollars.
+        currency (CharField): Stores the currency of the product.
         description (TextField): A detailed description of the product.
         feature (ManyToManyField): The features associated with this product.
         gender_and_age (CharField): Target gender and age group of the product.
     """
+
+    class Currency(models.TextChoices):
+        USD = "USD", "USD $"
+        EUR = "EUR", "EUR €"
+        TL = "TRY", "TL ₺"
+        GBP = "GBP", "GBP £"
 
     class Meta:
         verbose_name_plural = "Products"
@@ -57,6 +65,9 @@ class Products(models.Model):
     price_in_dollars = models.DecimalField(
         default=Decimal(0.00), max_digits=7, decimal_places=2
     )
+    currency = models.CharField(
+        max_length=3, choices=Currency.choices, default=Currency.USD
+    )
     gender_and_age = models.CharField(
         max_length=1, choices=GenderAndAge.choices, default=GenderAndAge.UNISEX
     )
@@ -65,6 +76,29 @@ class Products(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    @classmethod
+    def create(
+        cls, name, category, price_in_dollars, currency, gender_and_age, description
+    ):
+        if currency != cls.Currency.USD:
+            price_in_dollars = CurrencyConverter(decimal=True).convert(
+                price_in_dollars, currency, cls.Currency.USD
+            )
+        return cls(
+            name=name,
+            category=category,
+            price_in_dollars=price_in_dollars,
+            currency=currency,
+            gender_and_age=gender_and_age,
+            description=description,
+        )
+
+    @property
+    def price(self):
+        return CurrencyConverter(decimal=True).convert(
+            self.price_in_dollars, self.Currency.USD, self.currency
+        )
 
 
 class ProductDetails(models.Model):
