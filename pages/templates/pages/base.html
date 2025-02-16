@@ -487,27 +487,54 @@
                 <!-- Bottom Footer -->
                 <div class="border-t border-[#1a2633]">
                     <div class="max-w-[1800px] mx-auto px-24">
-                        <div class="flex items-center justify-center py-5 space-x-8">
-                            <a href="#"
-                               class="text-gray-400 hover:text-white transition-colors duration-200 text-[11px] tracking-wide">
-                                Cookie Settings
-                            </a>
-                            <div class="flex items-center space-x-2">
+                        <div class="flex flex-wrap items-center justify-center py-5 text-[10px] gap-x-4 gap-y-2">
+                            <div class="text-gray-400">© 2025 Under Armour®, Inc.</div>
+                            <div>
                                 <a href="#"
-                                   class="text-gray-400 hover:text-white transition-colors duration-200 text-[11px] tracking-wide">Your Privacy Choices</a>
-                                <img src="{% static 'images/privacy-choices.png' %}"
-                                     alt="Privacy Choices"
-                                     class="w-[31px] h-[17px] opacity-80">
+                                   class="text-gray-400 hover:text-white transition-colors duration-200">
+                                    Privacy Policy
+                                </a>
                             </div>
-                            <a href="#"
-                               class="text-gray-400 hover:text-white transition-colors duration-200 text-[11px] tracking-wide">
-                                Privacy Policy
-                            </a>
-                            <a href="#"
-                               class="text-gray-400 hover:text-white transition-colors duration-200 text-[11px] tracking-wide">
-                                Terms and Conditions
-                            </a>
-                            <span class="text-gray-400 text-[11px] tracking-wide">© 2025 adidas America, Inc.</span>
+                            <div>
+                                <a href="#"
+                                   class="text-gray-400 hover:text-white transition-colors duration-200">
+                                    Terms & Conditions
+                                </a>
+                            </div>
+                            <div>
+                                <a href="#"
+                                   class="text-gray-400 hover:text-white transition-colors duration-200">
+                                    UA Rewards Terms
+                                </a>
+                            </div>
+                            <div id="teconsent"
+                                 consent="0,1,2"
+                                 aria-label="Open Cookie Preferences Modal"
+                                 role="complementary">
+                                <script src="https://consent.trustarc.com/asset/notice.js/v/v1.7-3940"
+                                        async
+                                        crossorigin
+                                        importance="high"></script>
+                                <a role="link"
+                                   tabindex="0"
+                                   lang="en"
+                                   aria-haspopup="dialog"
+                                   aria-label="Cookie Preferences, opens a dedicated popup modal window"
+                                   class="text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer">
+                                    Cookie Preferences
+                                </a>
+                            </div>
+                            <div>
+                                <a href="#"
+                                   class="text-gray-400 hover:text-white transition-colors duration-200">
+                                    US and California Privacy Policy
+                                </a>
+                            </div>
+                            <div>
+                                <a href="#"
+                                   class="text-gray-400 hover:text-white transition-colors duration-200"
+                                   title="Cache Data Area: home Time: 16/02/2025, 13:28:37">v2.49.0</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -516,24 +543,24 @@
         <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
         <script src="{% static 'js/main.js' %}"></script>
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('searchInput');
-            const clearButton = document.getElementById('clearSearch');
+            document.addEventListener('DOMContentLoaded', function() {
+                const searchInput = document.getElementById('searchInput');
+                const clearButton = document.getElementById('clearSearch');
 
-            searchInput.addEventListener('input', function() {
-                if (this.value) {
-                    clearButton.classList.remove('hidden');
-                } else {
-                    clearButton.classList.add('hidden');
-                }
-            });
+                searchInput.addEventListener('input', function() {
+                    if (this.value) {
+                        clearButton.classList.remove('hidden');
+                    } else {
+                        clearButton.classList.add('hidden');
+                    }
+                });
 
-            clearButton.addEventListener('click', function() {
-                searchInput.value = '';
-                this.classList.add('hidden');
-                searchInput.focus();
+                clearButton.addEventListener('click', function() {
+                    searchInput.value = '';
+                    this.classList.add('hidden');
+                    searchInput.focus();
+                });
             });
-        });
         </script>
     </body>
 </html>

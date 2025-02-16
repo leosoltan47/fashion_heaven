@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %}
     <!-- Hero Banner -->
-    <section class="w-screen h-[187vh] relative overflow-hidden">
-        <div class="absolute inset-0 bg-gray-200 w-screen h-[187vh]"></div>
-        <div class="w-screen mx-auto px-6 h-full flex items-center">
+    <section class="hero-banner w-screen h-[50vh] relative overflow-hidden">
+        <div class="hero-banner__bg absolute inset-0 bg-gray-200 w-screen h-[50vh]"></div>
+        <div class="hero-banner__content w-screen mx-auto px-6 h-full flex items-center">
             <div class="max-w-xl ml-24">
                 <h1 class="text-6xl font-bold mb-6">Bring on the cold</h1>
                 <p class="text-xl mb-8">Stay warm and dry with our latest collection of winter gear.</p>
@@ -20,47 +20,883 @@
         </div>
     </section>
     <!-- Featured Section -->
-    <section class="bg-gray-50 py-20">
-        <div class="max-w-[1800px] mx-auto px-6 lg:px-24">
-            <h2 class="text-3xl font-bold mb-12 text-gray-900">Featured</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-                <!-- Product Cards -->
-                {% for product in products %}
-                    <div class="group">
-                        <div class="aspect-[4/3] bg-gray-200 mb-4 relative">
-                            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+    <section class="container mx-auto px-8 lg:px-16 py-20">
+        <h2 class="text-3xl font-semibold text-black mb-8">Featured</h2>
+        <div class="relative">
+            <div class="vf-c-carousel">
+                <div class="vf-c-carousel__slides">
+                    <!-- Product 1 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">BEST SELLER</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                                 </svg>
                             </button>
-                        </div>
-                        <!-- Variant colors -->
-                            <div class="flex gap-2 mb-3">
-                                {% for detail in product.details.all %}
-                                <div class="w-4 h-4 rounded-full" style="background-color:{{ detail.color_code }}"></div>
-                                {% endfor %}
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Men's HeatGear® Sleeveless"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#1C2B4B"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#808080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="green-blue"
+                                            title="View Color Green/Blue">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#228B22"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#0066CC"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
-                        <h3 class="text-sm font-medium text-gray-700 mb-1">{{ product.name }}</h3>
-                        <p class="text-sm text-gray-500">${{ product.price_in_dollars }}</p>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Men's HeatGear® Sleeveless</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$30.00</span>
+                                </p>
+                            </div>
+                        </a>
                     </div>
-                {% endfor %}
+                    <!-- Product 2 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">BEST SELLER</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Men's HeatGear® Compression Shorts"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#1C2B4B"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#808080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="green-blue"
+                                            title="View Color Green/Blue">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#228B22"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#0066CC"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Men's HeatGear® Compression Shorts</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$30.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 3 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Women's HeatGear® OG Compression Tank"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#1C2B4B"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#808080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="green-blue"
+                                            title="View Color Green/Blue">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#228B22"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#0066CC"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Women's HeatGear® OG Compression Tank</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$30.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 4 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Women's HeatGear® Armour Mid Branded Sports Bra"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#FFFFFF"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#1C2B4B"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#808080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="green-blue"
+                                            title="View Color Green/Blue">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#228B22"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#0066CC"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Women's HeatGear® Armour Mid Branded Sports Bra</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__price-range">$26.97 - $35.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 5 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Kids' UA Icon Fleece Hoodie"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#1C2B4B"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#000000"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#808080"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Kids' UA Icon Fleece Hoodie</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__discount-price">$45.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 6 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Kids' UA Icon Fleece Joggers"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#1C2B4B"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#000000"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#808080"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Kids' UA Icon Fleece Joggers</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__discount-price">$40.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 7 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Kids' UA Icon Fleece Crew"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#1C2B4B"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#000000"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#808080"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Kids' UA Icon Fleece Crew</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__discount-price">$35.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 8 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Kids' UA Icon Fleece Shorts"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#1C2B4B"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#000000"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#808080"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Kids' UA Icon Fleece Shorts</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__discount-price">$30.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 9 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">NEW</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Women's UA Storm ColdGear® Infrared Shield Jacket"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#1C2B4B"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#000000"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#808080"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Women's UA Storm ColdGear® Infrared Shield Jacket</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$89.99</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 10 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">NEW</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Men's Project Rock Charged Cotton® Fleece Hoodie"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#1C2B4B"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#000000"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#808080"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Men's Project Rock Charged Cotton® Fleece Hoodie</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$75.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 11 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">SALE</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Youth UA Rival Fleece Big Logo Hoodie"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#1C2B4B"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#000000"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#808080"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Youth UA Rival Fleece Big Logo Hoodie</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__discount-price">$39.99</span>
+                                    <span class="vf-c-product-card__regular-price line-through ml-2">$55.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 12 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Women's UA RUSH™ ColdGear® Leggings"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#1C2B4B"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#000000"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#808080"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Women's UA RUSH™ ColdGear® Leggings</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$65.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Navigation Buttons -->
+                <button class="vf-c-carousel__prev-btn" aria-label="Previous">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke-width="2"
+                         stroke="currentColor"
+                         class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                </button>
+                <button class="vf-c-carousel__next-btn" aria-label="Next">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke-width="2"
+                         stroke="currentColor"
+                         class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
             </div>
         </div>
     </section>
     <!-- Featured Categories -->
-    <section class="bg-gray-50 py-20">
+    <section class="bg-gray-50 py-32 mt-16">
         <div class="max-w-[1800px] mx-auto px-24">
-            <div class="flex justify-between items-center mb-12">
+            <div class="flex justify-between items-center mb-16">
                 <h2 class="text-2xl font-bold">What's hot right now</h2>
                 <a href="#" class="text-sm font-bold hover:underline">View All</a>
             </div>
-            <div class="grid grid-cols-4 gap-8">
-                <!-- Show 4 products because of `grid-cols-4 -->
-                {% for product in products|slice:4 %}
+            <div class="grid grid-cols-4 gap-12">
+                {% for i in '1234'|make_list %}
                     <div class="group">
-                        <div class="aspect-[4/5] bg-gray-200 mb-4"></div>
-                        <h3 class="font-bold mb-2">{{ product.category }}</h3>
-                        <p class="text-gray-600">$99.99</p>
+                        <div class="aspect-[3/4] bg-gray-200 mb-6"></div>
+                        <h3 class="font-bold mb-3 text-lg">Product Category {{ i }}</h3>
+                        <p class="text-gray-600 text-base">$99.99</p>
                     </div>
                 {% endfor %}
             </div>
@@ -85,23 +921,872 @@
         </div>
     </section>
     <!-- Winter Essentials -->
-    <section class="bg-gray-50 py-20">
-        <div class="max-w-[1800px] mx-auto px-24">
-            <div class="flex justify-between items-center mb-12">
-                <h2 class="text-2xl font-bold">Winter Essentials</h2>
-                <a href="#" class="text-sm font-bold hover:underline">View All</a>
-            </div>
-            <div class="grid grid-cols-3 gap-8">
-                {% for i in '123'|make_list %}
-                    <div class="group relative aspect-[4/3] bg-gray-200">
-                        <div class="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        </div>
-                        <div class="absolute bottom-8 left-8">
-                            <h3 class="text-white font-bold text-xl mb-2">Category {{ i }}</h3>
-                            <a href="#" class="text-white font-bold hover:underline">Shop Now</a>
-                        </div>
+    <section class="container mx-auto px-8 lg:px-16 py-20">
+        <h2 class="text-3xl font-semibold text-black mb-8">Winter Essentials</h2>
+        <div class="relative">
+            <div class="vf-c-carousel">
+                <div class="vf-c-carousel__slides">
+                    <!-- Product 1 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">BEST SELLER</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Men's HeatGear® Sleeveless"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#1C2B4B"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#808080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="green-blue"
+                                            title="View Color Green/Blue">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#228B22"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#0066CC"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Men's HeatGear® Sleeveless</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$30.00</span>
+                                </p>
+                            </div>
+                        </a>
                     </div>
-                {% endfor %}
+                    <!-- Product 2 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">NEW ARRIVAL</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Women's Winter Parka"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#1C2B4B"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#808080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="green-blue"
+                                            title="View Color Green/Blue">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#228B22"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#0066CC"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Women's Winter Parka</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$199.99</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 3 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">SALE</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Winter Snow Boots"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#1C2B4B"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#808080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="green-blue"
+                                            title="View Color Green/Blue">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#228B22"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#0066CC"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Winter Snow Boots</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$89.99</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 4 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">BEST SELLER</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Men's Winter Jacket"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-black"
+                                            title="View Color Navy/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#1C2B4B"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#808080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="green-blue"
+                                            title="View Color Green/Blue">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#228B22"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#0066CC"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Men's Winter Jacket</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$149.99</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 5 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">NEW ARRIVAL</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Women's Thermal Base Layer"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="pink-purple"
+                                            title="View Color Pink/Purple">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#FFC0CB"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#800080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="red-black"
+                                            title="View Color Red/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#FF0000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Women's Thermal Base Layer</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$49.99</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 6 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">SALE</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Winter Ski Gloves"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#808080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="green-blue"
+                                            title="View Color Green/Blue">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#228B22"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#0066CC"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="orange-yellow"
+                                            title="View Color Orange/Yellow">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#FFA500"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#FFFF00"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Winter Ski Gloves</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$34.99</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 7 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">NEW</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Winter Snow Boots"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="brown-tan"
+                                            title="View Color Brown/Tan">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#8B4513"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#D2B48C"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-white"
+                                            title="View Color Navy/White">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#FFFFFF"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#808080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Winter Snow Boots</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$89.99</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 8 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">TRENDING</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Winter Beanie Hat"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="gray-green"
+                                            title="View Color Gray/Green">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#808080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#228B22"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="green-blue"
+                                            title="View Color Green/Blue">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#228B22"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#0066CC"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="blue-red"
+                                            title="View Color Blue/Red">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#0066CC"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#FF0000"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Winter Beanie Hat</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$24.99</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 9 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">NEW</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Winter Scarf"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="black-gray"
+                                            title="View Color Black/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="red-blue"
+                                            title="View Color Red/Blue">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#FF0000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#0066CC"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="green-yellow"
+                                            title="View Color Green/Yellow">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#228B22"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#FFD700"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="purple-pink"
+                                            title="View Color Purple/Pink">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#800080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#FFC0CB"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Winter Scarf</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$19.99</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 10 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">SALE</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Winter Jacket"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="navy-gray"
+                                            title="View Color Navy/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="brown-beige"
+                                            title="View Color Brown/Beige">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#8B4513"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#F5F5DC"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="olive-khaki"
+                                            title="View Color Olive/Khaki">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#808000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#F0E68C"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="black-white"
+                                            title="View Color Black/White">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#FFFFFF"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Winter Jacket</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$129.99</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 11 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">HOT</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Winter Socks"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="red-black"
+                                            title="View Color Red/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#FF0000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="blue-white"
+                                            title="View Color Blue/White">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#0066CC"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#FFFFFF"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="green-yellow"
+                                            title="View Color Green/Yellow">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#228B22"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#FFD700"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="purple-orange"
+                                            title="View Color Purple/Orange">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#800080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#FFA500"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Winter Socks</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$14.99</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 12 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">POPULAR</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Winter Mittens"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="red-white"
+                                            title="View Color Red/White">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#FF0000"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#FFFFFF"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="navy-gray"
+                                            title="View Color Navy/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#000080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="green-black"
+                                            title="View Color Green/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#228B22"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#000000"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                    <button class="color-swatch"
+                                            data-color="purple-gray"
+                                            title="View Color Purple/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 32 32" aria-hidden="true">
+                                            <path d="M 0 6 a 6 6 0 0 1 6 -6 h 10 v 32 h -10 a 6 6 0 0 1 -6 -6 Z" fill="#800080"></path>
+                                            <path d="M 16 0 h 10 a 6 6 0 0 1 6 6 v 20 a 6 6 0 0 1 -6 6 h -10 Z" fill="#808080"></path>
+                                            <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke-width="1" stroke="#d0d0d0" fill="none"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Winter Mittens</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$29.99</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <button class="vf-c-carousel__prev-btn" aria-label="Previous">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke-width="2"
+                         stroke="currentColor"
+                         class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                </button>
+                <button class="vf-c-carousel__next-btn" aria-label="Next">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke-width="2"
+                         stroke="currentColor"
+                         class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
             </div>
         </div>
     </section>
@@ -119,4 +1804,1102 @@
             </div>
         </div>
     </section>
+    <!-- Trending Products -->
+    <section class="container mx-auto px-8 lg:px-16 py-20">
+        <h2 class="text-3xl font-semibold text-black mb-8">Trending Products</h2>
+        <div class="relative">
+            <div class="vf-c-carousel">
+                <div class="vf-c-carousel__slides">
+                    <!-- Product 1 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">BEST SELLER</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Men's HeatGear® Sleeveless"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="white-navy"
+                                            title="View Color White/Navy">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Men's HeatGear® Sleeveless</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$30.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 2 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">NEW</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Women's UA Storm ColdGear® Jacket"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="black-white"
+                                            title="View Color Black/White">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#000000"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#FFFFFF"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Women's UA Storm ColdGear® Jacket</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$89.99</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 3 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">SALE</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Kids' UA Tech™ Big Logo T-Shirt"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="red-black"
+                                            title="View Color Red/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FF0000"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#000000"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Kids' UA Tech™ Big Logo T-Shirt</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$25.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 4 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">LIMITED</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="UA Project Rock Training Shoes"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="gray-blue"
+                                            title="View Color Gray/Blue">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#808080"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#0000FF"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">UA Project Rock Training Shoes</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$140.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 5 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">NEW ARRIVAL</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Women's UA RUSH™ Leggings"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="purple-black"
+                                            title="View Color Purple/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#800080"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#000000"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Women's UA RUSH™ Leggings</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$65.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 6 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">HOT</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="UA Curry Flow 10 Basketball Shoes"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="yellow-blue"
+                                            title="View Color Yellow/Blue">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFD700"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#0000FF"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">UA Curry Flow 10 Basketball Shoes</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$160.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 7 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">EXCLUSIVE</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Men's Project Rock Hoodie"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="green-gray"
+                                            title="View Color Green/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#008000"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#808080"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Men's Project Rock Hoodie</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$85.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 8 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">TRENDING</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Women's UA HOVR™ Running Shoes"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="pink-white"
+                                            title="View Color Pink/White">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFC0CB"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#FFFFFF"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Women's UA HOVR™ Running Shoes</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$130.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 9 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">BEST SELLER</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="UA Charged Cotton® Fleece Joggers"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="navy-gray"
+                                            title="View Color Navy/Gray">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#1C2B4B"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#808080"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">UA Charged Cotton® Fleece Joggers</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$55.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 10 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">NEW SEASON</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="Women's UA Meridian Jacket"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="teal-black"
+                                            title="View Color Teal/Black">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#008080"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#000000"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">Women's UA Meridian Jacket</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$85.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 11 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">POPULAR</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="UA Crossfade Training Gloves"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="red-white"
+                                            title="View Color Red/White">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FF0000"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#FFFFFF"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">UA Crossfade Training Gloves</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$35.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Product 12 -->
+                    <div>
+                        <a href="#" class="vf-c-product-card">
+                            <div class="vf-c-product-card__badge">LIMITED EDITION</div>
+                            <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="1.5"
+                                     stroke="currentColor"
+                                     class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                            </button>
+                            <div class="vf-c-product-card__assets">
+                                <img src="https://placehold.co/555x650"
+                                     alt="UA Project Rock Over-Ear Headphones"
+                                     width="555"
+                                     height="650"
+                                     class="vf-c-product-card__img">
+                                <div class="vf-c-product-card__colors">
+                                    <button class="color-swatch"
+                                            data-color="black-gold"
+                                            title="View Color Black/Gold">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#000000"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#FFD700"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vf-c-product-card__copy-container">
+                                <div class="vf-c-product-card__title">UA Project Rock Over-Ear Headphones</div>
+                                <p class="vf-c-product-card__price">
+                                    <span class="vf-c-product-card__regular-price">$299.00</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    <button class="vf-c-carousel__prev-btn" aria-label="Previous">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="2"
+                             stroke="currentColor"
+                             class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button class="vf-c-carousel__prev-btn" aria-label="Previous">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke-width="2"
+                 stroke="currentColor"
+                 class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+        </button>
+        <button class="vf-c-carousel__next-btn" aria-label="Next">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke-width="2"
+                 stroke="currentColor"
+                 class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+        </button>
+    </div>
+</section>
+<!-- Stimulus.js Controller Template -->
+<script type="module">
+    import { Controller } from "@hotwired/stimulus"
+
+        // Product Grid Controller
+        export default class extends Controller {
+            connect() {
+                this.setupIntersectionObserver()
+            }
+
+            setupIntersectionObserver() {
+                const options = {
+                    root: null,
+                    rootMargin: '50px',
+                    threshold: 0.1
+                }
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target
+                            img.src = img.dataset.src
+                            observer.unobserve(img)
+                        }
+                    })
+                }, options)
+
+                this.element.querySelectorAll('img[data-src]').forEach(img => {
+                    observer.observe(img)
+                })
+            }
+
+            updateLayout() {
+                // Handle responsive layout updates
+            }
+        }
+
+        // Product Tile Controller
+        class ProductTileController extends Controller {
+            static targets = ["image", "colorContainer", "scrollIndicator", "price"]
+            static values = { 
+                id: Number,
+                priceRange: String
+            }
+
+            connect() {
+                this.setupScrollObserver()
+            }
+
+            async quickAdd(event) {
+                event.preventDefault()
+                const button = event.currentTarget
+                button.disabled = true
+                button.textContent = 'Adding...'
+
+                try {
+                    // Simulate API call
+                    await new Promise(resolve => setTimeout(resolve, 500))
+
+                    button.textContent = 'Added!'
+                    setTimeout(() => {
+                        button.textContent = 'Quick Add'
+                        button.disabled = false
+                    }, 1000)
+                } catch (error) {
+                    console.error('Error adding to cart:', error)
+                    button.textContent = 'Error'
+                    setTimeout(() => {
+                        button.textContent = 'Quick Add'
+                        button.disabled = false
+                    }, 1000)
+                }
+            }
+
+            selectColor(event) {
+                const color = event.currentTarget.dataset.color
+                // Update product variant
+            }
+
+            setupScrollObserver() {
+                // Handle color swatch scroll behavior
+            }
+        }
+
+        // Wishlist Controller
+        class WishlistController extends Controller {
+            static targets = ["icon"]
+
+            toggle() {
+                // Handle wishlist toggle
+            }
+        }
+</script>
+<!-- Custom Tailwind CSS -->
+<style>
+/* Hero Banner Styles */
+.hero-banner {
+    height: 50vh;
+    min-height: 400px;
+    max-height: 600px;
+}
+
+        .hero-banner__bg {
+            height: 100%;
+        }
+
+        .hero-banner__content {
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Custom scrollbar hiding */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Updated styles for carousel effect */
+        .swiper-container {
+            position: relative;
+            width: 100%;
+            max-width: 1800px;
+            margin: 0 auto;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .swiper-wrapper {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .swiper-slide {
+            flex: 0 0 auto;
+            width: 280px !important;
+            transition: all 0.5s ease;
+            transform-origin: center center;
+            position: relative;
+        }
+
+        .swiper-slide-active,
+        .swiper-slide-next,
+        .swiper-slide-prev {
+            z-index: 2;
+        }
+
+        .swiper-slide:not(.swiper-slide-active):not(.swiper-slide-next):not(.swiper-slide-prev) {
+            opacity: 0.5;
+            transform: scale(0.9);
+        }
+
+        /* Navigation arrows */
+        .swiper-button-next,
+        .swiper-button-prev {
+            opacity: 1 !important;
+            transition: all 0.3s ease;
+            width: 40px !important;
+            height: 40px !important;
+            margin-top: -20px !important;
+            cursor: pointer !important;
+            z-index: 10;
+        }
+
+        .swiper-button-next {
+            right: 16px !important;
+        }
+
+        .swiper-button-prev {
+            left: 16px !important;
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background: #333 !important;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .swiper-button-disabled {
+            opacity: 0.5 !important;
+            cursor: not-allowed !important;
+            pointer-events: none !important;
+        }
+
+        /* Product Tile Hover Effects */
+        .ProductTile_product-tile-container__flx2K {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: white;
+            padding: 0;
+            transition: all 0.3s ease;
+            transform-origin: center center;
+        }
+
+        .ProductTile_product-tile-container__flx2K:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Quick Add Button with delayed hide */
+        .quick-add-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            padding: 1rem;
+        }
+
+        .ProductTile_product-tile-container__flx2K:hover .quick-add-container {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: 0s;
+        }
+
+        .ProductTile_product-tile-container__flx2K:not(:hover) .quick-add-container {
+            transition-delay: 2s;
+        }
+
+        /* Wishlist button with delayed hide */
+        .ProductTile_wishlist-toggle__I7EGR {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 20;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+        }
+
+        .ProductTile_product-tile-container__flx2K:hover .ProductTile_wishlist-toggle__I7EGR {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition-delay: 0s;
+        }
+
+        .ProductTile_product-tile-container__flx2K:not(:hover) .ProductTile_wishlist-toggle__I7EGR {
+            transition-delay: 2s;
+        }
+
+        /* Active slide styles */
+        .swiper-slide-active .ProductTile_product-tile-container__flx2K {
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        /* TNF Carousel Styles */
+        .vf-c-carousel {
+            position: relative !important;
+            width: 100% !important;
+            overflow: visible !important;
+            padding: 0 48px !important;
+            margin: 0 !important;
+        }
+
+        .vf-c-carousel__slides {
+            display: grid !important;
+            grid-auto-flow: column !important;
+            grid-auto-columns: calc(25% - 24px) !important;
+            gap: 32px !important;
+            overflow-x: auto !important;
+            overscroll-behavior-inline: contain !important;
+            scroll-snap-type: x mandatory !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }
+
+        .vf-c-product-card {
+            position: relative !important;
+            display: block !important;
+            scroll-snap-align: start !important;
+            padding: 0 !important;
+            background: white !important;
+            margin-bottom: 16px !important;
+        }
+
+        .vf-c-product-card__badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background-color: #000;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 6px;
+            z-index: 2;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .vf-c-product-card__assets {
+            position: relative;
+            margin-bottom: 12px;
+            aspect-ratio: 0.85;
+        }
+
+        .vf-c-product-card__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .vf-c-product-card__colors {
+            display: flex;
+            gap: 4px;
+            margin-top: 8px;
+            padding: 0 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            justify-content: flex-start;
+        }
+
+        .vf-c-product-card__colors::-webkit-scrollbar {
+            display: none;
+        }
+
+        .color-swatch {
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            margin: 0 4px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .color-swatch svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .color-swatch[aria-pressed="true"] rect {
+            stroke: #000;
+            stroke-width: 1.5;
+        }
+
+        .vf-c-carousel__prev-btn,
+        .vf-c-carousel__next-btn {
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 50% !important;
+            background: white !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            color: #2B2B2B !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            z-index: 50 !important;
+            transition: all 0.15s ease !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+            margin-top: -44px !important;
+        }
+
+        .vf-c-carousel__prev-btn {
+            left: 0 !important;
+        }
+
+        .vf-c-carousel__next-btn {
+            right: 0 !important;
+        }
+
+        .vf-c-carousel__prev-btn:hover,
+        .vf-c-carousel__next-btn:hover {
+            background: white !important;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+            transform: translateY(-50%) scale(1.05) !important;
+        }
+
+        .vf-c-carousel__prev-btn:disabled,
+        .vf-c-carousel__next-btn:disabled {
+            opacity: 0;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .vf-c-carousel__prev-btn svg,
+        .vf-c-carousel__next-btn svg {
+            width: 20px !important;
+            height: 20px !important;
+            stroke: currentColor !important;
+            stroke-width: 2 !important;
+        }
+
+        /* Color swatch specific colors */
+        .bg-navy { background-color: #1C2B4B; }
+        .bg-charcoal { background-color: #36454F; }
+        .bg-forest { background-color: #228B22; }
+        .bg-burgundy { background-color: #800020; }
+        .bg-olive { background-color: #556B2F; }
+
+        .vf-c-product-card__copy-container {
+            position: relative !important;
+            z-index: 1 !important;
+            padding: 0 8px !important;
+            background: transparent !important;
+            margin-top: 12px !important;
+        }
+
+        .vf-c-product-card__title {
+            font-size: 14px !important;
+            line-height: 1.4 !important;
+            margin-bottom: 4px !important;
+            color: #2B2B2B !important;
+            font-weight: normal !important;
+        }
+
+        .vf-c-product-card__price {
+            font-size: 14px !important;
+            color: #2B2B2B !important;
+            font-weight: normal !important;
+        }
+
+        /* Updated Wishlist button styles */
+        .vf-c-product-card {
+            position: relative;
+        }
+
+        .vf-c-product-card__wishlist {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 36px;
+            height: 36px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            z-index: 3;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .vf-c-product-card:hover .vf-c-product-card__wishlist {
+            opacity: 1;
+        }
+
+        .vf-c-product-card__wishlist.active {
+            opacity: 1;
+        }
+
+        .vf-c-product-card__wishlist.active svg path {
+            fill: #e11d48;
+            stroke: #e11d48;
+        }
+
+        .vf-c-product-card__wishlist:hover {
+            transform: scale(1.1);
+        }
+
+        .vf-c-product-card__wishlist svg {
+            width: 20px;
+            height: 20px;
+        }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize all carousels on the page
+        const carousels = document.querySelectorAll('.vf-c-carousel');
+
+        carousels.forEach(carousel => {
+            const slides = carousel.querySelector('.vf-c-carousel__slides');
+            const prevBtn = carousel.querySelector('.vf-c-carousel__prev-btn');
+            const nextBtn = carousel.querySelector('.vf-c-carousel__next-btn');
+
+            const slidesPerView = 4;
+            const slideWidth = slides.querySelector('div').offsetWidth;
+            const gap = 24;
+
+            function updateButtonVisibility() {
+                const scrollLeft = slides.scrollLeft;
+                const maxScroll = slides.scrollWidth - slides.clientWidth;
+
+                prevBtn.disabled = scrollLeft <= 0;
+                nextBtn.disabled = scrollLeft >= maxScroll;
+            }
+
+            function smoothScroll(element, target) {
+                element.scrollTo({
+                    left: target,
+                    behavior: 'smooth'
+                });
+            }
+
+            prevBtn.addEventListener('click', () => {
+                const target = slides.scrollLeft - ((slideWidth + gap) * slidesPerView);
+                smoothScroll(slides, target);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                const target = slides.scrollLeft + ((slideWidth + gap) * slidesPerView);
+                smoothScroll(slides, target);
+            });
+
+            // Update button visibility on scroll and resize
+            slides.addEventListener('scroll', updateButtonVisibility);
+            window.addEventListener('resize', updateButtonVisibility);
+
+            // Initial setup
+            updateButtonVisibility();
+
+            // Wishlist functionality for this carousel
+            const wishlistButtons = carousel.querySelectorAll('.vf-c-product-card__wishlist');
+
+            wishlistButtons.forEach(button => {
+                // Make button visible by default
+                button.style.opacity = '1';
+
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Toggle active class
+                    this.classList.toggle('active');
+
+                    // Get the heart icon SVG path
+                    const heartPath = this.querySelector('svg path');
+
+                    if (this.classList.contains('active')) {
+                        // If active, fill the heart
+                        heartPath.setAttribute('fill', '#e11d48');
+                    } else {
+                        // If not active, remove the fill
+                        heartPath.setAttribute('fill', 'none');
+                    }
+
+                    // Animation feedback
+                    this.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 200);
+                });
+            });
+
+            // Make wishlist buttons visible on product card hover for this carousel
+            const productCards = carousel.querySelectorAll('.vf-c-product-card');
+
+            productCards.forEach(card => {
+                const wishlistBtn = card.querySelector('.vf-c-product-card__wishlist');
+
+                card.addEventListener('mouseenter', () => {
+                    wishlistBtn.style.opacity = '1';
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    if (!wishlistBtn.classList.contains('active')) {
+                        wishlistBtn.style.opacity = '0';
+                    }
+                });
+            });
+
+            // Add color swatch functionality for this carousel
+            const colorSwatches = carousel.querySelectorAll('.color-swatch');
+            colorSwatches.forEach(swatch => {
+                swatch.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const parent = swatch.closest('.vf-c-product-card__colors');
+                    parent.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+                    swatch.classList.add('selected');
+                });
+            });
+        });
+    });
+</script>
 {% endblock %}
