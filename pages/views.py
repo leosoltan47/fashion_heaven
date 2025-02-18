@@ -6,15 +6,16 @@ from .models import ProductDetails, Products
 
 # TODO: Add search bar that renders page specified in the search
 def home(request):
-    in_stock = ProductDetails.objects.filter(stock__gt=0)  # type: ignore
-    # Show 10 products that has at least one variant
+    in_stock = ProductDetails.objects.filter(stock__gt=0)
+    # Show at max 10 products that has at least one variant
     # as information like color are stored in variants
     products = (
-        Products.objects.filter(category__isnull=False)  # type: ignore
+        Products.objects.filter(category__isnull=False)
         .prefetch_related(Prefetch("details", queryset=in_stock))
         .distinct()
         .filter(details__isnull=False)
         .order_by("id")[:10]
     )
-    context = {"products": products}
+    categories = set(product.category for product in products)
+    context = {"products": products, "categories": categories}
     return render(request, "pages/home.html", context)

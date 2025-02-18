@@ -34,7 +34,7 @@ class ProductsAdmin(admin.ModelAdmin):
 
     @admin.display(description="Price")
     def displayed_price(self, obj):
-        return f"{obj.price:.2f} {obj.currency}"
+        return f"{obj.price} {obj.currency}"
 
     def changelist_view(self, request, extra_context=None):
         """
