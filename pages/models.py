@@ -96,9 +96,9 @@ class Products(models.Model):
 
     @property
     def price(self):
-        return CurrencyConverter(decimal=True).convert(
+        return f"{CurrencyConverter().convert(
             self.price_in_dollars, self.Currency.USD, self.currency
-        )
+    ):.2f}"
 
 
 class ProductDetails(models.Model):
