@@ -14,7 +14,7 @@ source .venv/bin/activate
 ```
 Activate virtual env on Windows
 ```cmd
-.venv\Scripts\Activate
+.venv\Scripts\activate
 ```
 Install dependencies into virtualenv
 ```
