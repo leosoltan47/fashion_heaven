@@ -25,6 +25,35 @@ class Features(models.Model):
         verbose_name_plural = "Features"
 
 
+class ProductDetails(models.Model):
+    """
+    Represents a variant of a product, with details that can differ among variants.
+
+    This model stores information that is specific to a particular variant of a product
+    such as color, size, and stock level. Related to :model:`pages.Products` via one-to-many relation
+
+    Attributes:
+        color (ColorField): The color of the variant.
+        size (CharField): The size of the variant (e.g. '10' for shoes, 'XL' for clothes).
+        stock (PositiveIntegerField): The number of items remaining in stock for this variant.
+    """
+
+    color_code = ColorField(default="#FF0000")
+    size = models.CharField(max_length=10)
+
+    stock = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        verbose_name_plural = "Product Details"
+
+    @admin.display
+    def color(self):
+        return format_html(
+            '<svg width="20px" height="20px"><rect width = "20" height = "20" fill = "{}"/></svg>',
+            self.color_code,
+        )
+
+
 class Products(models.Model):
     """
     Represents a product with details that remain consistent across variants.
@@ -38,6 +67,7 @@ class Products(models.Model):
         price_in_dollars (DecimalField): The base price of the product in dollars.
         currency (CharField): Stores the currency of the product.
         description (TextField): A detailed description of the product.
+        details (ManyToManyField): Variants of the product.
         feature (ManyToManyField): The features associated with this product.
         gender_and_age (CharField): Target gender and age group of the product.
     """
@@ -71,6 +101,7 @@ class Products(models.Model):
     gender_and_age = models.CharField(
         max_length=1, choices=GenderAndAge.choices, default=GenderAndAge.UNISEX
     )
+    details = models.ManyToManyField(ProductDetails)
     description = models.TextField()
     feature = models.ManyToManyField(Features)
 
@@ -99,39 +130,6 @@ class Products(models.Model):
         return f"{CurrencyConverter().convert(
             self.price_in_dollars, self.Currency.USD, self.currency
     ):.2f}"
-
-
-class ProductDetails(models.Model):
-    """
-    Represents a variant of a product, with details that can differ among variants.
-
-    This model stores information that is specific to a particular variant of a product
-    such as color, size, and stock level. Related to :model:`pages.Products` via one-to-many relation
-
-    Attributes:
-        product (ForeignKey): The product that this variant belongs to.
-        color (ColorField): The color of the variant.
-        size (CharField): The size of the variant (e.g. '10' for shoes, 'XL' for clothes).
-        stock (PositiveIntegerField): The number of items remaining in stock for this variant.
-    """
-
-    product = models.ForeignKey(
-        Products, on_delete=models.CASCADE, related_name="details"
-    )
-    color_code = ColorField(default="#FF0000")
-    size = models.CharField(max_length=10)
-
-    stock = models.PositiveIntegerField(default=0)
-
-    class Meta:
-        verbose_name_plural = "Product Details"
-
-    @admin.display
-    def color(self):
-        return format_html(
-            '<svg width="20px" height="20px"><rect width = "20" height = "20" fill = "{}"/></svg>',
-            self.color_code,
-        )
 
 
 class ProductImages(models.Model):
