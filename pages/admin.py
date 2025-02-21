@@ -2,11 +2,12 @@ from django.contrib import admin
 from django import forms
 from django.db import models
 from django.utils.safestring import mark_safe
-from .models import Collections, Features, ProductDetails, Products
+from .models import Categories, Collections, Features, ProductDetails, Products
 from currency_converter import CurrencyConverter
 
 admin.site.register(Features)
 admin.site.register(Collections)
+admin.site.register(Categories)
 
 
 class ProductsAdminForm(forms.ModelForm):

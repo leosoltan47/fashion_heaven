@@ -5,6 +5,25 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 
+class Categories(models.Model):
+    """
+    Represents categories. Allows to chain categories into sub-categories
+
+    Attributes:
+        name (CharField): Name of the category
+        paretn (ForeighField): Parent category if exists
+    """
+
+    class Meta:
+        verbose_name_plural = "Categories"
+
+    name = models.CharField(max_length=50)
+    parent = models.ForeignKey("self", on_delete=models.PROTECT, null=True, blank=True)
+
+    def __str__(self) -> str:
+        return f"{self.parent}/{self.name}"
+
+
 class Features(models.Model):
     """
     Represents reusable product features, such as 'Fast Drying' or 'Keeping Cool'.
@@ -62,7 +81,7 @@ class Products(models.Model):
 
     Attributes:
         name (CharField): The name of the product.
-        category (CharField): Category product belongs to.
+        category (ForeignKey): Category product belongs to.
         price_in_dollars (DecimalField): The base price of the product in dollars.
         currency (CharField): Stores the currency of the product.
         description (TextField): A detailed description of the product.
@@ -83,7 +102,9 @@ class Products(models.Model):
         KIDS = "K", "Kids"
 
     name = models.CharField(max_length=50)
-    category = models.CharField(max_length=50, null=True)
+    category = models.ForeignKey(
+        Categories, on_delete=models.DO_NOTHING, null=True, blank=True
+    )
     # Allow to store prices up to 99999,99 dollars
     price_in_dollars = models.DecimalField(
         default=Decimal(0.00), max_digits=7, decimal_places=2
