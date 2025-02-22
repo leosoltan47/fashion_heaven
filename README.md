@@ -3,21 +3,21 @@
 Get the repo
 ```bash
 git clone https://github.com/leosoltan47/fashion_heaven.git
-
-Create a virtual env
 ```
+Create a virtual environment
+```bash
 python -m venv .venv
-
-Activate virtual env on bash
+```
+Activate virtual environment on bash
 ```bash
 source .venv/bin/activate
 ```
-Activate virtual env on Windows
-```cmd
+Activate virtual virtual environment on cmd
+```bash
 .venv\Scripts\activate
 ```
-Install dependencies into virtualenv
-```
+Install dependencies into virtual environment
+```bash
 python -m pip install -r requirements.txt
 python manage.py collectstatic
 ```
