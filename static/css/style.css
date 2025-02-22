@@ -25,16 +25,23 @@ body {
 
 /* Top Bar */
 .top-bar {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    background-color: #1d1d1d;
+    color: white;
+    padding: 8px 0;
+    position: relative;
+    z-index: 20;
 }
 
 .top-bar a {
+    color: white;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
+    font-weight: 500;
 }
 
 .top-bar a:hover {
-    color: #ccc;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* Navbar */
@@ -185,4 +192,254 @@ footer a:hover {
 
 .hero-content {
     animation: fadeIn 1s ease-in;
+}
+
+/* Carousel Navigation */
+.vf-c-carousel {
+    position: relative;
+    isolation: isolate;
+    z-index: 1;
+}
+
+.vf-c-carousel__nav {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    background: white !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #2B2B2B !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    z-index: 2 !important;
+    transition: all 0.15s ease !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    margin-top: -44px !important;
+}
+
+.vf-c-carousel__nav--prev {
+    left: 0 !important;
+}
+
+.vf-c-carousel__nav--next {
+    right: 0 !important;
+}
+
+.vf-c-carousel__nav:hover {
+    background: white !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+    transform: translateY(-50%) scale(1.05) !important;
+}
+
+.vf-c-carousel__nav:disabled {
+    opacity: 0;
+    cursor: default;
+    pointer-events: none;
+}
+
+.vf-c-carousel__nav svg {
+    width: 20px !important;
+    height: 20px !important;
+    stroke: currentColor !important;
+    stroke-width: 2 !important;
+}
+
+/* Wishlist Button Styles */
+.vf-c-product-card__wishlist {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.vf-c-product-card__wishlist svg {
+    transition: all 0.2s ease;
+}
+
+.vf-c-product-card__wishlist:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.vf-c-product-card__wishlist.active svg path {
+    fill: #e11d48;
+    stroke: #e11d48;
+}
+
+/* Mega Menu Styles */
+#megaMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 40;
+    border-top: 1px solid #e5e7eb;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+#megaMenu.visible {
+    opacity: 1;
+    visibility: visible;
+    display: block !important;
+}
+
+.nav-mega-container {
+    position: relative;
+    width: 100%;
+}
+
+.mega-menu-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 4rem;
+    display: none;
+}
+
+.mega-menu-content.flex {
+    display: flex !important;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.mega-menu-section {
+    flex: 1;
+}
+
+.mega-menu-section h2 {
+    color: #111827;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.mega-menu-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mega-menu-section ul li {
+    margin-bottom: 0.75rem;
+}
+
+.mega-menu-section ul li a {
+    color: #4b5563;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.mega-menu-section ul li a:hover {
+    color: #111827;
+}
+
+/* Navigation Item Hover Effect */
+[data-menu-target] {
+    position: relative;
+}
+
+[data-menu-target]::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+[data-menu-target]:hover::after,
+[data-menu-target].active::after {
+    width: 100%;
+}
+
+/* Banner Styles */
+.b-navigation-banner {
+    flex: 1;
+}
+
+.b-navigation_banner-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.b-navigation_banner-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.b-navigation_banner-title {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.b-navigation_banner-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.b-navigation_banner-link:hover {
+    text-decoration: underline;
+}
+
+/* Navigation Sections */
+.mega-menu-section {
+    flex: 1;
+}
+
+.mega-menu-section h2 {
+    color: #1a1a1a;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.mega-menu-section ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mega-menu-section a {
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.mega-menu-section a:hover {
+    color: #000;
+}
+
+/* Navigation Icon */
+.nav-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 4px;
 } 
