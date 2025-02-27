@@ -1,6 +1,7 @@
 # TODO: Add logger and profiler to monitor performance
 from django.db.models import Prefetch
-from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render
 from .models import ProductDetails, Products
 
 
@@ -18,6 +19,20 @@ def home(request):
     )
     context = {"products": products}
     return render(request, "pages/home.html", context)
+
+
+def product(request, product_id):
+    """
+    View function that retrieves product information from get URL
+    """
+    obj = get_object_or_404(Products, pk=product_id)
+    product = {
+        "id": obj.pk,
+        "name": obj.name,
+        "price": obj.price_in_dollars,
+        "category": obj.category.name,
+    }
+    return JsonResponse(product)
 
 
 def wishlist(request):

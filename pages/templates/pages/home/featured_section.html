@@ -5,7 +5,7 @@
             <div class="vf-c-carousel__slides">
                 {% for product in products %}
                     <div>
-                        <a href="#" class="vf-c-product-card">
+                        <a href="{% url 'pages:product' product.id %}" class="vf-c-product-card">
                             <div class="vf-c-product-card__badge">BEST SELLER</div>
                             <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
                                 <svg xmlns="http://www.w3.org/2000/svg"
