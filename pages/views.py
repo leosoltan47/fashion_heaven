@@ -3,15 +3,16 @@ from django.db.models import Prefetch
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from .models import ProductDetails, Products
+import re
 
 
 # TODO: Add search bar that renders page specified in the search
 def home(request):
-    in_stock = ProductDetails.objects.filter(stock__gt=0)  # type: ignore
+    in_stock = ProductDetails.objects.filter(stock__gt=0)
     # Show 10 products that has at least one variant
     # as information like color are stored in variants
     products = (
-        Products.objects.filter(category__isnull=False)  # type: ignore
+        Products.objects.filter(category__isnull=False)
         .prefetch_related(Prefetch("details", queryset=in_stock))
         .distinct()
         .filter(details__isnull=False)
@@ -35,11 +36,21 @@ def product(request, product_id):
     return JsonResponse(product)
 
 
-def wishlist(request):
+def empty_wishlist(request):
+    return render(request, "pages/wishlist.html")
+
+
+def wishlist(request, id_list: str):
     """
     View function for the wishlist page.
     """
-    return render(request, "pages/wishlist.html")
+    regex = re.compile(r"ids\[\]=(\d+)")
+    ids = regex.findall(id_list)
+    if len(ids) == 0:
+        return render(request, "pages/wishlist.html")
+    products = Products.objects.filter(id__in=ids)
+    context = {"wishlist_items": products}
+    return render(request, "pages/wishlist.html", context)
 
 
 def bag(request):
