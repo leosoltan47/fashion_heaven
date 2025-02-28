@@ -17,7 +17,9 @@
     {% include "pages/home/trending_products.html" %}
     <!-- Stimulus.js Controller Template -->
     <script type="module">
-    import { Controller } from "@hotwired/stimulus"
+        import {
+            Controller
+        } from "@hotwired/stimulus"
 
         // Product Grid Controller
         export default class extends Controller {
@@ -55,7 +57,7 @@
         // Product Tile Controller
         class ProductTileController extends Controller {
             static targets = ["image", "colorContainer", "scrollIndicator", "price"]
-            static values = { 
+            static values = {
                 id: Number,
                 priceRange: String
             }
@@ -110,12 +112,12 @@
     </script>
     <!-- Custom Tailwind CSS -->
     <style>
-/* Hero Banner Styles */
-.hero-banner {
-    height: 50vh;
-    min-height: 400px;
-    max-height: 600px;
-}
+        /* Hero Banner Styles */
+        .hero-banner {
+            height: 50vh;
+            min-height: 400px;
+            max-height: 600px;
+        }
 
         .hero-banner__bg {
             height: 100%;
@@ -131,6 +133,7 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
@@ -227,7 +230,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
             padding: 1rem;
         }
 
@@ -386,7 +389,7 @@
             cursor: pointer !important;
             z-index: 50 !important;
             transition: all 0.15s ease !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
             margin-top: -44px !important;
         }
 
@@ -401,7 +404,7 @@
         .vf-c-carousel__prev-btn:hover,
         .vf-c-carousel__next-btn:hover {
             background: white !important;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
             transform: translateY(-50%) scale(1.05) !important;
         }
 
@@ -421,11 +424,25 @@
         }
 
         /* Color swatch specific colors */
-        .bg-navy { background-color: #1C2B4B; }
-        .bg-charcoal { background-color: #36454F; }
-        .bg-forest { background-color: #228B22; }
-        .bg-burgundy { background-color: #800020; }
-        .bg-olive { background-color: #556B2F; }
+        .bg-navy {
+            background-color: #1C2B4B;
+        }
+
+        .bg-charcoal {
+            background-color: #36454F;
+        }
+
+        .bg-forest {
+            background-color: #228B22;
+        }
+
+        .bg-burgundy {
+            background-color: #800020;
+        }
+
+        .bg-olive {
+            background-color: #556B2F;
+        }
 
         .vf-c-product-card__copy-container {
             position: relative !important;
@@ -496,125 +513,125 @@
         }
     </style>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Initialize all carousels on the page
-        const carousels = document.querySelectorAll('.vf-c-carousel');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all carousels on the page
+            const carousels = document.querySelectorAll('.vf-c-carousel');
 
-        carousels.forEach(carousel => {
-            const slides = carousel.querySelector('.vf-c-carousel__slides');
-            const prevBtn = carousel.querySelector('.vf-c-carousel__prev-btn');
-            const nextBtn = carousel.querySelector('.vf-c-carousel__next-btn');
+            carousels.forEach(carousel => {
+                const slides = carousel.querySelector('.vf-c-carousel__slides');
+                const prevBtn = carousel.querySelector('.vf-c-carousel__prev-btn');
+                const nextBtn = carousel.querySelector('.vf-c-carousel__next-btn');
 
-            const slidesPerView = 4;
-            const slideWidth = slides.querySelector('div').offsetWidth;
-            const gap = 24;
+                const slidesPerView = 4;
+                const slideWidth = slides.querySelector('div').offsetWidth;
+                const gap = 24;
 
-            function updateButtonVisibility() {
-                const scrollLeft = slides.scrollLeft;
-                const maxScroll = slides.scrollWidth - slides.clientWidth;
+                function updateButtonVisibility() {
+                    const scrollLeft = slides.scrollLeft;
+                    const maxScroll = slides.scrollWidth - slides.clientWidth;
 
-                prevBtn.disabled = scrollLeft <= 0;
-                nextBtn.disabled = scrollLeft >= maxScroll;
-            }
+                    prevBtn.disabled = scrollLeft <= 0;
+                    nextBtn.disabled = scrollLeft >= maxScroll;
+                }
 
-            function smoothScroll(element, target) {
-                element.scrollTo({
-                    left: target,
-                    behavior: 'smooth'
-                });
-            }
+                function smoothScroll(element, target) {
+                    element.scrollTo({
+                        left: target,
+                        behavior: 'smooth'
+                    });
+                }
 
-            prevBtn.addEventListener('click', () => {
-                const target = slides.scrollLeft - ((slideWidth + gap) * slidesPerView);
-                smoothScroll(slides, target);
-            });
-
-            nextBtn.addEventListener('click', () => {
-                const target = slides.scrollLeft + ((slideWidth + gap) * slidesPerView);
-                smoothScroll(slides, target);
-            });
-
-            // Update button visibility on scroll and resize
-            slides.addEventListener('scroll', updateButtonVisibility);
-            window.addEventListener('resize', updateButtonVisibility);
-
-            // Initial setup
-            updateButtonVisibility();
-
-            // Wishlist functionality for this carousel
-            const wishlistButtons = carousel.querySelectorAll('.vf-c-product-card__wishlist');
-
-            wishlistButtons.forEach(button => {
-                // Make button visible by default
-                button.style.opacity = '1';
-
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    // Toggle active class
-                    this.classList.toggle('active');
-
-                    // Get the heart icon SVG path
-                    const heartPath = this.querySelector('svg path');
-
-                    // Get id of wishlisted product
-                    const urlSegments = this.parentNode.href.split("/");
-                    const productId = urlSegments[urlSegments.length - 1];
-
-                    // Product ids will be saved to local storage to persist on user device
-                    var products = window.localStorage;
-
-                    if (this.classList.contains('active')) {
-                        // If active, fill the heart
-                        heartPath.setAttribute('fill', '#e11d48');
-
-                        // Save product id on user device to retrieve it wishlist page
-                        products.setItem(productId, productId);
-                    } else {
-                        // If not active, remove the fill
-                        heartPath.setAttribute('fill', 'none');
-
-                        // Remove item from local storage if user no longer wishlist it
-                        products.removeItem(productId);
-                    }
-
-                    // Animation feedback
-                    this.style.transform = 'scale(1.2)';
-                    setTimeout(() => {
-                        this.style.transform = 'scale(1)';
-                    }, 200);
-                });
-            });
-
-            // Make wishlist buttons visible on product card hover for this carousel
-            const productCards = carousel.querySelectorAll('.vf-c-product-card');
-
-            productCards.forEach(card => {
-                const wishlistBtn = card.querySelector('.vf-c-product-card__wishlist');
-
-                card.addEventListener('mouseenter', () => {
-                    wishlistBtn.style.opacity = '1';
+                prevBtn.addEventListener('click', () => {
+                    const target = slides.scrollLeft - ((slideWidth + gap) * slidesPerView);
+                    smoothScroll(slides, target);
                 });
 
-                card.addEventListener('mouseleave', () => {
-                    if (!wishlistBtn.classList.contains('active')) {
-                        wishlistBtn.style.opacity = '0';
-                    }
+                nextBtn.addEventListener('click', () => {
+                    const target = slides.scrollLeft + ((slideWidth + gap) * slidesPerView);
+                    smoothScroll(slides, target);
                 });
-            });
 
-            // Add color swatch functionality for this carousel
-            const colorSwatches = carousel.querySelectorAll('.color-swatch');
-            colorSwatches.forEach(swatch => {
-                swatch.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const parent = swatch.closest('.vf-c-product-card__colors');
-                    parent.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
-                    swatch.classList.add('selected');
+                // Update button visibility on scroll and resize
+                slides.addEventListener('scroll', updateButtonVisibility);
+                window.addEventListener('resize', updateButtonVisibility);
+
+                // Initial setup
+                updateButtonVisibility();
+
+                // Wishlist functionality for this carousel
+                const wishlistButtons = carousel.querySelectorAll('.vf-c-product-card__wishlist');
+
+                wishlistButtons.forEach(button => {
+                    // Make button visible by default
+                    button.style.opacity = '1';
+
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        // Toggle active class
+                        this.classList.toggle('active');
+
+                        // Get the heart icon SVG path
+                        const heartPath = this.querySelector('svg path');
+
+                        // Get id of wishlisted product
+                        const urlSegments = this.parentNode.href.split("/");
+                        const productId = urlSegments[urlSegments.length - 1];
+
+                        // Product ids will be saved to local storage to persist on user device
+                        var products = window.localStorage;
+
+                        if (this.classList.contains('active')) {
+                            // If active, fill the heart
+                            heartPath.setAttribute('fill', '#e11d48');
+
+                            // Save product id on user device to retrieve it wishlist page
+                            products.setItem(productId, productId);
+                        } else {
+                            // If not active, remove the fill
+                            heartPath.setAttribute('fill', 'none');
+
+                            // Remove item from local storage if user no longer wishlist it
+                            products.removeItem(productId);
+                        }
+
+                        // Animation feedback
+                        this.style.transform = 'scale(1.2)';
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1)';
+                        }, 200);
+                    });
+                });
+
+                // Make wishlist buttons visible on product card hover for this carousel
+                const productCards = carousel.querySelectorAll('.vf-c-product-card');
+
+                productCards.forEach(card => {
+                    const wishlistBtn = card.querySelector('.vf-c-product-card__wishlist');
+
+                    card.addEventListener('mouseenter', () => {
+                        wishlistBtn.style.opacity = '1';
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        if (!wishlistBtn.classList.contains('active')) {
+                            wishlistBtn.style.opacity = '0';
+                        }
+                    });
+                });
+
+                // Add color swatch functionality for this carousel
+                const colorSwatches = carousel.querySelectorAll('.color-swatch');
+                colorSwatches.forEach(swatch => {
+                    swatch.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const parent = swatch.closest('.vf-c-product-card__colors');
+                        parent.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+                        swatch.classList.add('selected');
+                    });
                 });
             });
         });
-    });
     </script>
 {% endblock %}
