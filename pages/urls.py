@@ -5,7 +5,8 @@ app_name = "pages"
 
 urlpatterns = [
     path("", views.home, name="home"),
-    path("wishlist/", views.wishlist, name="wishlist"),
+    path("wishlist/", views.empty_wishlist, name="wishlist"),
+    path("wishlist/<str:id_list>", views.wishlist, name="wishlist"),
     path("bag/", views.bag, name="bag"),
     path("featured/", views.blank_featured, name="blank_featured"),
     path("men/", views.blank_men, name="blank_men"),

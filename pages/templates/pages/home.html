@@ -558,12 +558,25 @@
                     // Get the heart icon SVG path
                     const heartPath = this.querySelector('svg path');
 
+                    // Get id of wishlisted product
+                    const urlSegments = this.parentNode.href.split("/");
+                    const productId = urlSegments[urlSegments.length - 1];
+
+                    // Product ids will be saved to local storage to persist on user device
+                    var products = window.localStorage;
+
                     if (this.classList.contains('active')) {
                         // If active, fill the heart
                         heartPath.setAttribute('fill', '#e11d48');
+
+                        // Save product id on user device to retrieve it wishlist page
+                        products.setItem(productId, productId);
                     } else {
                         // If not active, remove the fill
                         heartPath.setAttribute('fill', 'none');
+
+                        // Remove item from local storage if user no longer wishlist it
+                        products.removeItem(productId);
                     }
 
                     // Animation feedback
