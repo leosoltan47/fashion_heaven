@@ -1,5 +1,6 @@
 from decimal import Decimal
 from django.test import TestCase
+from pages.admin import StockListFilter
 from .models import Features, Products, Categories, ProductDetails, Collections
 
 
@@ -64,3 +65,72 @@ class ProductsModelTests(TestCase):
 
     def test_basic(self):
         self.assertEqual(2 + 2, 4)
+
+
+class StockFilterTest(TestCase):
+    def setUp(self) -> None:
+        # Populate database with test data
+        self.COLORS = [
+            "#FF0000",
+            "#00FF00",
+            "#0000FF",
+            "#FFFF00",
+            "#FF00FF",
+            "#00FFFF",
+            "#800000",
+            "#008000",
+            "#000080",
+            "#808000",
+            "#800080",
+            "#008080",
+            "#C0C0C0",
+            "#808080",
+            "#999999",
+        ]
+        self.SIZES = [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "XXXL",
+            "4XL",
+            "5XL",
+            "6XL",
+            "7XL",
+            "8XL",
+            "9XL",
+            "10XL",
+            "11XL",
+        ]
+        self.STOCKS = [3, 1, 5, 2, 6, 15, 25, 11, 46, 98, 27, 63, 75, 31, 58]
+        for color_code, size, stock in zip(self.COLORS, self.SIZES, self.STOCKS):
+            ProductDetails.objects.create(color_code=color_code, size=size, stock=stock)
+
+        self.variants = ProductDetails.objects.all()
+
+    def test_parse_happy_path(self):
+        cases = [
+            ("7", 7),
+            ("8..", (8, StockListFilter.MAX_INT)),
+            ("..9", (0, 9)),
+            ("12..16", (12, 16)),
+        ]
+        for query, result in cases:
+            self.assertEqual(StockListFilter._parse(query), result)
+
+    def test_parse_sad_path(self):
+        cases = [
+            "",
+            "abc",
+            "..fjko",
+            "kjalfdj..kdjf",
+            "12..kj",
+            "kj..",
+            "-1..-16",
+            "8...9",
+        ]
+        for case in cases:
+            with self.assertRaises(ValueError):
+                _ = StockListFilter._parse(case)
