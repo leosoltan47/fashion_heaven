@@ -19,14 +19,58 @@ def home(request):
     context = {"products": products}
     return render(request, "pages/home.html", context)
 
+
 def wishlist(request):
     """
     View function for the wishlist page.
     """
     return render(request, "pages/wishlist.html")
 
+
 def bag(request):
     """
     View function for the shopping bag page.
     """
     return render(request, "pages/bag.html")
+
+
+def blank_featured(request):
+    """
+    View function for the blank featured page.
+    """
+    return render(request, "pages/blank_featured.html")
+
+
+def blank_men(request):
+    """
+    View function for the blank men's page.
+    """
+    return render(request, "pages/blank_men.html")
+
+
+def blank_women(request):
+    """
+    View function for the blank women's page.
+    """
+    return render(request, "pages/blank_women.html")
+
+
+def blank_kids(request):
+    """
+    View function for the blank kids' page.
+    """
+    return render(request, "pages/blank_kids.html")
+
+
+def blank_shoes(request):
+    """
+    View function for the blank shoes page.
+    """
+    return render(request, "pages/blank_shoes.html")
+
+
+def blank_outlet(request):
+    """
+    View function for the blank outlet page.
+    """
+    return render(request, "pages/blank_outlet.html")

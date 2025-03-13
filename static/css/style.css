@@ -283,73 +283,141 @@ footer a:hover {
 
 /* Mega Menu Styles */
 #megaMenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    width: 100%;
-    background-color: white;
-    z-index: 40;
-    border-top: 1px solid #e5e7eb;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    background-color: transparent !important;
+    z-index: 40 !important;
+    border-top: 1px solid #e5e7eb !important;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    display: flex !important;
+    justify-content: center !important;
+    overflow: visible !important;
 }
 
 #megaMenu.visible {
-    opacity: 1;
-    visibility: visible;
-    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+    justify-content: center !important;
 }
 
 .nav-mega-container {
-    position: relative;
-    width: 100%;
+    position: static !important;
+    width: 100% !important;
 }
 
 .mega-menu-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 2rem 4rem;
+    width: 1488px !important;
+    max-width: 1488px !important;
+    margin: 0 auto !important;
+    padding: 2rem !important;
+    background-color: white !important;
     display: none;
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1) !important;
 }
 
 .mega-menu-content.flex {
     display: flex !important;
-    gap: 2rem;
-    justify-content: space-between;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
 }
 
-.mega-menu-section {
+/* Force consistent grid columns */
+.mega-menu-content .grid {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 2rem !important;
+}
+
+/* Under Armour Style Mega Menu */
+.DesktopSubNav_sub-menu-category-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 2rem !important;
+}
+
+.DesktopSubNav_sub-menu-categories {
+    margin-bottom: 1rem;
+}
+
+.DesktopSubNav_sub-menu-category-title {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: #111827 !important;
+    margin-bottom: 16px !important;
+    display: block !important;
+    text-decoration: none !important;
+}
+
+.DesktopSubNav_sub-menu-category-grouping {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+}
+
+.DesktopSubNav_sub-menu-category-grouping li a {
+    color: #4b5563;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease-in-out;
+    display: inline-block;
+}
+
+.DesktopSubNav_sub-menu-category-grouping li a:hover {
+    color: #111827;
+}
+
+/* Banner Styles */
+.b-navigation-banner {
     flex: 1;
 }
 
-.mega-menu-section h2 {
+.b-navigation_banner-container {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+}
+
+.b-navigation_banner-image {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 0 !important;
+    object-fit: cover !important;
+}
+
+.b-navigation_banner-title {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 16px;
     color: #111827;
-    margin-bottom: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
 }
 
-.mega-menu-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.mega-menu-section ul li {
-    margin-bottom: 0.75rem;
-}
-
-.mega-menu-section ul li a {
+.b-navigation_banner-link {
     color: #4b5563;
     text-decoration: none;
+    font-size: 14px;
     transition: color 0.2s ease-in-out;
 }
 
-.mega-menu-section ul li a:hover {
+.b-navigation_banner-link:hover {
     color: #111827;
+    text-decoration: underline;
 }
 
 /* Navigation Item Hover Effect */
@@ -371,40 +439,6 @@ footer a:hover {
 [data-menu-target]:hover::after,
 [data-menu-target].active::after {
     width: 100%;
-}
-
-/* Banner Styles */
-.b-navigation-banner {
-    flex: 1;
-}
-
-.b-navigation_banner-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.b-navigation_banner-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-.b-navigation_banner-title {
-    margin-top: 16px;
-    margin-bottom: 8px;
-    font-weight: 600;
-    font-size: 16px;
-}
-
-.b-navigation_banner-link {
-    color: inherit;
-    text-decoration: none;
-}
-
-.b-navigation_banner-link:hover {
-    text-decoration: underline;
 }
 
 /* Navigation Sections */
@@ -442,4 +476,39 @@ footer a:hover {
     display: inline-flex;
     align-items: center;
     margin-left: 4px;
+}
+
+/* Social Media Icons */
+.social-icon {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.social-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px) scale(1.1);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.social-icon:active {
+    transform: translateY(0) scale(1);
+    transition: all 0.1s ease;
+}
+
+/* Footer Social Media Icons */
+footer a.text-gray-400 {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+footer a.text-gray-400:hover {
+    color: #ffffff !important;
 } 
