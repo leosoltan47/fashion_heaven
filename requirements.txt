@@ -1,8 +1,10 @@
 asgiref==3.8.1
-Django==5.1.5
+CurrencyConverter==0.18.3
+debugpy==1.8.12
+Django==5.1.7
+django-colorfield==0.12.0
+django-debug-toolbar==5.0.1
+pillow==11.1.0
+setuptools==75.8.0
 sqlparse==0.5.3
 tzdata==2025.1
-pillow==11.1.0
-django-debug-toolbar==5.0.1
-django-colorfield==0.12.0
-currencyconverter==0.18.3
