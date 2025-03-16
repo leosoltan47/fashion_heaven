@@ -45,6 +45,25 @@ class ProductsAdminForm(forms.ModelForm):
         return cleaned_data
 
 
+class ColorListFilter(admin.SimpleListFilter):
+    title = gettext_lazy("Color")
+    parameter_name = "color_code"
+
+    def lookups(self, request, model_admin):
+        colors = (
+            ProductDetails.objects.only("color_code")
+            .all()
+            .distinct()
+            .order_by("color_code")
+        )
+        return [(color.color_code, color.color()) for color in colors]
+
+    def queryset(self, request, queryset):
+        if self.value() is None:
+            return queryset
+        return queryset.filter(color_code=self.value())
+
+
 class StockListFilter(admin.SimpleListFilter):
     title = gettext_lazy("Stock ranges")
     parameter_name = "stock"
@@ -115,8 +134,7 @@ class ProductDetailsAdmin(admin.ModelAdmin):
 
     list_display = ["id", "color", "size", "stock"]
 
-    # TODO: Add `color` to `list_filter`
-    list_filter = ["size", StockListFilter]
+    list_filter = ["size", StockListFilter, ColorListFilter]
 
     # TODO: Implement low stock threshold notification, alerting admins when a
     # product's inventory falls below a specified level, triggering a warning
