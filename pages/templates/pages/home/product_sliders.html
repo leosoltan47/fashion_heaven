@@ -1,5 +1,5 @@
 <section class="container mx-auto px-8 lg:px-16 py-20">
-    <h2 class="text-3xl font-semibold text-black mb-8">Trending Products</h2>
+    <h2 class="text-3xl font-semibold text-black mb-8">{{ section_title }}</h2>
     <div class="relative">
         <div class="vf-c-carousel">
             <div class="vf-c-carousel__slides">
@@ -92,23 +92,21 @@
                 {% endif %}
             </div>
             <!-- Navigation Buttons -->
-            <button class="vf-c-carousel__nav vf-c-carousel__nav--prev"
-                    aria-label="Previous slide">
+            <button class="vf-c-carousel__prev-btn" aria-label="Previous">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      fill="none"
                      viewBox="0 0 24 24"
-                     stroke-width="1.5"
+                     stroke-width="2"
                      stroke="currentColor"
                      class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                 </svg>
             </button>
-            <button class="vf-c-carousel__nav vf-c-carousel__nav--next"
-                    aria-label="Next slide">
+            <button class="vf-c-carousel__next-btn" aria-label="Next">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      fill="none"
                      viewBox="0 0 24 24"
-                     stroke-width="1.5"
+                     stroke-width="2"
                      stroke="currentColor"
                      class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
