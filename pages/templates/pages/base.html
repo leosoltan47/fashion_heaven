@@ -69,16 +69,62 @@
                         <!-- Center Navigation -->
                         <div class="hidden md:flex items-center justify-center space-x-8">
                             <!-- Navigation Items -->
-                            {% for name in ["NEW & FEATURED 🔥", "MEN", "WOMEN", "KIDS", "CURRY", "OUTLET"] %}
-                                <a href="#"
-                                   class="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-bold uppercase tracking-wide transition-colors duration-300 group"
-                                   data-menu-target="new-featured">
-                                    <span class="relative">
-                                        {{ name }}
-                                        <span class="absolute bottom-[-4px] left-0 h-[6px] bg-white transition-all duration-500 ease-out"></span>
-                                    </span>
-                                </a>
-                            {% endfor %}
+                            <a href="#"
+                               class="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-bold uppercase tracking-wide transition-colors duration-300 group"
+                               data-menu-target="new-featured">
+                                <span class="relative">
+                                    NEW & FEATURED 🔥
+                                    <span class="absolute bottom-[-4px] left-0 h-[6px] bg-white transition-all duration-500 ease-out"></span>
+                                </span>
+                            </a>
+                            <a href="#"
+                               class="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-bold uppercase tracking-wide transition-colors duration-300 group"
+                               data-menu-target="men">
+                                <span class="relative">
+                                    MEN
+                                    <span class="absolute bottom-[-4px] left-0 h-[6px] bg-white transition-all duration-500 ease-out"></span>
+                                </span>
+                            </a>
+                            <a href="#"
+                               class="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-bold uppercase tracking-wide transition-colors duration-300 group"
+                               data-menu-target="women">
+                                <span class="relative">
+                                    WOMEN
+                                    <span class="absolute bottom-[-4px] left-0 h-[6px] bg-white transition-all duration-500 ease-out"></span>
+                                </span>
+                            </a>
+                            <a href="#"
+                               class="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-bold uppercase tracking-wide transition-colors duration-300 group"
+                               data-menu-target="kids">
+                                <span class="relative">
+                                    KIDS
+                                    <span class="absolute bottom-[-4px] left-0 h-[6px] bg-white transition-all duration-500 ease-out"></span>
+                                </span>
+                            </a>
+                            <a href="#"
+                               class="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-bold uppercase tracking-wide transition-colors duration-300 group"
+                               data-menu-target="shoes">
+                                <span class="relative">
+                                    SHOES
+                                    <span class="absolute bottom-[-4px] left-0 h-[6px] bg-white transition-all duration-500 ease-out"></span>
+                                </span>
+                            </a>
+                            <a href="#"
+                               class="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-bold uppercase tracking-wide transition-colors duration-300 group"
+                               data-menu-target="curry">
+                                <span class="relative">
+                                    CURRY
+                                    <span class="absolute bottom-[-4px] left-0 h-[6px] bg-white transition-all duration-500 ease-out"></span>
+                                </span>
+                            </a>
+                            <a href="#"
+                               class="relative text-gray-300 hover:text-white px-3 py-2 text-sm font-bold uppercase tracking-wide transition-colors duration-300 group"
+                               data-menu-target="outlet">
+                                <span class="relative">
+                                    OUTLET
+                                    <span class="absolute bottom-[-4px] left-0 h-[6px] bg-white transition-all duration-500 ease-out"></span>
+                                </span>
+                            </a>
                         </div>
                         <!-- Right Section - Search -->
                         <div class="flex items-center space-x-6">
@@ -150,10 +196,18 @@
                         <div class="px-2 pt-2 pb-3 space-y-2 bg-gray-800">
                             <a href="#"
                                class="block px-3 py-4 text-base font-bold uppercase tracking-wide text-gray-300 hover:text-white hover:bg-gray-700 rounded-md"><span class="hover:underline">NEW & FEATURED</span> 🔥</a>
-                            {% for catalog in ["MEN", "WOMEN", "KIDS", "CURRY", "OUTLET"] %}
-                                <a href="#"
-                                   class="block px-3 py-4 text-base font-bold uppercase tracking-wide text-gray-300 hover:text-white hover:underline hover:bg-gray-700 rounded-md">{{ catalog }}</a>
-                            {% endfor %}
+                            <a href="#"
+                               class="block px-3 py-4 text-base font-bold uppercase tracking-wide text-gray-300 hover:text-white hover:underline hover:bg-gray-700 rounded-md">MEN</a>
+                            <a href="#"
+                               class="block px-3 py-4 text-base font-bold uppercase tracking-wide text-gray-300 hover:text-white hover:underline hover:bg-gray-700 rounded-md">WOMEN</a>
+                            <a href="#"
+                               class="block px-3 py-4 text-base font-bold uppercase tracking-wide text-gray-300 hover:text-white hover:underline hover:bg-gray-700 rounded-md">KIDS</a>
+                            <a href="#"
+                               class="block px-3 py-4 text-base font-bold uppercase tracking-wide text-gray-300 hover:text-white hover:underline hover:bg-gray-700 rounded-md">SHOES</a>
+                            <a href="#"
+                               class="block px-3 py-4 text-base font-bold uppercase tracking-wide text-gray-300 hover:text-white hover:underline hover:bg-gray-700 rounded-md">CURRY</a>
+                            <a href="#"
+                               class="block px-3 py-4 text-base font-bold uppercase tracking-wide text-gray-300 hover:text-white hover:underline hover:bg-gray-700 rounded-md">OUTLET</a>
                         </div>
                     </div>
                 </div>
@@ -169,19 +223,19 @@
                             justify-content: center;
                             background-color: transparent">
                     <!-- Shoes Content -->
-                    {% include "base/shoes.html" %}
+                    {% include "pages/base/shoes.html" with title="shoes" %}
                     <!-- New & Featured Content -->
-                    {% include "base/featured.html" %}
+                    {% include "pages/base/featured.html" with title="featured" %}
                     <!-- Men Content -->
-                    {% include "base/men.html" %}
+                    {% include "pages/base/men.html" with title="men" %}
                     <!-- Women Content -->
-                    {% include "base/women.html" %}
+                    {% include "pages/base/women.html" with title="women" %}
                     <!-- Kids Content -->
-                    {% include "base/kids.html" %}
+                    {% include "pages/base/kids.html" with title="kids" %}
                     <!-- Curry Content -->
-                    {% include "base/curry.html" %}
+                    {% include "pages/base/curry.html" with title="curry" %}
                     <!-- Outlet Content -->
-                    {% include "base/outlet.html" %}
+                    {% include "pages/base/outlet.html" with title="outlet" %}
                 </div>
             </div>
         </nav>
