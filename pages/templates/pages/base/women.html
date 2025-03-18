@@ -1,0 +1,439 @@
+<div id="megaMenu"
+     class="hidden"
+     style="position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background-color: transparent">
+    <!-- Shoes Content -->
+    {% include "base/shoes.html" %}
+    <!-- New & Featured Content -->
+    {% include "base/featured.html" %}
+    <!-- Men Content -->
+    {% include "base/
+    <!-- Women Content -->
+    <div class="mega-menu-content hidden"
+         data-menu-content="women"
+         style="width: 1488px;
+                max-width: 1488px;
+                margin: 0 auto;
+                padding: 2rem;
+                background-color: white;
+                box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1)">
+        <div class="py-6">
+            <ul class="DesktopSubNav_sub-menu-category-list grid grid-cols-5 gap-8"
+                style="width: 100%;
+                       display: grid;
+                       grid-template-columns: repeat(5, minmax(0, 1fr));
+                       gap: 2rem">
+                <!-- Banner Image Section -->
+                <li class="b-navigation-banner">
+                    <div class="b-navigation_banner-container" bis_skin_checked="1">
+                        <div style="width: 259.2px; height: 259.2px; position: relative;">
+                            <a href="{% url 'pages:blank_women' %}"
+                               title="Women's Collection"
+                               style="display: block;
+                                      width: 100%;
+                                      height: 100%">
+                                <img alt="Women's Training Collection"
+                                     loading="lazy"
+                                     width="259.2"
+                                     height="259.2"
+                                     decoding="async"
+                                     class="b-navigation_banner-image"
+                                     src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='259.2' height='259.2' viewBox='0 0 259.2 259.2'%3E%3Crect width='259.2' height='259.2' fill='%23e0e0e0'/%3E%3C/svg%3E"
+                                     style="object-fit: cover;
+                                            width: 100%;
+                                            height: 100%;
+                                            border-radius: 0">
+                            </a>
+                        </div>
+                        <h6 class="b-navigation_banner-title">Women's Collection</h6>
+                        <a class="b-navigation_banner-link"
+                           href="{% url 'pages:blank_women' %}"
+                           title="Shop All Women's">Shop Now</a>
+                    </div>
+                </li>
+                <!-- New Arrivals Section -->
+                <li class="DesktopSubNav_sub-menu-categories">
+                    <h2 class="DesktopSubNav_sub-menu-category-title">New Arrivals</h2>
+                    <ul class="DesktopSubNav_sub-menu-category-grouping">
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/new-arrivals/tops/">Tops</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/new-arrivals/bottoms/">Bottoms</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/new-arrivals/shoes/">Shoes</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/new-arrivals/accessories/">Accessories</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Shop by Category -->
+                <li class="DesktopSubNav_sub-menu-categories">
+                    <h2 class="DesktopSubNav_sub-menu-category-title">Shop by Category</h2>
+                    <ul class="DesktopSubNav_sub-menu-category-grouping">
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/tops/">Tops</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/bottoms/">Bottoms</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/shoes/">Shoes</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/accessories/">Accessories</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/outerwear/">Outerwear</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/sports-bras/">Sports Bras</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Shop by Sport -->
+                <li class="DesktopSubNav_sub-menu-categories">
+                    <h2 class="DesktopSubNav_sub-menu-category-title">Shop by Sport</h2>
+                    <ul class="DesktopSubNav_sub-menu-category-grouping">
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/basketball/">Basketball</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/training/">Training</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/running/">Running</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/golf/">Golf</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/soccer/">Soccer</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/outdoor/">Outdoor</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Featured -->
+                <li class="DesktopSubNav_sub-menu-categories">
+                    <h2 class="DesktopSubNav_sub-menu-category-title">Featured</h2>
+                    <ul class="DesktopSubNav_sub-menu-category-grouping">
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/best-sellers/">Best Sellers</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/curry-brand/womens/">Curry Brand</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/project-rock/womens/">Project Rock</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/ua-rush/">UA RUSH™</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/womens/outlet/">Outlet</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Kids Content -->
+    <div class="mega-menu-content hidden"
+         data-menu-content="kids"
+         style="width: 1488px;
+                max-width: 1488px;
+                margin: 0 auto;
+                padding: 2rem;
+                background-color: white;
+                box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1)">
+        <div class="py-6">
+            <ul class="DesktopSubNav_sub-menu-category-list grid grid-cols-5 gap-8"
+                style="width: 100%;
+                       display: grid;
+                       grid-template-columns: repeat(5, minmax(0, 1fr));
+                       gap: 2rem">
+                <!-- Banner Image Section -->
+                <li class="b-navigation-banner">
+                    <div class="b-navigation_banner-container" bis_skin_checked="1">
+                        <div style="width: 259.2px; height: 259.2px; position: relative;">
+                            <a href="{% url 'pages:blank_kids' %}"
+                               title="Kids' Collection"
+                               style="display: block;
+                                      width: 100%;
+                                      height: 100%">
+                                <img alt="Boys' Collection"
+                                     loading="lazy"
+                                     width="259.2"
+                                     height="259.2"
+                                     decoding="async"
+                                     class="b-navigation_banner-image"
+                                     src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='259.2' height='259.2' viewBox='0 0 259.2 259.2'%3E%3Crect width='259.2' height='259.2' fill='%23e0e0e0'/%3E%3C/svg%3E"
+                                     style="object-fit: cover;
+                                            width: 100%;
+                                            height: 100%;
+                                            border-radius: 0">
+                            </a>
+                        </div>
+                        <h6 class="b-navigation_banner-title">Kids' Collection</h6>
+                        <a class="b-navigation_banner-link"
+                           href="{% url 'pages:blank_kids' %}"
+                           title="Shop All Kids'">Shop Now</a>
+                    </div>
+                </li>
+                <!-- New Arrivals Section -->
+                <li class="DesktopSubNav_sub-menu-categories">
+                    <h2 class="DesktopSubNav_sub-menu-category-title">New Arrivals</h2>
+                    <ul class="DesktopSubNav_sub-menu-category-grouping">
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/new-arrivals/tops/">Tops</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/new-arrivals/bottoms/">Bottoms</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/new-arrivals/shoes/">Shoes</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/new-arrivals/accessories/">Accessories</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Shop by Category -->
+                <li class="DesktopSubNav_sub-menu-categories">
+                    <h2 class="DesktopSubNav_sub-menu-category-title">Shop by Category</h2>
+                    <ul class="DesktopSubNav_sub-menu-category-grouping">
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/tops/">Tops</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/bottoms/">Bottoms</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/shoes/">Shoes</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/accessories/">Accessories</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/outerwear/">Outerwear</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/underwear/">Underwear</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Shop by Age -->
+                <li class="DesktopSubNav_sub-menu-categories">
+                    <h2 class="DesktopSubNav_sub-menu-category-title">Shop by Age</h2>
+                    <ul class="DesktopSubNav_sub-menu-category-grouping">
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/boys/">Boys</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/girls/">Girls</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/toddler/">Toddler</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/infant/">Infant</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/youth/">Youth</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/teen/">Teen</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Featured -->
+                <li class="DesktopSubNav_sub-menu-categories">
+                    <h2 class="DesktopSubNav_sub-menu-category-title">Featured</h2>
+                    <ul class="DesktopSubNav_sub-menu-category-grouping">
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/best-sellers/">Best Sellers</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/curry-brand/kids/">Curry Brand</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/project-rock/kids/">Project Rock</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/ua-rush/">UA RUSH™</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/kids/outlet/">Outlet</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Curry Content -->
+    <div class="mega-menu-content hidden"
+         data-menu-content="curry"
+         style="width: 1488px;
+                max-width: 1488px;
+                margin: 0 auto;
+                padding: 0.5rem 2rem;
+                background-color: white;
+                box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1)">
+        <div class="py-0">
+            <div class="flex justify-center items-center space-x-24"
+                 style="width: 100%">
+                <a href="/en-us/c/curry-brand/men/"
+                   class="text-gray-800 hover:text-black text-xl font-bold transition-colors duration-200">Men</a>
+                <a href="/en-us/c/curry-brand/women/"
+                   class="text-gray-800 hover:text-black text-xl font-bold transition-colors duration-200">Women</a>
+                <a href="/en-us/c/curry-brand/kids/"
+                   class="text-gray-800 hover:text-black text-xl font-bold transition-colors duration-200">Kids</a>
+                <a href="/en-us/c/curry-brand/shoes/"
+                   class="text-gray-800 hover:text-black text-xl font-bold transition-colors duration-200">Shoes</a>
+            </div>
+        </div>
+    </div>
+    <!-- Outlet Content -->
+    <div class="mega-menu-content hidden"
+         data-menu-content="outlet"
+         style="width: 1488px;
+                max-width: 1488px;
+                margin: 0 auto;
+                padding: 2rem;
+                background-color: white;
+                box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1)">
+        <div class="py-6">
+            <ul class="DesktopSubNav_sub-menu-category-list grid grid-cols-5 gap-8"
+                style="width: 100%;
+                       display: grid;
+                       grid-template-columns: repeat(5, minmax(0, 1fr));
+                       gap: 2rem">
+                <!-- Banner Image Section -->
+                <li class="b-navigation-banner">
+                    <div class="b-navigation_banner-container" bis_skin_checked="1">
+                        <div style="width: 259.2px; height: 259.2px; position: relative;">
+                            <a href="{% url 'pages:blank_outlet' %}"
+                               title="Outlet Collection"
+                               style="display: block;
+                                      width: 100%;
+                                      height: 100%">
+                                <img alt="Outlet Collection"
+                                     loading="lazy"
+                                     width="259.2"
+                                     height="259.2"
+                                     decoding="async"
+                                     class="b-navigation_banner-image"
+                                     src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='259.2' height='259.2' viewBox='0 0 259.2 259.2'%3E%3Crect width='259.2' height='259.2' fill='%23e0e0e0'/%3E%3C/svg%3E"
+                                     style="object-fit: cover;
+                                            width: 100%;
+                                            height: 100%;
+                                            border-radius: 0">
+                            </a>
+                        </div>
+                        <h6 class="b-navigation_banner-title">Outlet Collection</h6>
+                        <a class="b-navigation_banner-link"
+                           href="{% url 'pages:blank_outlet' %}"
+                           title="Shop All Outlet">Shop Now</a>
+                    </div>
+                </li>
+                <!-- New Arrivals Section -->
+                <li class="DesktopSubNav_sub-menu-categories">
+                    <h2 class="DesktopSubNav_sub-menu-category-title">New Arrivals</h2>
+                    <ul class="DesktopSubNav_sub-menu-category-grouping">
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/new-arrivals/tops/">Tops</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/new-arrivals/bottoms/">Bottoms</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/new-arrivals/shoes/">Shoes</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/new-arrivals/accessories/">Accessories</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Shop by Category -->
+                <li class="DesktopSubNav_sub-menu-categories">
+                    <h2 class="DesktopSubNav_sub-menu-category-title">Shop by Category</h2>
+                    <ul class="DesktopSubNav_sub-menu-category-grouping">
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/tops/">Tops</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/bottoms/">Bottoms</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/shoes/">Shoes</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/accessories/">Accessories</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/outerwear/">Outerwear</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/underwear/">Underwear</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Shop by Sport -->
+                <li class="DesktopSubNav_sub-menu-categories">
+                    <h2 class="DesktopSubNav_sub-menu-category-title">Shop by Sport</h2>
+                    <ul class="DesktopSubNav_sub-menu-category-grouping">
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/basketball/">Basketball</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/training/">Training</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/running/">Running</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/golf/">Golf</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/soccer/">Soccer</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/outdoor/">Outdoor</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Featured -->
+                <li class="DesktopSubNav_sub-menu-categories">
+                    <h2 class="DesktopSubNav_sub-menu-category-title">Featured</h2>
+                    <ul class="DesktopSubNav_sub-menu-category-grouping">
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/best-sellers/">Best Sellers</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/curry-brand/outlet/">Curry Brand</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/project-rock/outlet/">Project Rock</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/ua-rush/">UA RUSH™</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="/en-us/c/outlet/deals/">Deals</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
