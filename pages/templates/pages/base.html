@@ -168,7 +168,7 @@
                         <img class="h-8 w-auto" src="{% static 'icons8-bmw-30.svg' %}" alt="Logo">
                     </a>
                     <!-- Wishlist Icon - Positioned between search and bag -->
-                    <a href="{% url 'pages:wishlist' %}"
+                    <a id="wishlistLink" href="{% url 'pages:wishlist' %}"
                        class="absolute right-0 top-1/2 transform -translate-y-1/2 -mr-6 lg:-mr-12 z-10 flex-shrink-0 text-gray-300 hover:text-white transition-colors duration-200">
                         <svg xmlns="http://www.w3.org/2000/svg"
                              fill="none"
@@ -223,19 +223,19 @@
                             justify-content: center;
                             background-color: transparent">
                     <!-- Shoes Content -->
-                    {% include "pages/base/shoes.html" with title="shoes" %}
+                    {% include "pages/base/shoes.html" with name="shoes" %}
                     <!-- New & Featured Content -->
-                    {% include "pages/base/featured.html" with title="featured" %}
+                    {% include "pages/base/featured.html" with name="featured" %}
                     <!-- Men Content -->
-                    {% include "pages/base/men.html" with title="men" %}
+                    {% include "pages/base/people.html" with name="men" %}
                     <!-- Women Content -->
-                    {% include "pages/base/women.html" with title="women" %}
+                    {% include "pages/base/people.html" with name="women" %}
                     <!-- Kids Content -->
-                    {% include "pages/base/kids.html" with title="kids" %}
+                    {% include "pages/base/people.html" with name="kids" %}
                     <!-- Curry Content -->
-                    {% include "pages/base/curry.html" with title="curry" %}
+                    {% include "pages/base/curry.html" %}
                     <!-- Outlet Content -->
-                    {% include "pages/base/outlet.html" with title="outlet" %}
+                    {% include "pages/base/people.html" with name="outlet" %}
                 </div>
             </div>
         </nav>
