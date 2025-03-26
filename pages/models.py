@@ -1,5 +1,4 @@
 from decimal import Decimal
-from colorfield.fields import ColorField
 from django.db import models
 from django.contrib import admin
 from django.utils.html import format_html
@@ -51,12 +50,13 @@ class ProductDetails(models.Model):
     such as color, size, and stock level. Related to :model:`pages.Products` via one-to-many relation
 
     Attributes:
-        color (ColorField): The color of the variant.
+        product (ForeignKey): The product that this variant belongs to.
+        color (CharField): The color of the variant.
         size (CharField): The size of the variant (e.g. '10' for shoes, 'XL' for clothes).
         stock (PositiveIntegerField): The number of items remaining in stock for this variant.
     """
 
-    color_code = ColorField(default="#FF0000")
+    color_code = models.CharField(max_length=15)
     size = models.CharField(max_length=10)
 
     stock = models.PositiveIntegerField(default=0)
