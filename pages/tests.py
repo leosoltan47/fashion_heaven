@@ -1,7 +1,8 @@
 from decimal import Decimal
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 from pages.admin import StockListFilter
-from .models import Features, Products, Categories, ProductDetails, Collections
+from .models import Features, Products, Categories, ProductDetails, Collections, validate_hex_color
 
 
 class CollectionsModelTests(TestCase):
@@ -38,6 +39,39 @@ class ProductDetailsModelTests(TestCase):
 
     def test_creation(self):
         self.assertEqual(2 + 2, 4)
+
+    def test_validator_happy(self):
+        valid_colors = [
+            '#FFFFFF',
+            '#000000',
+            '#123456',
+            '#ABCDEF',
+            '#789012',
+            '#FF0000',
+            '#00FF00',
+            '#0000FF',
+            '#12345678',
+        ]
+        for color in valid_colors:
+            self.assertEqual(validate_hex_color(color), None)
+
+    def test_validator_sad(self):
+        invalid_colors = [
+            'FFFFFF',  # missing #
+            '#12345',  # too short
+            '#1234567',  # too long (7 digits)
+            '#12345G',  # invalid character (G)
+            '#12345 ',  # trailing space
+            ' #123456',  # leading space
+            '#1234567890',  # too long (10 digits)
+            '123456',  # missing #
+            '#',  # empty
+            '#123',  # too short
+        ]
+        for color in invalid_colors:
+            with self.assertRaises(ValidationError):
+                validate_hex_color(color)
+
 
 
 class CategoriesModelTests(TestCase):
