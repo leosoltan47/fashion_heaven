@@ -19,5 +19,4 @@ Activate virtual virtual environment on cmd
 Install dependencies into virtual environment
 ```bash
 python -m pip install -r requirements.txt
-python manage.py collectstatic
 ```
