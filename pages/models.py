@@ -2,6 +2,14 @@ from decimal import Decimal
 from django.db import models
 from django.contrib import admin
 from django.utils.html import format_html
+from django.core.exceptions import ValidationError
+import re
+
+
+def validate_hex_color(value):
+    regex = re.compile(r"^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$")
+    if not regex.match(value):
+        raise ValidationError("Invalid hex color code")
 
 
 class Categories(models.Model):
@@ -51,12 +59,12 @@ class ProductDetails(models.Model):
 
     Attributes:
         product (ForeignKey): The product that this variant belongs to.
-        color (CharField): The color of the variant.
+        color_code (CharField): The color of the variant in hex.
         size (CharField): The size of the variant (e.g. '10' for shoes, 'XL' for clothes).
         stock (PositiveIntegerField): The number of items remaining in stock for this variant.
     """
 
-    color_code = models.CharField(max_length=15)
+    color_code = models.CharField(max_length=9, default="#FF0000", validators=[validate_hex_color])
     size = models.CharField(max_length=10)
 
     stock = models.PositiveIntegerField(default=0)
