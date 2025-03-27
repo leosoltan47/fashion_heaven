@@ -3,7 +3,7 @@ from django import forms
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy
-from .models import Categories, Collections, Features, ProductDetails, Products
+from .models import Categories, Collections, Color, Features, ProductDetails, Products
 from currency_converter import CurrencyConverter
 
 admin.site.register(Features)
@@ -51,17 +51,18 @@ class ColorListFilter(admin.SimpleListFilter):
 
     def lookups(self, request, model_admin):
         colors = (
-            ProductDetails.objects.only("color_code")
+            Color.objects.only("color_code")
             .all()
             .distinct()
             .order_by("color_code")
         )
+
         return [(color.color_code, color.color()) for color in colors]
 
     def queryset(self, request, queryset):
         if self.value() is None:
             return queryset
-        return queryset.filter(color_code=self.value())
+        return queryset.prefetch_related().filter(productimages__color__color_code=self.value())
 
 
 class StockListFilter(admin.SimpleListFilter):
@@ -132,7 +133,7 @@ class StockListFilter(admin.SimpleListFilter):
 @admin.register(ProductDetails)
 class ProductDetailsAdmin(admin.ModelAdmin):
 
-    list_display = ["id", "color", "size", "stock"]
+    list_display = ["id", "productimages__color__color_code", "size", "stock"]
 
     list_filter = ["size", StockListFilter, ColorListFilter]
 
