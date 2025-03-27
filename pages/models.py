@@ -59,25 +59,16 @@ class ProductDetails(models.Model):
 
     Attributes:
         product (ForeignKey): The product that this variant belongs to.
-        color_code (CharField): The color of the variant in hex.
         size (CharField): The size of the variant (e.g. '10' for shoes, 'XL' for clothes).
         stock (PositiveIntegerField): The number of items remaining in stock for this variant.
     """
 
-    color_code = models.CharField(max_length=9, default="#FF0000", validators=[validate_hex_color])
     size = models.CharField(max_length=10)
-
     stock = models.PositiveIntegerField(default=0)
 
     class Meta:
         verbose_name_plural = "Product Details"
 
-    @admin.display
-    def color(self):
-        return format_html(
-            '<svg width="20px" height="20px"><rect width = "20" height = "20" fill = "{}"/></svg>',
-            self.color_code,
-        )
 
 
 class Products(models.Model):
@@ -146,6 +137,23 @@ class ProductImages(models.Model):
     content = models.ImageField()
     product_detail = models.ForeignKey(ProductDetails, on_delete=models.CASCADE)
 
+class Color(models.Model):
+    """
+    Represents colors images can take.
+
+    Attributes:
+        color_code (CharField): Hex value of the color
+        images (ManyToManyField): Connection to product images
+    """
+    color_code = models.CharField(default="#FF0000", max_length=9, validators=[validate_hex_color])
+    images = models.ManyToManyField(ProductImages)
+
+    @admin.display
+    def color(self):
+        return format_html(
+            '<svg width="20px" height="20px"><rect width = "20" height = "20" fill = "{}"/></svg>',
+            self.color_code,
+        )
 
 class Collections(models.Model):
     """
