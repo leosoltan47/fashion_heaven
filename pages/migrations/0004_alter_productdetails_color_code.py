@@ -7,13 +7,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0003_alter_productdetails_color_code'),
+        ("pages", "0003_alter_productdetails_color_code"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='productdetails',
-            name='color_code',
-            field=models.CharField(default='#FF0000', max_length=9, validators=[pages.models.validate_hex_color]),
+            model_name="productdetails",
+            name="color_code",
+            field=models.CharField(
+                default="#FF0000",
+                max_length=9,
+                validators=[pages.models.validate_hex_color],
+            ),
         ),
     ]

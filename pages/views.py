@@ -23,7 +23,11 @@ def home(request):
             "id": obj.pk,
             "name": obj.name,
             "price": obj.price_in_dollars,
-            "colors": [[ color.color_code for color in image.color_set.all()] for variant in obj.details.all() for image in variant.productimages_set.all()]
+            "colors": [
+                [color.color_code for color in image.color_set.all()]
+                for variant in obj.details.all()
+                for image in variant.productimages_set.all()
+            ],
         }
         for obj in objects
     ]

@@ -44,9 +44,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "color_code",
-                    models.CharField(
-                        default="#FF0000",  max_length=7
-                    ),
+                    models.CharField(default="#FF0000", max_length=7),
                 ),
                 ("size", models.CharField(max_length=10)),
                 ("stock", models.PositiveIntegerField(default=0)),

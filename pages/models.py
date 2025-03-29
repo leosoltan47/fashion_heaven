@@ -70,7 +70,6 @@ class ProductDetails(models.Model):
         verbose_name_plural = "Product Details"
 
 
-
 class Products(models.Model):
     """
     Represents a product with details that remain consistent across variants.
@@ -137,6 +136,7 @@ class ProductImages(models.Model):
     content = models.ImageField()
     product_detail = models.ForeignKey(ProductDetails, on_delete=models.CASCADE)
 
+
 class Color(models.Model):
     """
     Represents colors images can take.
@@ -145,7 +145,10 @@ class Color(models.Model):
         color_code (CharField): Hex value of the color
         images (ManyToManyField): Connection to product images
     """
-    color_code = models.CharField(default="#FF0000", max_length=9, validators=[validate_hex_color])
+
+    color_code = models.CharField(
+        default="#FF0000", max_length=9, validators=[validate_hex_color]
+    )
     images = models.ManyToManyField(ProductImages)
 
     @admin.display
@@ -154,6 +157,7 @@ class Color(models.Model):
             '<svg width="20px" height="20px"><rect width = "20" height = "20" fill = "{}"/></svg>',
             self.color_code,
         )
+
 
 class Collections(models.Model):
     """
