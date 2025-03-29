@@ -25,14 +25,15 @@
                                          height="650"
                                          class="vf-c-product-card__img">
                                     <div class="vf-c-product-card__colors">
-                                        {% for variant in product.details.all %}
-                                            <button class="color-swatch"
-                                                    data-color="white-navy"
-                                                    title="View Color White/Navy">
+                                        {% for color in product.colors %}
+                                            <button class="color-swatch" data-color="white-navy" title="View Color">
                                                 <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
-                                                    <!--<path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#FFFFFF"></path>-->
-                                                    <!--<path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#1C2B4B"></path>-->
-                                                    <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="{{ variant.color_code }}"></rect>
+                                                    {% if color|length < 2 %}
+                                                        <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="{{ color|last }}"></rect>
+                                                    {% else %}
+                                                        <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="{{ color|first }}"></path>
+                                                        <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="{{ color|last }}"></path>
+                                                    {% endif %}
                                                 </svg>
                                             </button>
                                         {% endfor %}
@@ -41,7 +42,7 @@
                                 <div class="vf-c-product-card__copy-container">
                                     <div class="vf-c-product-card__title">{{ product.name }}</div>
                                     <p class="vf-c-product-card__price">
-                                        <span class="vf-c-product-card__regular-price">{{ product.price_in_dollars }}</span>
+                                        <span class="vf-c-product-card__regular-price">{{ product.price }}</span>
                                     </p>
                                 </div>
                             </a>

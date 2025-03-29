@@ -3,12 +3,14 @@ from django import forms
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy
-from .models import Categories, Collections, Color, Features, ProductDetails, Products
+from .models import Categories, Collections, Color, Features, ProductDetails, ProductImages, Products
 from currency_converter import CurrencyConverter
 
 admin.site.register(Features)
 admin.site.register(Collections)
 admin.site.register(Categories)
+admin.site.register(Color)
+admin.site.register(ProductImages)
 
 
 class ProductsAdminForm(forms.ModelForm):
