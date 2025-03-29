@@ -2,7 +2,14 @@ from decimal import Decimal
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 from pages.admin import StockListFilter
-from .models import Features, Products, Categories, ProductDetails, Collections, validate_hex_color
+from .models import (
+    Features,
+    Products,
+    Categories,
+    ProductDetails,
+    Collections,
+    validate_hex_color,
+)
 
 
 class CollectionsModelTests(TestCase):
