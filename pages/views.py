@@ -76,3 +76,11 @@ def bag(request):
 def catalog(request, title):
     context = {"title": title}
     return render(request, "pages/catalog.html", context)
+
+
+def featured_page(request):
+    """
+    View function for the featured collection page.
+    """
+    context = {}
+    return render(request, "pages/blank_featured.html", context)

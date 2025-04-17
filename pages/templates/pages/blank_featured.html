@@ -1,0 +1,1107 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Product Listing Page -->
+    <div class="container mx-auto px-4 py-4">
+        <!-- Topper Section Container -->
+        <div id="page-topper"> <!-- Added id="page-topper" -->
+        <!-- Breadcrumb Navigation -->
+        <div class="text-xs mb-2 flex items-center">
+                <a href="#" class="text-gray-500 hover:text-black">Sports</a>
+            <span class="mx-1">›</span>
+                <a href="#" class="text-gray-500 hover:text-black">Golf</a>
+                <span class="mx-1">›</span>
+                <span class="text-gray-700">Going For The Green Golf Collection</span> <!-- Changed breadcrumbs -->
+        </div>
+
+        <!-- Page Title -->
+            <h1 class="text-3xl font-bold mb-4">Going For The Green Golf Collection</h1> <!-- Changed title and size -->
+
+            <!-- Divider -->
+            <div class="border-b border-gray-300 my-4"></div>
+
+            <!-- Item Count & Sort (Moved Here) -->
+            <div class="mb-6 py-4 px-4"> <!-- Outer container box -->
+                <!-- Re-added inner flex div with justify-end and items-center -->
+                <div class="flex justify-end items-center">
+                    <!-- Item Count -->
+                    <span class="text-sm text-gray-500 mr-4" id="item-count-display"></span> <!-- Changed text-gray-600 to text-gray-500 -->
+
+                    <!-- Sort Dropdown Relative Container -->
+                    <div class="relative"> 
+                        <!-- Fieldset for Border and Label -->
+                        <fieldset class="border border-gray-300 rounded-md px-2 pt-0 pb-1 shadow-sm relative min-w-[10rem]">
+                            <legend class="text-xs px-1 text-gray-500 ml-1">Sort</legend>
+                            <!-- Button (unstyled) -->
+                            <button type="button" class="inline-flex justify-between items-center w-full bg-white px-2 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none" id="sort-menu-button" aria-expanded="false" aria-haspopup="true">
+                                <span id="sort-label">Now Trending</span>
+                                <svg class="-mr-1 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </fieldset>
+
+                        <!-- Dropdown panel (remains positioned relative to outer div) -->
+                        <div class="origin-top-right absolute right-0 mt-0 w-full rounded-md shadow-sm bg-white border border-gray-300 focus:outline-none hidden z-20" role="menu" aria-orientation="vertical" aria-labelledby="sort-menu-button" tabindex="-1" id="sort-menu">
+                            <div class="py-1" role="none">
+                                <!-- Removed justify-between, added mr-2 to span -->
+                                <a href="#" data-sort="trending" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 sort-option flex items-center selected-sort" role="menuitem" tabindex="-1" id="sort-menu-item-0">
+                                    <span class="mr-2">Now Trending</span>
+                                    <svg class="h-4 w-4 text-black checkmark-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                </a>
+                                <a href="#" data-sort="best-sellers" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 sort-option flex items-center" role="menuitem" tabindex="-1" id="sort-menu-item-1">
+                                    <span class="mr-2">Best Sellers</span>
+                                    <svg class="h-4 w-4 text-black checkmark-icon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                </a>
+                                <a href="#" data-sort="price-low-high" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 sort-option flex items-center" role="menuitem" tabindex="-1" id="sort-menu-item-2">
+                                    <span class="mr-2">Price (Low - High)</span>
+                                    <svg class="h-4 w-4 text-black checkmark-icon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                </a>
+                                <a href="#" data-sort="price-high-low" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 sort-option flex items-center" role="menuitem" tabindex="-1" id="sort-menu-item-3">
+                                    <span class="mr-2">Price (High - Low)</span>
+                                    <svg class="h-4 w-4 text-black checkmark-icon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                </a>
+                                <a href="#" data-sort="top-rated" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 sort-option flex items-center" role="menuitem" tabindex="-1" id="sort-menu-item-4">
+                                    <span class="mr-2">Top Rated</span>
+                                    <svg class="h-4 w-4 text-black checkmark-icon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                </a>
+                                <a href="#" data-sort="newest" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 sort-option flex items-center" role="menuitem" tabindex="-1" id="sort-menu-item-5">
+                                    <span class="mr-2">Newest</span>
+                                    <svg class="h-4 w-4 text-black checkmark-icon hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Item Count & Sort -->
+        </div> <!-- End Topper Section Container -->
+
+        <!-- Main Content Area with Filters and Products -->
+        <div class="flex flex-col md:flex-row">
+            <!-- Left Sidebar - Filters -->
+            <div class="w-full md:w-1/5 pl-2 pr-8 overflow-y-auto max-h-screen scrollbar-hide">
+                <!-- Filter Sections -->
+                <div class="mb-8">
+                    <!-- Main Category Title -->
+                    <div class="mb-6">
+                        <h2 class="text-xl font-medium">College Fan Gear</h2>
+                    </div>
+
+                    <!-- Primary Categories -->
+                    <div class="mb-6 space-y-2">
+                        <div class="text-base">
+                            <a href="#" class="text-gray-700 hover:text-black">Men's</a>
+                        </div>
+                        <div class="text-base">
+                            <a href="#" class="text-gray-700 hover:text-black">Women's</a>
+                        </div>
+                        <div class="text-base">
+                            <a href="#" class="text-gray-700 hover:text-black">Kids</a>
+                        </div>
+                    </div>
+
+                    <!-- Gender Filter (Collapsible) -->
+                    <div class="border-t py-4">
+                        <button class="w-full flex justify-between items-center text-left" onclick="toggleFilter('gender-filter')">
+                            <span class="text-base font-medium">Gender<span id="gender-count" class="ml-1"></span></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform transition-transform" id="gender-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="mt-2 hidden space-y-2" id="gender-filter-content">
+                            <div class="flex items-center">
+                                <input id="gender-men" name="gender" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="gender-men" class="ml-2 text-sm text-gray-600">Men</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="gender-women" name="gender" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="gender-women" class="ml-2 text-sm text-gray-600">Women</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="gender-kids" name="gender" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="gender-kids" class="ml-2 text-sm text-gray-600">Kids</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- By Team Filter (Collapsible) -->
+                    <div class="border-t py-4">
+                        <button class="w-full flex justify-between items-center text-left" onclick="toggleFilter('team-filter')">
+                            <span class="text-base font-medium">By Team<span id="team-count" class="ml-1"></span></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform transition-transform" id="team-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="mt-2 hidden space-y-2" id="team-filter-content">
+                            <div class="flex items-center">
+                                <input id="team-eagles" name="team" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="team-eagles" class="ml-2 text-sm text-gray-600">Eagles</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="team-lions" name="team" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="team-lions" class="ml-2 text-sm text-gray-600">Lions</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="team-tigers" name="team" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="team-tigers" class="ml-2 text-sm text-gray-600">Tigers</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="team-bears" name="team" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="team-bears" class="ml-2 text-sm text-gray-600">Bears</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Category Filter (Collapsible) -->
+                    <div class="border-t py-4">
+                        <button class="w-full flex justify-between items-center text-left" onclick="toggleFilter('category-filter')">
+                            <span class="text-base font-medium">Product Category<span id="category-count" class="ml-1"></span></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform transition-transform" id="category-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="mt-2 hidden space-y-2" id="category-filter-content">
+                            <div class="flex items-center">
+                                <input id="cat-clothing" name="category" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="cat-clothing" class="ml-2 text-sm text-gray-600">Clothing</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="cat-shoes" name="category" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="cat-shoes" class="ml-2 text-sm text-gray-600">Shoes</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="cat-accessories" name="category" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="cat-accessories" class="ml-2 text-sm text-gray-600">Accessories</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Type Filter (Collapsible) -->
+                    <div class="border-t py-4">
+                        <button class="w-full flex justify-between items-center text-left" onclick="toggleFilter('type-filter')">
+                            <span class="text-base font-medium">Product Type<span id="type-count" class="ml-1"></span></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform transition-transform" id="type-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="mt-2 hidden space-y-2" id="type-filter-content">
+                            <div class="flex items-center">
+                                <input id="type-headwear" name="type" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="type-headwear" class="ml-2 text-sm text-gray-600">Headwear</label>
+                            </div>
+                             <div class="flex items-center">
+                                <input id="type-pants" name="type" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="type-pants" class="ml-2 text-sm text-gray-600">Pants</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="type-polos" name="type" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="type-polos" class="ml-2 text-sm text-gray-600">Polos</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="type-socks" name="type" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="type-socks" class="ml-2 text-sm text-gray-600">Socks</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="type-belts" name="type" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="type-belts" class="ml-2 text-sm text-gray-600">Belts</label>
+                            </div>
+                             <div class="flex items-center">
+                                <input id="type-cleats" name="type" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="type-cleats" class="ml-2 text-sm text-gray-600">Cleats and Spikes</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="type-gloves" name="type" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="type-gloves" class="ml-2 text-sm text-gray-600">Gloves</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="type-graphics" name="type" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="type-graphics" class="ml-2 text-sm text-gray-600">Graphics</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Color Filter (Collapsible) -->
+                    <div class="border-t py-4">
+                        <button class="w-full flex justify-between items-center text-left" onclick="toggleFilter('color-filter')">
+                            <span class="text-base font-medium">Color<span id="color-count" class="ml-1"></span></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform transition-transform" id="color-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="mt-2 hidden" id="color-filter-content">
+                            <!-- Color Swatches Layout -->
+                            <div class="inline-flex flex-wrap gap-x-4 gap-y-3">
+                                <!-- Black -->
+                                <div class="flex flex-col items-center">
+                                    <button data-color="black" title="Black" class="color-filter-btn w-8 h-8 rounded border border-gray-300 focus:outline-none transition-transform hover:scale-110 hover:border-black" style="background-color: #000000;"></button>
+                                    <span class="text-xs mt-1">Black</span>
+                                </div>
+                                <!-- Blue -->
+                                <div class="flex flex-col items-center">
+                                    <button data-color="blue" title="Blue" class="color-filter-btn w-8 h-8 rounded border border-gray-300 focus:outline-none transition-transform hover:scale-110 hover:border-black" style="background-color: #4338CA;"></button>
+                                    <span class="text-xs mt-1">Blue</span>
+                                </div>
+                                <!-- Brown -->
+                                <div class="flex flex-col items-center">
+                                    <button data-color="brown" title="Brown" class="color-filter-btn w-8 h-8 rounded border border-gray-300 focus:outline-none transition-transform hover:scale-110 hover:border-black" style="background-color: #78350F;"></button>
+                                    <span class="text-xs mt-1">Brown</span>
+                                </div>
+                                <!-- Gray -->
+                                <div class="flex flex-col items-center">
+                                    <button data-color="gray" title="Gray" class="color-filter-btn w-8 h-8 rounded border border-gray-300 focus:outline-none transition-transform hover:scale-110 hover:border-black" style="background-color: #6B7280;"></button>
+                                    <span class="text-xs mt-1">Gray</span>
+                                </div>
+                                <!-- Green -->
+                                <div class="flex flex-col items-center">
+                                    <button data-color="green" title="Green" class="color-filter-btn w-8 h-8 rounded border border-gray-300 focus:outline-none transition-transform hover:scale-110 hover:border-black" style="background-color: #15803D;"></button>
+                                    <span class="text-xs mt-1">Green</span>
+                                </div>
+                                <!-- Pink -->
+                                <div class="flex flex-col items-center">
+                                    <button data-color="pink" title="Pink" class="color-filter-btn w-8 h-8 rounded border border-gray-300 focus:outline-none transition-transform hover:scale-110 hover:border-black" style="background-color: #F9A8D4;"></button>
+                                    <span class="text-xs mt-1">Pink</span>
+                                </div>
+                                <!-- White -->
+                                <div class="flex flex-col items-center">
+                                    <button data-color="white" title="White" class="color-filter-btn w-8 h-8 rounded border border-gray-300 focus:outline-none transition-transform hover:scale-110 hover:border-black" style="background-color: #FFFFFF;"></button>
+                                    <span class="text-xs mt-1">White</span>
+                                </div>
+                                <!-- Maroon -->
+                                <div class="flex flex-col items-center">
+                                    <button data-color="maroon" title="Maroon" class="color-filter-btn w-8 h-8 rounded border border-gray-300 focus:outline-none transition-transform hover:scale-110 hover:border-black" style="background-color: #881337;"></button>
+                                    <span class="text-xs mt-1">Maroon</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sports Filter (Collapsible) -->
+                    <div class="border-t py-4">
+                        <button class="w-full flex justify-between items-center text-left" onclick="toggleFilter('sports-filter')">
+                            <span class="text-base font-medium">Sports<span id="sport-count" class="ml-1"></span></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform transition-transform" id="sports-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="mt-2 hidden space-y-2" id="sports-filter-content">
+                            <div class="flex items-center">
+                                <input id="sport-football" name="sport" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="sport-football" class="ml-2 text-sm text-gray-600">Football</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="sport-basketball" name="sport" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="sport-basketball" class="ml-2 text-sm text-gray-600">Basketball</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="sport-baseball" name="sport" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="sport-baseball" class="ml-2 text-sm text-gray-600">Baseball</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="sport-soccer" name="sport" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="sport-soccer" class="ml-2 text-sm text-gray-600">Soccer</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Size Filter (Collapsible) -->
+                    <div class="border-t py-4">
+                        <button class="w-full flex justify-between items-center text-left" onclick="toggleFilter('size-filter')">
+                            <span class="text-base font-medium">Size<span id="size-count" class="ml-1"></span></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform transition-transform" id="size-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="mt-2 hidden" id="size-filter-content">
+                            <!-- Flex Layout for Sizes -->
+                            <div class="inline-flex flex-wrap gap-2"> <!-- Changed flex to inline-flex -->
+                                <button data-size="XS" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 focus:outline-none focus:ring-1 focus:ring-black hover:border-2 hover:border-black transition-all duration-150 ease-in-out">XS</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="S" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">S</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="M" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">M</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="L" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">L</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="XL" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">XL</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="XXL" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">XXL</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="3XL" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">3XL</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="4XL" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">4XL</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="One Size" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">One Size</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="11.5" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">11.5</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="12" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">12</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="30/30" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">30/30</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="30/32" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">30/32</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="30/34" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">30/34</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="30/36" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">30/36</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="32/30" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">32/30</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="32/32" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">32/32</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="32/34" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">32/34</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="32/36" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">32/36</button> <!-- Removed fixed size/flex, added padding & transition -->
+                                <button data-size="33/32" class="size-btn border border-gray-300 rounded text-sm px-5 py-2 hover:border-2 hover:border-black focus:outline-none focus:ring-1 focus:ring-black transition-all duration-150 ease-in-out">33/32</button> <!-- Removed fixed size/flex, added padding & transition -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fit Filter (Collapsible) -->
+                    <div class="border-t py-4">
+                        <button class="w-full flex justify-between items-center text-left" onclick="toggleFilter('fit-filter')">
+                            <span class="text-base font-medium">Fit<span id="fit-count" class="ml-1"></span></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform transition-transform" id="fit-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="mt-2 hidden space-y-2" id="fit-filter-content">
+                            <div class="flex items-center">
+                                <input id="fit-regular" name="fit" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="fit-regular" class="ml-2 text-sm text-gray-600">Regular</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="fit-slim" name="fit" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="fit-slim" class="ml-2 text-sm text-gray-600">Slim</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="fit-relaxed" name="fit" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="fit-relaxed" class="ml-2 text-sm text-gray-600">Relaxed</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="fit-athletic" name="fit" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="fit-athletic" class="ml-2 text-sm text-gray-600">Athletic</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Price Filter (Collapsible) -->
+                    <div class="border-t py-4">
+                        <button class="w-full flex justify-between items-center text-left" onclick="toggleFilter('price-filter')">
+                            <span class="text-base font-medium">Price</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform transition-transform" id="price-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="mt-2 hidden" id="price-filter-content">
+                            <ul class="space-y-1">
+                                <li><a href="#" class="text-gray-600 hover:text-black text-sm">$0 - $25</a></li>
+                                <li><a href="#" class="text-gray-600 hover:text-black text-sm">$25 - $50</a></li>
+                                <li><a href="#" class="text-gray-600 hover:text-black text-sm">$50 - $100</a></li>
+                                <li><a href="#" class="text-gray-600 hover:text-black text-sm">$100+</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content - Products Grid -->
+            <div class="w-full md:w-4/5 overflow-y-auto max-h-screen scrollbar-hide" id="product-scroll-container"> <!-- Added id="product-scroll-container" -->
+                <!-- Top Bar: Item Count and Sort Dropdown (REMOVED FROM HERE) -->
+                <!-- Single Product Grid Container -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4" id="product-grid"> <!-- Added pt-4 for spacing -->
+                    <!-- Product 1 Placeholder Template -->
+                    <div class="group relative overflow-hidden">
+                        <!-- Badge -->
+                        <div class="absolute top-2 left-2 z-10 bg-black text-white text-xs px-2 py-1 font-bold uppercase">
+                            NEW 
+                        </div>
+                        <!-- Image Container -->
+                        <div class="product-image-container bg-gray-200 overflow-hidden">
+                           <img src="https://placehold.co/321x402/E2E8F0/AAAAAA?text=Product" 
+                                alt="Placeholder Product Name" 
+                                class="w-full h-full object-center object-cover">
+                           <!-- Wishlist Button -->
+                        <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="wishlist-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+                            </div>
+                        <!-- Product Details -->
+                        <div class="mt-2">
+                            <!-- Color Swatches -->
+                            <div class="flex space-x-1 mb-2 items-center pl-2">
+                                <button class="color-swatch" data-color="white" title="White"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#FFFFFF"></rect></svg></button>
+                                <button class="color-swatch" data-color="black" title="Black"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#000000"></rect></svg></button>
+                            </div>
+                            <!-- Title -->
+                            <h3 class="text-sm text-gray-700">Placeholder Product Name</h3> 
+                            <!-- Price -->
+                            <p class="mt-1 text-sm font-medium text-gray-900">$XX.XX</p> 
+                        </div>
+                        </div>
+                    <!-- End Product 1 Placeholder -->
+
+                    <!-- Product 2 Placeholder Template -->
+                    <div class="group relative overflow-hidden">
+                        <!-- Badge -->
+                        <div class="absolute top-2 left-2 z-10 bg-black text-white text-xs px-2 py-1 font-bold uppercase">
+                            NEW 
+                </div>
+                        <!-- Image Container -->
+                        <div class="product-image-container bg-gray-200 overflow-hidden">
+                           <img src="https://placehold.co/321x402/E2E8F0/AAAAAA?text=Product" 
+                                alt="Placeholder Product Name 2" 
+                                class="w-full h-full object-center object-cover">
+                           <!-- Wishlist Button -->
+                        <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="wishlist-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+                            </div>
+                        <!-- Product Details -->
+                        <div class="mt-2">
+                            <!-- Color Swatches -->
+                            <div class="flex space-x-1 mb-2 items-center pl-2">
+                                <button class="color-swatch" data-color="white" title="White"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#FFFFFF"></rect></svg></button>
+                                <button class="color-swatch" data-color="black" title="Black"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#000000"></rect></svg></button>
+                            </div>
+                            <!-- Title -->
+                            <h3 class="text-sm text-gray-700">Placeholder Product Name 2</h3> 
+                            <!-- Price -->
+                            <p class="mt-1 text-sm font-medium text-gray-900">$XX.XX</p> 
+                        </div>
+                        </div>
+                    <!-- End Product 2 Placeholder -->
+
+                    <!-- Product 3 Placeholder Template -->
+                    <div class="group relative overflow-hidden">
+                        <!-- Badge -->
+                        <div class="absolute top-2 left-2 z-10 bg-black text-white text-xs px-2 py-1 font-bold uppercase">
+                            SALE 
+                        </div>
+                        <!-- Image Container -->
+                        <div class="product-image-container bg-gray-200 overflow-hidden">
+                           <img src="https://placehold.co/321x402/E2E8F0/AAAAAA?text=Product" 
+                                alt="Placeholder Product Name 3" 
+                                class="w-full h-full object-center object-cover">
+                           <!-- Wishlist Button -->
+                        <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="wishlist-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+                            </div>
+                        <!-- Product Details -->
+                        <div class="mt-2">
+                            <!-- Color Swatches -->
+                            <div class="flex space-x-1 mb-2 items-center pl-2">
+                                <button class="color-swatch" data-color="red" title="Red"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#FF0000"></rect></svg></button>
+                            </div>
+                            <!-- Title -->
+                            <h3 class="text-sm text-gray-700">Placeholder Product Name 3</h3> 
+                            <!-- Price -->
+                            <p class="mt-1 text-sm font-medium text-gray-900">$YY.YY</p> 
+                        </div>
+                        </div>
+                    <!-- End Product 3 Placeholder -->
+
+                    <!-- Product 4 Placeholder Template -->
+                    <div class="group relative overflow-hidden">
+                        <!-- No Badge -->
+                        <!-- Image Container -->
+                        <div class="product-image-container bg-gray-200 overflow-hidden">
+                           <img src="https://placehold.co/321x402/E2E8F0/AAAAAA?text=Product" 
+                                alt="Placeholder Product Name 4" 
+                                class="w-full h-full object-center object-cover">
+                           <!-- Wishlist Button -->
+                        <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="wishlist-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+                            </div>
+                        <!-- Product Details -->
+                        <div class="mt-2">
+                            <!-- Color Swatches -->
+                            <div class="flex space-x-1 mb-2 items-center pl-2">
+                                <button class="color-swatch" data-color="blue" title="Blue"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#0000FF"></rect></svg></button>
+                                <button class="color-swatch" data-color="gray" title="Gray"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#808080"></rect></svg></button>
+                            </div>
+                            <!-- Title -->
+                            <h3 class="text-sm text-gray-700">Placeholder Product Name 4</h3> 
+                            <!-- Price -->
+                            <p class="mt-1 text-sm font-medium text-gray-900">$ZZ.ZZ</p> 
+                        </div>
+                        </div>
+                    <!-- End Product 4 Placeholder -->
+
+                    <!-- Product 5 Placeholder Template -->
+                    <div class="group relative overflow-hidden">
+                        <!-- No Badge -->
+                        <!-- Image Container -->
+                        <div class="product-image-container bg-gray-200 overflow-hidden">
+                           <img src="https://placehold.co/321x402/E2E8F0/AAAAAA?text=Product" 
+                                alt="Placeholder Product Name 5" 
+                                class="w-full h-full object-center object-cover">
+                           <!-- Wishlist Button -->
+                        <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="wishlist-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+                            </div>
+                        <!-- Product Details -->
+                        <div class="mt-2">
+                            <!-- Color Swatches -->
+                            <div class="flex space-x-1 mb-2 items-center pl-2"> 
+                                <button class="color-swatch" data-color="blue" title="Blue"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#0000FF"></rect></svg></button>
+                                <button class="color-swatch" data-color="gray" title="Gray"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#808080"></rect></svg></button>
+                            </div>
+                            <!-- Title -->
+                            <h3 class="text-sm text-gray-700">Placeholder Product Name 5</h3> 
+                            <!-- Price -->
+                            <p class="mt-1 text-sm font-medium text-gray-900">$ZZ.ZZ</p> 
+                        </div>
+                        </div>
+                    <!-- End Product 5 Placeholder -->
+
+                    <!-- Product 6 Placeholder Template -->
+                    <div class="group relative overflow-hidden">
+                        <!-- No Badge -->
+                        <!-- Image Container -->
+                        <div class="product-image-container bg-gray-200 overflow-hidden">
+                           <img src="https://placehold.co/321x402/E2E8F0/AAAAAA?text=Product" 
+                                alt="Placeholder Product Name 6" 
+                                class="w-full h-full object-center object-cover">
+                           <!-- Wishlist Button -->
+                        <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="wishlist-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+                            </div>
+                        <!-- Product Details -->
+                        <div class="mt-2">
+                            <!-- Color Swatches -->
+                            <div class="flex space-x-1 mb-2 items-center pl-2"> 
+                                <button class="color-swatch" data-color="blue" title="Blue"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#0000FF"></rect></svg></button>
+                                <button class="color-swatch" data-color="gray" title="Gray"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#808080"></rect></svg></button>
+                            </div>
+                            <!-- Title -->
+                            <h3 class="text-sm text-gray-700">Placeholder Product Name 6</h3> 
+                            <!-- Price -->
+                            <p class="mt-1 text-sm font-medium text-gray-900">$ZZ.ZZ</p> 
+                        </div>
+                        </div>
+                    <!-- End Product 6 Placeholder -->
+
+                    <!-- Product 7 Placeholder Template -->
+                    <div class="group relative overflow-hidden">
+                        <!-- No Badge -->
+                        <!-- Image Container -->
+                        <div class="product-image-container bg-gray-200 overflow-hidden">
+                           <img src="https://placehold.co/321x402/E2E8F0/AAAAAA?text=Product" 
+                                alt="Placeholder Product Name 7" 
+                                class="w-full h-full object-center object-cover">
+                           <!-- Wishlist Button -->
+                        <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="wishlist-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+                            </div>
+                        <!-- Product Details -->
+                        <div class="mt-2">
+                            <!-- Color Swatches -->
+                            <div class="flex space-x-1 mb-2 items-center pl-2"> 
+                                <button class="color-swatch" data-color="blue" title="Blue"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#0000FF"></rect></svg></button>
+                                <button class="color-swatch" data-color="gray" title="Gray"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#808080"></rect></svg></button>
+                            </div>
+                            <!-- Title -->
+                            <h3 class="text-sm text-gray-700">Placeholder Product Name 7</h3> 
+                            <!-- Price -->
+                            <p class="mt-1 text-sm font-medium text-gray-900">$ZZ.ZZ</p> 
+                        </div>
+                        </div>
+                    <!-- End Product 7 Placeholder -->
+
+                    <!-- Product 8 Placeholder Template -->
+                    <div class="group relative overflow-hidden">
+                        <!-- No Badge -->
+                        <!-- Image Container -->
+                        <div class="product-image-container bg-gray-200 overflow-hidden">
+                           <img src="https://placehold.co/321x402/E2E8F0/AAAAAA?text=Product" 
+                                alt="Placeholder Product Name 8" 
+                                class="w-full h-full object-center object-cover">
+                           <!-- Wishlist Button -->
+                        <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="wishlist-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+                            </div>
+                        <!-- Product Details -->
+                        <div class="mt-2">
+                            <!-- Color Swatches -->
+                            <div class="flex space-x-1 mb-2 items-center pl-2"> 
+                                <button class="color-swatch" data-color="blue" title="Blue"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#0000FF"></rect></svg></button>
+                                <button class="color-swatch" data-color="gray" title="Gray"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#808080"></rect></svg></button>
+                            </div>
+                            <!-- Title -->
+                            <h3 class="text-sm text-gray-700">Placeholder Product Name 8</h3> 
+                            <!-- Price -->
+                            <p class="mt-1 text-sm font-medium text-gray-900">$ZZ.ZZ</p> 
+                        </div>
+                        </div>
+                    <!-- End Product 8 Placeholder -->
+
+                    <!-- Product 9 Placeholder Template -->
+                    <div class="group relative overflow-hidden">
+                        <!-- No Badge -->
+                        <!-- Image Container -->
+                        <div class="product-image-container bg-gray-200 overflow-hidden">
+                           <img src="https://placehold.co/321x402/E2E8F0/AAAAAA?text=Product" 
+                                alt="Placeholder Product Name 9" 
+                                class="w-full h-full object-center object-cover">
+                           <!-- Wishlist Button -->
+                        <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="wishlist-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+                            </div>
+                        <!-- Product Details -->
+                        <div class="mt-2">
+                            <!-- Color Swatches -->
+                            <div class="flex space-x-1 mb-2 items-center pl-2"> 
+                                <button class="color-swatch" data-color="blue" title="Blue"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#0000FF"></rect></svg></button>
+                                <button class="color-swatch" data-color="gray" title="Gray"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#808080"></rect></svg></button>
+                            </div>
+                            <!-- Title -->
+                            <h3 class="text-sm text-gray-700">Placeholder Product Name 9</h3> 
+                            <!-- Price -->
+                            <p class="mt-1 text-sm font-medium text-gray-900">$ZZ.ZZ</p> 
+                        </div>
+                        </div>
+                    <!-- End Product 9 Placeholder -->
+
+                    <!-- Product 10 Placeholder Template -->
+                    <div class="group relative overflow-hidden">
+                        <!-- No Badge -->
+                        <!-- Image Container -->
+                        <div class="product-image-container bg-gray-200 overflow-hidden">
+                           <img src="https://placehold.co/321x402/E2E8F0/AAAAAA?text=Product" 
+                                alt="Placeholder Product Name 10" 
+                                class="w-full h-full object-center object-cover">
+                           <!-- Wishlist Button -->
+                        <button class="vf-c-product-card__wishlist" aria-label="Add to Wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="wishlist-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </button>
+                    </div>
+                        <!-- Product Details -->
+                        <div class="mt-2">
+                            <!-- Color Swatches -->
+                            <div class="flex space-x-1 mb-2 items-center pl-2"> 
+                                <button class="color-swatch" data-color="blue" title="Blue"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#0000FF"></rect></svg></button>
+                                <button class="color-swatch" data-color="gray" title="Gray"><svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true"><rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#808080"></rect></svg></button>
+                </div>
+                            <!-- Title -->
+                            <h3 class="text-sm text-gray-700">Placeholder Product Name 10</h3> 
+                            <!-- Price -->
+                            <p class="mt-1 text-sm font-medium text-gray-900">$ZZ.ZZ</p> 
+            </div>
+        </div>
+                    <!-- End Product 10 Placeholder -->
+
+                    <!-- Add more product cards here -->
+
+                </div> <!-- End Single Grid Container -->
+            </div> <!-- End Right Content -->
+            <!-- End Right Content -->
+        </div> <!-- End Main Flex Container -->
+    </div> <!-- End Page Container -->
+
+    <style>
+        /* Styles adapted from home.html for featured product card look */
+        .vf-c-product-card {
+            position: relative !important;
+            display: block !important;
+            /* Removed scroll-snap-align for grid layout */
+            padding: 0 !important; /* No padding on the card container itself */
+            background: white !important;
+            margin-bottom: 16px !important; /* Consistent margin */
+            /* No max-width needed for grid? Let grid control width */
+        }
+        
+        .vf-c-product-card__badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background-color: #000;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 6px;
+            z-index: 2;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        .vf-c-product-card__assets {
+            position: relative;
+            margin-bottom: 12px; /* Space between image and text */
+            width: 321px; /* Set fixed width */
+            height: 402px; /* Set fixed height */
+            background-color: #f3f3f5; /* Added fallback bg */
+            overflow: hidden; /* Ensure image fits */
+        }
+
+        .vf-c-product-card__assets img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .vf-c-product-card__colors {
+            display: flex;
+            gap: 4px; /* Space between swatches */
+            margin-top: 8px; /* Consistent margin */
+            padding: 0 8px; /* Padding inside the colors container */
+            /* Removed overflow/scrollbar styles - not needed for grid */
+            justify-content: flex-start;
+        }
+
+        /* Adapted color-swatch for simple backgrounds */
+        .color-swatch {
+            width: 20px;  /* Revert to original size for SVG */
+            height: 20px;
+            /* border: 1px solid #d0d0d0; */ /* Border is now part of SVG */
+            display: inline-block;
+            /* cursor: default; */ /* Make clickable again */
+            cursor: pointer;
+            margin-right: 4px; /* Re-add margin from original */
+            padding: 0; /* Reset padding */
+            background: none; /* Ensure no background interferes with SVG */
+            border: none; /* Ensure no border interferes with SVG */
+            transition: transform 0.2s ease; /* Added transition for hover effect */
+            /* background-color applied via inline style */
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1); /* Added scale effect on hover */
+        }
+        
+        .vf-c-product-card__copy-container {
+            position: relative !important;
+            z-index: 1 !important;
+            padding: 0 8px !important; /* Padding for text */
+            background: transparent !important;
+            margin-top: 12px !important; /* Space above text */
+        }
+        
+        .vf-c-product-card__title {
+            font-size: 14px !important;
+            line-height: 1.4 !important;
+            margin-bottom: 4px !important;
+            color: #2B2B2B !important;
+            font-weight: normal !important;
+        }
+        
+        .vf-c-product-card__price {
+            font-size: 14px !important;
+            color: #2B2B2B !important;
+            font-weight: normal !important; /* Adjust if price should be bolder */
+        }
+
+        /* Wishlist button styles from home.html */
+        .vf-c-product-card__wishlist {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 36px; /* Match home.html */
+            height: 36px; /* Match home.html */
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            z-index: 3;
+            opacity: 0; /* Hide by default */
+            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Show wishlist button on parent group hover */
+        .group:hover .vf-c-product-card__wishlist {
+            opacity: 1;
+        }
+
+        /* Optional hover for wishlist button itself */
+        .vf-c-product-card__wishlist:hover {
+            transform: scale(1.1);
+        }
+
+        /* Wishlist icon size */
+        .vf-c-product-card__wishlist .wishlist-icon {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* Active state for wishlist (visual only, JS controls fill) */
+        .vf-c-product-card__wishlist.active {
+             /* Add styles for active state if needed, e.g., slight scale or color change */
+        }
+
+        /* Filter toggle styles (keep existing) */
+         function toggleFilter(filterId) {
+            const content = document.getElementById(filterId + '-content');
+            const icon = document.getElementById(filterId + '-icon');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        /* NEW rule for fixed image container dimensions */
+        .product-image-container {
+            width: 321px;
+            height: 402px;
+            position: relative; /* For potential absolute children */
+            overflow: hidden; /* Ensure image fits */
+            background-color: #E2E8F0; /* Fallback bg color */
+        }
+
+        /* .vf-c-product-card__assets img { ... } */ /* Rule not needed if img uses w-full/h-full */
+
+        /* Make white swatch border black on hover for visibility */
+        .color-swatch[data-color="white"]:hover svg rect {
+            stroke: #000000;
+        }
+
+        /* Utility to hide scrollbars (Re-added) */
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;  /* Chrome, Safari, Opera */
+        }
+
+        #page-topper {
+            transition: transform 0.3s ease-out;
+        }
+
+        #page-topper.topper-hidden {
+            transform: translateY(-100%);
+        }
+    </style>
+
+    <script>
+        function toggleFilter(filterId) {
+            const content = document.getElementById(filterId + '-content');
+            const icon = document.getElementById(filterId + '-icon');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // Function to update the count display
+        function updateCountDisplay(countElementId, count) {
+            const countElement = document.getElementById(countElementId);
+            if (countElement) {
+                countElement.innerText = count > 0 ? `(${count})` : '';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wishlist Toggle Logic (keep existing)
+            const wishlistButtons = document.querySelectorAll('.vf-c-product-card__wishlist');
+            wishlistButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    this.classList.toggle('active');
+                    const heartPath = this.querySelector('svg path');
+                    if (this.classList.contains('active')) {
+                        heartPath.setAttribute('fill', '#e11d48');
+                    } else {
+                        heartPath.setAttribute('fill', 'none');
+                    }
+                    this.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 200);
+                });
+            });
+
+            // --- Filter Count Update Logic --- 
+
+            // Checkbox Filters
+            const checkboxFilters = {
+                'gender': 'gender-count',
+                'team': 'team-count',
+                'category': 'category-count',
+                'type': 'type-count',
+                'sport': 'sport-count', // Note: name attribute is 'sport'
+                'fit': 'fit-count'
+            };
+
+            for (const name in checkboxFilters) {
+                const countElementId = checkboxFilters[name];
+                const checkboxes = document.querySelectorAll(`input[name="${name}"][type="checkbox"]`);
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const checkedCount = document.querySelectorAll(`input[name="${name}"][type="checkbox"]:checked`).length;
+                        updateCountDisplay(countElementId, checkedCount);
+                    });
+                });
+                // Initial count check
+                const initialCheckedCount = document.querySelectorAll(`input[name="${name}"][type="checkbox"]:checked`).length;
+                updateCountDisplay(countElementId, initialCheckedCount);
+            }
+
+            // Size Button Selection Logic (Modified)
+            const sizeButtons = document.querySelectorAll('.size-btn');
+            sizeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const clickedButton = this;
+                    // Toggle the clicked button's state independently
+                    if (clickedButton.classList.contains('active-size')) {
+                        clickedButton.classList.remove('active-size', 'border-2', 'border-black');
+                        clickedButton.classList.add('border', 'border-gray-300');
+                        // console.log("Deselected size:", clickedButton.dataset.size);
+                    } else {
+                        clickedButton.classList.remove('border', 'border-gray-300');
+                        clickedButton.classList.add('active-size', 'border-2', 'border-black');
+                        // console.log("Selected size:", clickedButton.dataset.size);
+                    }
+                    // Update count
+                    const activeSizeCount = document.querySelectorAll('.size-btn.active-size').length;
+                    updateCountDisplay('size-count', activeSizeCount);
+                });
+            });
+            // Initial size count check
+            const initialActiveSizeCount = document.querySelectorAll('.size-btn.active-size').length;
+            updateCountDisplay('size-count', initialActiveSizeCount);
+
+            // Color Filter Button Selection Logic (Modified)
+            const colorButtons = document.querySelectorAll('.color-filter-btn');
+            colorButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const clickedButton = this;
+                    clickedButton.classList.toggle('active-color');
+                    // Toggle ring for visual selection
+                    if (clickedButton.classList.contains('active-color')) {
+                        clickedButton.classList.add('ring-2', 'ring-offset-1', 'ring-black');
+                        // console.log("Selected color:", clickedButton.dataset.color);
+                    } else {
+                        clickedButton.classList.remove('ring-2', 'ring-offset-1', 'ring-black');
+                        // console.log("Deselected color:", clickedButton.dataset.color);
+                    }
+                    // Update count
+                    const activeColorCount = document.querySelectorAll('.color-filter-btn.active-color').length;
+                    updateCountDisplay('color-count', activeColorCount);
+                });
+            });
+            // Initial color count check
+            const initialActiveColorCount = document.querySelectorAll('.color-filter-btn.active-color').length;
+            updateCountDisplay('color-count', initialActiveColorCount);
+
+            // --- Re-implemented Sort Dropdown Logic ---
+            const sortButton = document.getElementById('sort-menu-button');
+            const sortMenu = document.getElementById('sort-menu');
+            const sortLabel = document.getElementById('sort-label');
+            
+            if (sortButton && sortMenu && sortLabel) {
+                sortButton.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent click from immediately closing menu via document listener
+                    const isExpanded = sortButton.getAttribute('aria-expanded') === 'true';
+                    sortButton.setAttribute('aria-expanded', !isExpanded);
+                    sortMenu.classList.toggle('hidden');
+                });
+
+                const sortOptions = sortMenu.querySelectorAll('a.sort-option');
+                sortOptions.forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        
+                        // Get the currently selected option and its checkmark
+                        const currentSelected = sortMenu.querySelector('a.sort-option.selected-sort');
+                        const currentCheckmark = currentSelected?.querySelector('.checkmark-icon');
+                        
+                        // Deselect previous option and hide its checkmark
+                        if (currentSelected) {
+                            currentSelected.classList.remove('selected-sort');
+                        }
+                        if (currentCheckmark) {
+                            currentCheckmark.classList.add('hidden');
+                        }
+
+                        // Select the new option and show its checkmark
+                        const newSelected = e.currentTarget;
+                        const newCheckmark = newSelected.querySelector('.checkmark-icon');
+                        sortLabel.innerText = newSelected.querySelector('span').innerText; // Get text from span
+                        newSelected.classList.add('selected-sort');
+                        if (newCheckmark) {
+                            newCheckmark.classList.remove('hidden');
+                        }
+
+                        sortMenu.classList.add('hidden');
+                        sortButton.setAttribute('aria-expanded', 'false');
+                        const sortValue = newSelected.dataset.sort;
+                        console.log("Sort by:", sortValue); 
+                        // Add actual sorting/filtering logic here
+                    });
+                });
+
+                // Set default selected option on load
+                const defaultSortOption = sortMenu.querySelector('a.sort-option[data-sort="trending"]');
+                if (defaultSortOption) {
+                    defaultSortOption.classList.add('selected-sort');
+                    const defaultCheckmark = defaultSortOption.querySelector('.checkmark-icon');
+                    if (defaultCheckmark) {
+                        defaultCheckmark.classList.remove('hidden');
+                    }
+                }
+            }
+
+            // --- Re-implemented Item Count Logic ---
+            const productGrid = document.getElementById('product-grid');
+            const itemCountDisplay = document.getElementById('item-count-display');
+            
+            if (productGrid && itemCountDisplay) {
+                function updateItemCountDisplay() {
+                    const productCards = productGrid.querySelectorAll(':scope > .group.relative.overflow-hidden');
+                    const count = productCards.length;
+                    itemCountDisplay.innerText = `${count} Item${count !== 1 ? 's' : ''}`;
+                }
+                updateItemCountDisplay(); // Initial count
+                // Consider calling updateItemCountDisplay() after filtering/sorting actions
+            }
+
+            // --- Close Sort Dropdown on Outside Click ---
+            document.addEventListener('click', (event) => {
+                if (sortMenu && !sortMenu.classList.contains('hidden')) { // Only run if menu exists and is open
+                    if (sortButton && !sortButton.contains(event.target) && !sortMenu.contains(event.target)) {
+                        sortMenu.classList.add('hidden');
+                        sortButton.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+
+            // --- Hide Topper on Product Scroll --- 
+            const pageTopper = document.getElementById('page-topper');
+            const productScrollContainer = document.getElementById('product-scroll-container');
+
+            if (pageTopper && productScrollContainer) {
+                productScrollContainer.addEventListener('scroll', function() {
+                    if (productScrollContainer.scrollTop > 0) {
+                        pageTopper.classList.add('topper-hidden');
+                    } else {
+                        pageTopper.classList.remove('topper-hidden');
+                    }
+                });
+            }
+
+        });
+    </script>
+
+{% endblock %} 
