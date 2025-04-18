@@ -6,7 +6,9 @@ app_name = "pages"
 urlpatterns = [
     path("", views.home, name="home"),
     path("wishlist/", views.empty_wishlist, name="wishlist"),
-    re_path(r"wishlist/(?P<id_list>(?:ids\[\]=\d+&?)+)", views.wishlist, name="wishlist"),
+    re_path(
+        r"wishlist/(?P<id_list>(?:ids\[\]=\d+&?)+)", views.wishlist, name="wishlist"
+    ),
     path("bag/", views.bag, name="bag"),
     path("catalog/<str:title>", views.catalog, name="catalog"),
     path("products/<int:product_id>", views.product, name="product"),
