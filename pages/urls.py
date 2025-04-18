@@ -10,5 +10,4 @@ urlpatterns = [
     path("bag/", views.bag, name="bag"),
     path("catalog/<str:title>", views.catalog, name="catalog"),
     path("products/<int:product_id>", views.product, name="product"),
-    path("featured/", views.featured_page, name="featured"),
 ]
