@@ -74,6 +74,36 @@ def bag(request):
 
 
 def catalog(request, title):
-    catalogs = {"featured": "blank_featured"}
-    context = {"title": title}
-    return render(request, f"pages/{catalogs.get(title, "catalog")}.html", context)
+    gender_filters = {"women": ["W", "U"], "men": ["M", "U"], "kids": ["K", "B", "G"]}
+    in_stock = ProductDetails.objects.filter(stock__gt=0)
+    objects = (
+        Products.objects.prefetch_related(Prefetch("details", queryset=in_stock))
+        .distinct()
+        .filter(details__isnull=False)
+        .filter(
+            gender_and_age__in=gender_filters.get(title, ["W", "M", "U", "G", "B", "K"])
+        )
+        .order_by("id")
+    )
+    products = [
+        {
+            "id": obj.pk,
+            "name": obj.name,
+            "price": obj.price_in_dollars,
+            "colors": [
+                [color.color_code for color in image.color_set.all()]
+                for variant in obj.details.all()
+                for image in variant.productimages_set.all()
+            ],
+        }
+        for obj in objects
+    ]
+    context = {
+        "products": products,
+        "title": title,
+        "genders": {obj.gender_and_age for obj in objects},
+        "categories": {obj.category for obj in objects},
+        "sizes": {variant.size for obj in objects for variant in obj.details.all()},
+        "colors": [product.get("colors") for product in products],
+    }
+    return render(request, f"pages/catalog.html", context)
