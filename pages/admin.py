@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django import forms
 from django.db import models
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy
 from Pylette import extract_colors
@@ -149,21 +150,29 @@ class ProductImagesInline(admin.TabularInline):
 @admin.register(ProductDetails)
 class ProductDetailsAdmin(admin.ModelAdmin):
 
-    list_display = ["id", "productimages__color__color_code", "size", "stock"]
+    list_display = ["id", "colors", "size", "stock"]
     list_filter = ["size", StockListFilter, ColorListFilter]
     inlines = [ProductImagesInline]
+
+    def colors(self, obj):
+        color_codes = [
+            color.color()
+            for image in obj.productimages_set.all()
+            for color in image.color_set.all()
+        ]
+        return format_html("".join(color_codes))
 
     def save_formset(self, request, form, formset, change):
         instances = formset.save(commit=False)
         for instance in instances:
             if instance.pk is None:
                 instance.save()
-                # NOTE: In the future replace 2 with a constant to detemine how colors
+                # NOTE: In the future replace 2 with a constant to determine how colors
                 # will be shown for a particular product
                 img = instance.content.path
                 pallete = extract_colors(img, 2, sort_mode="frequency")
                 for color in pallete.colors:
-                    # Convert rgb to hex
+                    # Convert RGB to hex
                     red, green, blue = color.rgb
                     color_code = f"#{hex(red)[-2:]}{hex(green)[-2:]}{hex(blue)[-2:]}"
                     color, created = Color.objects.get_or_create(color_code=color_code)
