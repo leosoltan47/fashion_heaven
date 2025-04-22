@@ -3,6 +3,7 @@ from django import forms
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy
+from Pylette import extract_colors
 from .models import (
     Categories,
     Collections,
@@ -11,6 +12,7 @@ from .models import (
     ProductDetails,
     ProductImages,
     Products,
+    Color,
 )
 from currency_converter import CurrencyConverter
 
@@ -139,12 +141,37 @@ class StockListFilter(admin.SimpleListFilter):
         yield all_choice
 
 
+class ProductImagesInline(admin.TabularInline):
+    model = ProductImages
+    extra = 1
+
+
 @admin.register(ProductDetails)
 class ProductDetailsAdmin(admin.ModelAdmin):
 
     list_display = ["id", "productimages__color__color_code", "size", "stock"]
-
     list_filter = ["size", StockListFilter, ColorListFilter]
+    inlines = [ProductImagesInline]
+
+    def save_formset(self, request, form, formset, change):
+        instances = formset.save(commit=False)
+        for instance in instances:
+            if instance.pk is None:
+                instance.save()
+                # NOTE: In the future replace 2 with a constant to detemine how colors
+                # will be shown for a particular product
+                img = instance.content.path
+                pallete = extract_colors(img, 2, sort_mode="frequency")
+                for color in pallete.colors:
+                    # Convert rgb to hex
+                    red, green, blue = color.rgb
+                    color_code = f"#{hex(red)[-2:]}{hex(green)[-2:]}{hex(blue)[-2:]}"
+                    color, created = Color.objects.get_or_create(color_code=color_code)
+                    print(created)
+                    print(color)
+                    color.images.add(instance)
+            else:
+                instance.save()
 
     # TODO: Implement low stock threshold notification, alerting admins when a
     # product's inventory falls below a specified level, triggering a warning
