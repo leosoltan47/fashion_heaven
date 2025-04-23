@@ -75,6 +75,14 @@ def bag(request):
 
 def catalog(request, title):
     gender_filters = {"women": ["W", "U"], "men": ["M", "U"], "kids": ["K", "B", "G"]}
+    gender_fullname = {
+        "W": "Womem",
+        "M": "Men",
+        "K": "Kids",
+        "U": "Unisex",
+        "B": "Boys",
+        "G": "Girls",
+    }
     in_stock = ProductDetails.objects.filter(stock__gt=0)
     objects = (
         Products.objects.prefetch_related(Prefetch("details", queryset=in_stock))
@@ -101,7 +109,7 @@ def catalog(request, title):
     context = {
         "products": products,
         "title": title,
-        "genders": {obj.gender_and_age for obj in objects},
+        "genders": {gender_fullname[obj.gender_and_age] for obj in objects},
         "categories": {obj.category for obj in objects},
         "sizes": {variant.size for obj in objects for variant in obj.details.all()},
         "colors": [product.get("colors") for product in products],
