@@ -112,6 +112,11 @@ def catalog(request, title):
         "genders": {gender_fullname[obj.gender_and_age] for obj in objects},
         "categories": {obj.category for obj in objects},
         "sizes": {variant.size for obj in objects for variant in obj.details.all()},
-        "colors": [product.get("colors") for product in products],
+        "colors": [
+            # FIXME: Resulting list can contain duplicate color pairs
+            color
+            for product in products
+            for color in product.get("colors", [])
+        ],
     }
     return render(request, f"pages/catalog.html", context)
