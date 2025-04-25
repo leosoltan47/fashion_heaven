@@ -297,64 +297,17 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
-                        <div class="mt-2 hidden space-y-2" id="type-filter-content">
-                            <div class="flex items-center">
-                                <input id="type-headwear"
-                                       name="type"
-                                       type="checkbox"
-                                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="type-headwear" class="ml-2 text-sm text-gray-600">Headwear</label>
+                        {% for category in categories %}
+                            <div class="mt-2 hidden space-y-2" id="type-filter-content">
+                                <div class="flex items-center">
+                                    <input id="type-{{ category.name }}"
+                                           name="type"
+                                           type="checkbox"
+                                           class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                    <label for="type-{{ category.name }}" class="ml-2 text-sm text-gray-600">{{ category.name|title }}</label>
+                                </div>
                             </div>
-                            <div class="flex items-center">
-                                <input id="type-pants"
-                                       name="type"
-                                       type="checkbox"
-                                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="type-pants" class="ml-2 text-sm text-gray-600">Pants</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input id="type-polos"
-                                       name="type"
-                                       type="checkbox"
-                                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="type-polos" class="ml-2 text-sm text-gray-600">Polos</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input id="type-socks"
-                                       name="type"
-                                       type="checkbox"
-                                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="type-socks" class="ml-2 text-sm text-gray-600">Socks</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input id="type-belts"
-                                       name="type"
-                                       type="checkbox"
-                                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="type-belts" class="ml-2 text-sm text-gray-600">Belts</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input id="type-cleats"
-                                       name="type"
-                                       type="checkbox"
-                                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="type-cleats" class="ml-2 text-sm text-gray-600">Cleats and Spikes</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input id="type-gloves"
-                                       name="type"
-                                       type="checkbox"
-                                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="type-gloves" class="ml-2 text-sm text-gray-600">Gloves</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input id="type-graphics"
-                                       name="type"
-                                       type="checkbox"
-                                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="type-graphics" class="ml-2 text-sm text-gray-600">Graphics</label>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                     <!-- Color Filter (Collapsible) -->
                     <div class="border-t py-4">
