@@ -182,9 +182,6 @@ class ProductDetailsAdmin(admin.ModelAdmin):
             else:
                 instance.save()
 
-    # TODO: Implement low stock threshold notification, alerting admins when a
-    # product's inventory falls below a specified level, triggering a warning
-    # that the product is at risk of going out of stock.
     def changelist_view(self, request, extra_context=None):
         """
         Display warning if there're out of stock variants
