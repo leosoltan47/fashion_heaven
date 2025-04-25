@@ -377,12 +377,13 @@
                                             <button data-color="{{ color|first }}"
                                                     title="{{ color|first }}"
                                                     class="color-filter-btn w-8 h-8 rounded border border-gray-300 focus:outline-none transition-transform hover:scale-110 hover:border-black"
-                                                    style="background-color: {{color|first}}"></button>
+                                                    style="background-color: {{ color|first }}"></button>
                                         {% else %}
                                             <button data-color="{{ color|join:"|" }}"
                                                     title="{{ color|join:"|" }}"
                                                     class="color-filter-btn w-8 h-8 rounded border border-gray-300 focus:outline-none transition-transform hover:scale-110 hover:border-black"
-                                                    style="background: linear-gradient(to right, {{color|first}} 0%, {{color|first}} 52.5%, {{color|last}} 52.5%, {{color|last}} 100%)"></button>
+                                                    style="background: linear-gradient(to right, {{ color|first }} 0%, {{ color|first }} 52.5%, {{ color|last }} 52.5%, {{ color|last }} 100%)">
+                                            </button>
                                         {% endif %}
                                     </div>
                                 {% endfor %}
@@ -576,35 +577,37 @@
                                                     title="{{ color|first }}">
                                                 <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
                                                     <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="{{ color|last }}"></rect>
-                                                {% else %}
-                                                    <button class="color-swatch"
-                                                            data-color="{{ color|join:"|" }}"
-                                                            title="{{ color|join:"|" }}">
-                                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
-                                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="{{ color|first }}"></path>
-                                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="{{ color|last }}"></path>
-                                                        {% endif %}
-                                                    </svg>
-                                                </button>
-                                            {% endfor %}
-                                        </div>
-                                        <!-- Title -->
-                                        <h3 class="text-sm text-gray-700">{{ product.name }}</h3>
-                                        <!-- Price -->
-                                        <p class="mt-1 text-sm font-medium text-gray-900">${{ product.price }}</p>
-                                    </div>
+                                                </svg>
+                                            </button>
+                                        {% else %}
+                                            <button class="color-swatch"
+                                                    data-color="{{ color|join:"|" }}"
+                                                    title="{{ color|join:"|" }}">
+                                                <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                                    <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="{{ color|first }}"></path>
+                                                    <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="{{ color|last }}"></path>
+                                                </svg>
+                                            </button>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
-                            {% endfor %}
+                                <!-- Title -->
+                                <h3 class="text-sm text-gray-700">{{ product.name }}</h3>
+                                <!-- Price -->
+                                <p class="mt-1 text-sm font-medium text-gray-900">${{ product.price }}</p>
+                            </div>
                         </div>
-                        <!-- End Single Grid Container -->
-                    </div>
-                    <!-- End Right Content -->
-                    <!-- End Right Content -->
+                    {% endfor %}
                 </div>
-                <!-- End Main Flex Container -->
+                <!-- End Single Grid Container -->
             </div>
-            <!-- End Page Container -->
-            <style>
+            <!-- End Right Content -->
+            <!-- End Right Content -->
+        </div>
+        <!-- End Main Flex Container -->
+    </div>
+    <!-- End Page Container -->
+    <style>
 /* Styles adapted from home.html for featured product card look */
 .vf-c-product-card {
     position: relative !important;
@@ -784,8 +787,8 @@
         #page-topper.topper-hidden {
             transform: translateY(-100%);
         }
-            </style>
-            <script>
+    </style>
+    <script>
     function toggleFilter(filterId) {
         const content = document.getElementById(filterId + '-content');
         const icon = document.getElementById(filterId + '-icon');
@@ -997,5 +1000,5 @@
         }
 
     });
-            </script>
-        {% endblock %}
+    </script>
+{% endblock %}
