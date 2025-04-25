@@ -271,13 +271,15 @@
                         </button>
                         <div class="mt-2 hidden space-y-2" id="category-filter-content">
                             {% for category in categories %}
-                                <div class="flex items-center">
-                                    <input id="cat-{{ category }}"
-                                           name="category"
-                                           type="checkbox"
-                                           class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                    <label for="cat-{{ category }}" class="ml-2 text-sm text-gray-600">{{ category|title }}</label>
-                                </div>
+                                {% if category.parent %}
+                                    <div class="flex items-center">
+                                        <input id="cat-{{ category.parent }}"
+                                               name="category"
+                                               type="checkbox"
+                                               class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <label for="cat-{{ category.parent }}" class="ml-2 text-sm text-gray-600">{{ category.parent|title }}</label>
+                                    </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>
