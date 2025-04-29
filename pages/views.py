@@ -127,3 +127,40 @@ def catalog(request, title):
         },
     }
     return render(request, f"pages/catalog.html", context)
+
+
+def product_detail_page(request, product_id):
+    """
+    View function for the product detail page.
+    Fetches the product and its details (images, colors, sizes)
+    and renders the HTML template.
+    """
+    # Prefetch related details for efficiency
+    details_prefetch = Prefetch(
+        'details',
+        queryset=ProductDetails.objects.filter(stock__gt=0).prefetch_related(
+            'productimages_set',
+            'color_set',
+            'size_set'
+        )
+    )
+
+    product = get_object_or_404(
+        Products.objects.select_related('category').prefetch_related(details_prefetch),
+        pk=product_id
+    )
+
+    # Extract images from the prefetched details
+    product_images = []
+    details_list = [] # Also pass details to template for color/size info
+    if product.details.exists():
+        details_list = list(product.details.all()) # Convert queryset to list for template
+        for detail in details_list:
+            product_images.extend(list(detail.productimages_set.all()))
+
+    context = {
+        'product': product,
+        'product_images': product_images,
+        'details': details_list, # Pass details for color/size buttons
+    }
+    return render(request, 'pages/product_detail.html', context)
