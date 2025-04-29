@@ -5,6 +5,7 @@ CurrencyConverter==0.18.3
 debugpy==1.8.12
 Django==5.1.7
 django-debug-toolbar==5.0.1
+Faker==37.1.0
 idna==3.10
 joblib==1.4.2
 markdown-it-py==3.0.0
