@@ -28,7 +28,7 @@ def home(request):
             "colors": [
                 [color.color_code for color in image.color_set.all()]
                 for image in images
-                if image.product_detail.product.id == product.pk
+                if image.product_detail.product.id == product.id
             ],
         }
         for product in products
@@ -104,6 +104,7 @@ def catalog(request, title):
         {
             "id": product_pk,
             "name": (objs := list(obj))[0].product_detail.product.name,
+            "price": objs[0].product_detail.product.price_in_dollars,
             "colors": [
                 [color.color_code for color in image.color_set.all()] for image in objs
             ],
