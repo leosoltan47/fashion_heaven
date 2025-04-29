@@ -1,0 +1,11 @@
+{% extends 'pages/base.html' %} {% load static %} {% block content %}
+<!-- Content for specific support page (e.g., FAQ, Contact) will go here -->
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4 capitalize">
+    {{ page_name|default:'Support' }}
+  </h1>
+  <p>
+    Information for the {{ page_name|default:'support' }} page is coming soon.
+  </p>
+</div>
+{% endblock %}

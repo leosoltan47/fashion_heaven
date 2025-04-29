@@ -164,3 +164,13 @@ def product_detail_page(request, product_id):
         'details': details_list, # Pass details for color/size buttons
     }
     return render(request, 'pages/product_detail.html', context)
+
+
+def support_page(request, page_name):
+    """
+    Renders a generic support page template.
+    The actual content will depend on the specific template logic 
+    or further development based on 'page_name'.
+    """
+    context = {'page_name': page_name.replace('-', ' ')}
+    return render(request, 'pages/support.html', context)
