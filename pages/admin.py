@@ -24,6 +24,11 @@ admin.site.register(Color)
 admin.site.register(ProductImages)
 
 
+class ProductDetailsInline(admin.TabularInline):
+    model = ProductDetails
+    extra = 1
+
+
 class ProductsAdminForm(forms.ModelForm):
     class Currency(models.TextChoices):
         USD = "USD"
@@ -41,7 +46,6 @@ class ProductsAdminForm(forms.ModelForm):
             "gender_and_age",
             "price",
             "currency",
-            "details",
             "description",
             "feature",
         ]
@@ -201,6 +205,7 @@ class ProductsAdmin(admin.ModelAdmin):
 
     list_display = ["name", "category", "price_in_dollars", "gender_and_age"]
     list_filter = ["category", "gender_and_age"]
+    inlines = [ProductDetailsInline]
 
     def save_model(self, request, obj, form, change):
         obj.price_in_dollars = form.cleaned_data.get("price_in_dollars")

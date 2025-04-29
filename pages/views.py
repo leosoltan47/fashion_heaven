@@ -1,34 +1,37 @@
 from django.db.models import Prefetch
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
-from .models import ProductDetails, Products
+from .models import ProductDetails, Products, ProductImages
+from itertools import groupby
 import re
 
 
 # TODO: Add search bar that renders page specified in the search
 def home(request):
-    in_stock = ProductDetails.objects.filter(stock__gt=0)
-    # Show 10 products that has at least one variant
-    # as information like color are stored in variants
-    objects = (
-        Products.objects.filter(category__isnull=False)
-        .prefetch_related(Prefetch("details", queryset=in_stock))
-        .distinct()
-        .filter(details__isnull=False)
+    # Show 10 products that has at least one variant as information like color are stored in variants
+    products = (
+        Products.objects.select_related("category")
+        .filter(category__isnull=False)
         .order_by("id")[:10]
+    )
+    images = (
+        ProductImages.objects.select_related("product_detail")
+        .filter(product_detail__stock__gt=0, product_detail__product__in=products)
+        .prefetch_related("color_set")
+        .order_by("product_detail__product")
     )
     products = [
         {
-            "id": obj.pk,
-            "name": obj.name,
-            "price": obj.price_in_dollars,
+            "id": product.pk,
+            "name": product.name,
+            "price": product.price_in_dollars,
             "colors": [
                 [color.color_code for color in image.color_set.all()]
-                for variant in obj.details.all()
-                for image in variant.productimages_set.all()
+                for image in images
+                if image.product_detail.product.id == product.pk
             ],
         }
-        for obj in objects
+        for product in products
     ]
     context = {"products": products}
     return render(request, "pages/home.html", context)
@@ -83,50 +86,46 @@ def catalog(request, title):
         "G": "Girls",
     }
 
-    # In order to reduce number of SQL queries prefetch `ProductImages` and `Color` tables
-    # as they're going to be used to populate context
-    in_stock = ProductDetails.objects.filter(stock__gt=0).prefetch_related(
-        "productimages_set", "productimages_set__color_set"
-    )
     objects = (
-        Products.objects.select_related("category")
-        .prefetch_related(Prefetch("details", queryset=in_stock))
-        .distinct()
-        .filter(details__isnull=False)
-        # Get only the records corresponding to catalog
-        # Ex: catalog/men will show only outfits for Men, catalog/women for Women etc
-        .filter(
-            gender_and_age__in=gender_filters.get(title, ["W", "M", "U", "G", "B", "K"])
+        ProductImages.objects.select_related(
+            "product_detail", "product_detail__product"
         )
-        .order_by("id")
+        .filter(
+            product_detail__stock__gt=0,
+            product_detail__product__gender_and_age__in=gender_filters.get(
+                title, ["W", "M", "U", "G", "B", "K"]
+            ),
+        )
+        .prefetch_related("color_set")
+        .order_by("product_detail__product__id")
     )
 
     products = [
         {
-            "id": obj.pk,
-            "name": obj.name,
-            "price": obj.price_in_dollars,
+            "id": product_pk,
+            "name": (objs := list(obj))[0].product_detail.product.name,
             "colors": [
-                (*[color.color_code for color in image.color_set.all()],)
-                for variant in obj.details.all()
-                for image in variant.productimages_set.all()
+                [color.color_code for color in image.color_set.all()] for image in objs
             ],
         }
-        for obj in objects
+        for product_pk, obj in groupby(objects, lambda x: x.product_detail.product.id)
     ]
+
     context = {
         "products": products,
         "title": title,
-        "genders": {gender_fullname[obj.gender_and_age] for obj in objects},
-        "categories": {obj.category for obj in objects},
-        "sizes": {variant.size for obj in objects for variant in obj.details.all()},
+        "genders": {
+            gender_fullname[obj.product_detail.product.gender_and_age]
+            for obj in objects
+        },
+        "categories": {obj.product_detail.product.category for obj in objects},
+        "sizes": {obj.product_detail.size for obj in objects},
         "colors": {
-            (*sorted(color),)
-            for product in products
-            for color in product.get("colors", [])
+            (*obj.color_set.order_by("id").values_list("color_code", flat=True),)
+            for obj in objects
         },
     }
-    return render(request, f"pages/catalog.html", context)
+    return render(request, "pages/catalog.html", context)
 
 
 def product_detail_page(request, product_id):
@@ -137,30 +136,30 @@ def product_detail_page(request, product_id):
     """
     # Prefetch related details for efficiency
     details_prefetch = Prefetch(
-        'details',
+        "details",
         queryset=ProductDetails.objects.filter(stock__gt=0).prefetch_related(
-            'productimages_set',
-            'color_set',
-            'size_set'
-        )
+            "productimages_set", "color_set", "size_set"
+        ),
     )
 
     product = get_object_or_404(
-        Products.objects.select_related('category').prefetch_related(details_prefetch),
-        pk=product_id
+        Products.objects.select_related("category").prefetch_related(details_prefetch),
+        pk=product_id,
     )
 
     # Extract images from the prefetched details
     product_images = []
-    details_list = [] # Also pass details to template for color/size info
+    details_list = []  # Also pass details to template for color/size info
     if product.details.exists():
-        details_list = list(product.details.all()) # Convert queryset to list for template
+        details_list = list(
+            product.details.all()
+        )  # Convert queryset to list for template
         for detail in details_list:
             product_images.extend(list(detail.productimages_set.all()))
 
     context = {
-        'product': product,
-        'product_images': product_images,
-        'details': details_list, # Pass details for color/size buttons
+        "product": product,
+        "product_images": product_images,
+        "details": details_list,  # Pass details for color/size buttons
     }
-    return render(request, 'pages/product_detail.html', context)
+    return render(request, "pages/product_detail.html", context)
