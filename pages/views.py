@@ -169,3 +169,8 @@ def product_detail_page(request, product_id):
 def support_page(request):
     """Renders the support page."""
     return render(request, 'pages/support.html')
+
+
+def returns_exchanges_view(request):
+    """Renders the product details/returns page."""
+    return render(request, 'pages/product_details.html')
