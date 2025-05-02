@@ -50,26 +50,6 @@ class Features(models.Model):
         verbose_name_plural = "Features"
 
 
-class ProductDetails(models.Model):
-    """
-    Represents a variant of a product, with details that can differ among variants.
-
-    This model stores information that is specific to a particular variant of a product
-    such as color, size, and stock level. Related to :model:`pages.Products` via one-to-many relation
-
-    Attributes:
-        product (ForeignKey): The product that this variant belongs to.
-        size (CharField): The size of the variant (e.g. '10' for shoes, 'XL' for clothes).
-        stock (PositiveIntegerField): The number of items remaining in stock for this variant.
-    """
-
-    size = models.CharField(max_length=10)
-    stock = models.PositiveIntegerField(default=0)
-
-    class Meta:
-        verbose_name_plural = "Product Details"
-
-
 class Products(models.Model):
     """
     Represents a product with details that remain consistent across variants.
@@ -83,7 +63,6 @@ class Products(models.Model):
         price_in_dollars (DecimalField): The base price of the product in dollars.
         currency (CharField): Stores the currency of the product.
         description (TextField): A detailed description of the product.
-        details (ManyToManyField): Variants of the product.
         feature (ManyToManyField): The features associated with this product.
         gender_and_age (CharField): Target gender and age group of the product.
     """
@@ -110,12 +89,32 @@ class Products(models.Model):
     gender_and_age = models.CharField(
         max_length=1, choices=GenderAndAge.choices, default=GenderAndAge.UNISEX
     )
-    details = models.ManyToManyField(ProductDetails)
     description = models.TextField()
     feature = models.ManyToManyField(Features)
 
     def __str__(self) -> str:
         return self.name
+
+
+class ProductDetails(models.Model):
+    """
+    Represents a variant of a product, with details that can differ among variants.
+
+    This model stores information that is specific to a particular variant of a product
+    such as color, size, and stock level. Related to :model:`pages.Products` via one-to-many relation
+
+    Attributes:
+        product (ForeignKey): The product that this variant belongs to.
+        size (CharField): The size of the variant (e.g. '10' for shoes, 'XL' for clothes).
+        stock (PositiveIntegerField): The number of items remaining in stock for this variant.
+    """
+
+    size = models.CharField(max_length=10)
+    stock = models.PositiveIntegerField(default=0)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = "Product Details"
 
 
 class ProductImages(models.Model):
