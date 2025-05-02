@@ -18,7 +18,7 @@ class Categories(models.Model):
 
     Attributes:
         name (CharField): Name of the category
-        paretn (ForeighField): Parent category if exists
+        parent (ForeighField): Parent category if exists
     """
 
     class Meta:
