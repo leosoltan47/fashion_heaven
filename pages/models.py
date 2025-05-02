@@ -165,16 +165,18 @@ class Collections(models.Model):
     This model enables :model:`pages.Products` to be associated with multiple collections, and collections to contain multiple products.
 
     Attributes:
-        name (CharField): Name of the collection (e.g. 'Summer Sale', 'New Arrivals').
-        description (TextField): A detailed description of the collection
+        name (CharField): Unique name of the collection (e.g. 'Summer Sale', 'New Arrivals').
+        description (TextField): Optional description of the collection
+        badge (CharField): Optional text to display on product card
         product (ManyToManyField): Products associated with this collection
     """
 
     class Meta:
         verbose_name_plural = "Collections"
 
-    name = models.CharField(max_length=50)
-    description = models.TextField()
+    name = models.CharField(max_length=50, unique=True)
+    description = models.TextField(null=True, blank=True)
+    badge = models.CharField(max_length=20, blank=True, null=True)
     product = models.ManyToManyField(Products)
 
     def __str__(self) -> str:
