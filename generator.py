@@ -3,6 +3,7 @@ from random import choices, choice, randint
 from faker import Faker
 from pages.models import (
     Categories,
+    Collections,
     ProductDetails,
     ProductImages,
     Products,
@@ -19,6 +20,14 @@ def main():
     categories = [
         Categories.objects.create(name=fk.unique.first_name()) for _ in repeat(None, 20)
     ]
+    product_collecions = [
+        Collections.objects.create(
+            name=fk.unique.name(),
+            description=fk.text(),
+            badge=fk.first_name_male(),
+        )
+        for _ in repeat(None, 20)
+    ]
     products = [
         Products.objects.create(
             name=fk.name(),
@@ -33,6 +42,13 @@ def main():
         pick = choices(features, k=2)
         product.feature.add(pick[0])
         product.feature.add(pick[1])
+
+    for product, collection in zip(products, product_collecions):
+        collection.product.add(product)
+        pick = choices(products, k=4)
+        collection.product.add(
+            *pick,
+        )
 
     product_details = [
         ProductDetails.objects.create(

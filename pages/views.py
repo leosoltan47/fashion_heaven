@@ -17,7 +17,8 @@ def get_product_slider_data(products):
                 product_detail__stock__gt=0
             ).prefetch_related("color_set"),
             to_attr="available_images",
-        )
+        ),
+        "collections_set",
     )
 
     # Create a dictionary for quick lookup
@@ -38,6 +39,13 @@ def get_product_slider_data(products):
                 if hasattr(detail, "available_images")
             )
 
+            all_badges = [
+                collection.badge
+                for collection in product_obj.collections_set.all()
+                if hasattr(collection, "badge")
+            ]
+            badge = all_badges[0] if all_badges else ""
+
             # Extract colors for each image
             for image in all_images:
                 colors = [color.color_code for color in image.color_set.all()]
@@ -50,6 +58,7 @@ def get_product_slider_data(products):
                 "name": product.name,
                 "price": product.price_in_dollars,
                 "colors": colors_list,
+                "badge": badge,
             }
         )
     return product_data
@@ -60,6 +69,7 @@ def home(request):
     # Get 10 products with their categories in a single query
     products = (
         Products.objects.select_related("category")
+        .prefetch_related("collections_set")
         .filter(category__isnull=False)
         .order_by("id")[:10]
     )
