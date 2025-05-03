@@ -2,7 +2,6 @@ from django.db.models import Prefetch
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from .models import ProductDetails, Products, ProductImages
-from itertools import groupby
 import re
 
 
@@ -119,46 +118,33 @@ def catalog(request, title):
         "B": "Boys",
         "G": "Girls",
     }
+    genders = gender_filters.get(title, ["W", "U", "M", "K", "B", "G"])
 
-    objects = (
-        ProductImages.objects.select_related(
-            "product_detail", "product_detail__product"
-        )
-        .filter(
-            product_detail__stock__gt=0,
-            product_detail__product__gender_and_age__in=gender_filters.get(
-                title, ["W", "M", "U", "G", "B", "K"]
-            ),
-        )
-        .prefetch_related("color_set")
-        .order_by("product_detail__product__id")
+    products = (
+        Products.objects.filter(gender_and_age__in=genders)
+        .select_related("category")
+        .order_by("id")
     )
 
-    products = [
-        {
-            "id": product_pk,
-            "name": (objs := list(obj))[0].product_detail.product.name,
-            "price": objs[0].product_detail.product.price_in_dollars,
-            "colors": [
-                [color.color_code for color in image.color_set.all()] for image in objs
-            ],
-        }
-        for product_pk, obj in groupby(objects, lambda x: x.product_detail.product.id)
-    ]
+    product_data = get_product_slider_data(products)
+    genders = {gender_fullname.get(p.gender_and_age) for p in products}
+    categories = {p.category for p in products}
+    sizes = (
+        ProductDetails.objects.filter(product__in=[p.id for p in products], stock__gt=0)
+        .distinct()
+        .values_list("size", flat=True)
+    )
+    colors = {
+        (*colors,) for product in product_data for colors in product.get("colors")
+    }
 
     context = {
-        "products": products,
+        "products": product_data,
+        "genders": genders,
         "title": title,
-        "genders": {
-            gender_fullname[obj.product_detail.product.gender_and_age]
-            for obj in objects
-        },
-        "categories": {obj.product_detail.product.category for obj in objects},
-        "sizes": {obj.product_detail.size for obj in objects},
-        "colors": {
-            (*obj.color_set.order_by("id").values_list("color_code", flat=True),)
-            for obj in objects
-        },
+        "colors": colors,
+        "sizes": sizes,
+        "categories": categories,
     }
     return render(request, "pages/catalog.html", context)
 
