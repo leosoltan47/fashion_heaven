@@ -9,7 +9,7 @@
             href="{% url 'pages:product' product.id %}"
             class="vf-c-product-card"
           >
-            <div class="vf-c-product-card__badge">BEST SELLER</div>
+            <div class="vf-c-product-card__badge">{{ product.badge }}</div>
             <button
               class="vf-c-product-card__wishlist"
               aria-label="Add to Wishlist"
