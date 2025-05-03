@@ -8,32 +8,61 @@ import re
 
 # TODO: Add search bar that renders page specified in the search
 def home(request):
-    # Show 10 products that has at least one variant as information like color are stored in variants
+    # Get 10 products with their categories in a single query
     products = (
         Products.objects.select_related("category")
         .filter(category__isnull=False)
         .order_by("id")[:10]
     )
-    images = (
-        ProductImages.objects.select_related("product_detail")
-        .filter(product_detail__stock__gt=0, product_detail__product__in=products)
-        .prefetch_related("color_set")
-        .order_by("product_detail__product")
+
+    # Prefetch product images with their colors in a single query
+    # Using a custom prefetch object to filter images by stock > 0
+    products_with_images = Products.objects.filter(
+        id__in=[p.id for p in products]
+    ).prefetch_related(
+        Prefetch(
+            "productdetails_set__productimages_set",
+            queryset=ProductImages.objects.filter(
+                product_detail__stock__gt=0
+            ).prefetch_related("color_set"),
+            to_attr="available_images",
+        )
     )
-    products = [
-        {
-            "id": product.pk,
-            "name": product.name,
-            "price": product.price_in_dollars,
-            "colors": [
-                [color.color_code for color in image.color_set.all()]
-                for image in images
-                if image.product_detail.product.id == product.id
-            ],
-        }
-        for product in products
-    ]
-    context = {"products": products}
+
+    # Create a dictionary for quick lookup
+    products_dict = {p.id: p for p in products_with_images}
+
+    # Prepare the product data
+    product_data = []
+    for product in products:
+        product_obj = products_dict.get(product.id)
+        colors_list = []
+
+        if product_obj:
+            # Flatten the structure to get all images
+            all_images = (
+                image
+                for detail in product_obj.productdetails_set.all()
+                for image in detail.available_images
+                if hasattr(detail, "available_images")
+            )
+
+            # Extract colors for each image
+            for image in all_images:
+                colors = [color.color_code for color in image.color_set.all()]
+                if colors:  # Only add non-empty color lists
+                    colors_list.append(colors)
+
+        product_data.append(
+            {
+                "id": product.pk,
+                "name": product.name,
+                "price": product.price_in_dollars,
+                "colors": colors_list,
+            }
+        )
+
+    context = {"products": product_data}
     return render(request, "pages/home.html", context)
 
 
