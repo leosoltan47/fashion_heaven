@@ -6,15 +6,7 @@ from itertools import groupby
 import re
 
 
-# TODO: Add search bar that renders page specified in the search
-def home(request):
-    # Get 10 products with their categories in a single query
-    products = (
-        Products.objects.select_related("category")
-        .filter(category__isnull=False)
-        .order_by("id")[:10]
-    )
-
+def get_product_slider_data(products):
     # Prefetch product images with their colors in a single query
     # Using a custom prefetch object to filter images by stock > 0
     products_with_images = Products.objects.filter(
@@ -61,6 +53,19 @@ def home(request):
                 "colors": colors_list,
             }
         )
+    return product_data
+
+
+# TODO: Add search bar that renders page specified in the search
+def home(request):
+    # Get 10 products with their categories in a single query
+    products = (
+        Products.objects.select_related("category")
+        .filter(category__isnull=False)
+        .order_by("id")[:10]
+    )
+
+    product_data = get_product_slider_data(products)
 
     context = {"products": product_data}
     return render(request, "pages/home.html", context)
