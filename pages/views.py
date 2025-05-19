@@ -1,4 +1,5 @@
-from django.db.models import Prefetch
+from functools import reduce
+from django.db.models import Prefetch, F
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from .models import ProductDetails, Products, ProductImages
@@ -111,11 +112,28 @@ def wishlist(request, id_list: str):
     return render(request, "pages/wishlist.html", context)
 
 
-def bag(request):
+def bag(request, ids: str = ""):
     """
     View function for the shopping bag page.
     """
-    return render(request, "pages/bag.html")
+    variant_ids: list[int] = [int(id) for id in ids.split(sep="&") if id.isdigit()]
+    if not variant_ids:
+        return render(request, "pages/bag.html")
+
+    products = list(
+        ProductDetails.objects.select_related("product", "product__category")
+        .annotate(
+            category_name=F("product__category__name"),
+            price=F("product__price_in_dollars"),
+        )
+        .filter(pk__in=variant_ids, stock__gt=0)
+        .order_by("pk")
+        .all()
+    )
+
+    total_price = reduce(lambda x, y: x + y.price, products, 0)
+    context = {"total_price": total_price, "products": products}
+    return render(request, "pages/bag.html", context)
 
 
 def catalog(request, title):
