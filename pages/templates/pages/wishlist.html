@@ -13,9 +13,11 @@
                     <!-- Sample Item -->
                     <div class="group relative">
                         <div class="aspect-w-4 aspect-h-5 bg-gray-100 rounded-lg overflow-hidden">
-                            <img src="https://placehold.co/400x500"
-                                 alt="Product"
-                                 class="w-full h-full object-cover object-center">
+                            <a href="{% url 'pages:product' item.pk %}">
+                                <img src="https://placehold.co/400x500"
+                                     alt="Product"
+                                     class="w-full h-full object-cover object-center">
+                            </a>
                             <div class="absolute top-4 right-4">
                                 <button class="p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors duration-200">
                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -63,4 +65,45 @@
             </div>
         {% endif %}
     </div>
+{% block extra_js %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const wishlistButtons = document.getElementsByClassName("p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors duration-200");
+            for (let button of wishlistButtons) {
+                button.addEventListener('click', function() {
+
+                    // Get product Id
+                    const urlSegments = this.parentNode.parentNode.querySelector("a").href.split("/");
+                    console.log(urlSegments);
+                    const productId = urlSegments[urlSegments.length - 1];
+                    console.log(productId);
+
+                    // Delete product from wishlist
+                    var products = window.localStorage;
+                    products.removeItem(productId);
+
+                    // Reconstruct URL for wishlist page
+                    let storedIds = [];
+                    for (let i = 0; i < products.length; ++i) {
+                        const key = products.key(i);
+                        const item = products.getItem(key);
+                        if (!Number.isNaN(Number.parseInt(item))) {
+                            storedIds.push(item);
+                        }
+                    }
+                    if (!storedIds || !Array.isArray(storedIds)) {
+                        console.error("No valid IDs found in localStorage");
+                        return;
+                    }
+                    const queryString = storedIds
+                        .map((id) => `ids[]=${encodeURIComponent(id)}`)
+                        .join("&");
+
+                    // Redirect toward new URL
+                    window.location.replace("{% url 'pages:wishlist' %}"+ queryString);
+                });
+            }
+        });
+    </script>
+{% endblock extra_js %}
 {% endblock %}
