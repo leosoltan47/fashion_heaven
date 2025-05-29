@@ -1,5 +1,5 @@
 from functools import reduce
-from django.db.models import Prefetch, F
+from django.db.models import Q, Prefetch, F
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from .models import ProductDetails, Products, ProductImages
@@ -65,7 +65,6 @@ def get_product_slider_data(products):
     return product_data
 
 
-# TODO: Add search bar that renders page specified in the search
 def home(request):
     # Get 10 products with their categories in a single query
     products = (
@@ -136,7 +135,8 @@ def bag(request, ids: str = ""):
     return render(request, "pages/bag.html", context)
 
 
-def catalog(request, title):
+def catalog(request, title, search=""):
+    search = search.lower()
     gender_filters = {"women": ["W", "U"], "men": ["M", "U"], "kids": ["K", "B", "G"]}
     gender_fullname = {
         "W": "Women",
@@ -152,6 +152,11 @@ def catalog(request, title):
         Products.objects.filter(gender_and_age__in=genders)
         .select_related("category")
         .order_by("id")
+        .filter(
+            Q(name__icontains=search)
+            | Q(description__icontains=search)
+            | Q(category__name__icontains=search)
+        )
     )
 
     product_data = get_product_slider_data(products)
