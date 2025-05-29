@@ -13,6 +13,29 @@ from pages.models import (
 
 
 def main():
+    # Clear existing data to ensure fresh generation
+    # Delete in an order that respects foreign key dependencies,
+    # or rely on on_delete=models.CASCADE if set.
+    # Start with models that are depended upon by others, or M2M through models if handled manually.
+    # Django's M2M fields handle their through tables automatically on deletion of an instance.
+    # ProductImages depend on ProductDetails
+    # ProductDetails depend on Products
+    # Products depend on Categories (FK) and Features (M2M)
+    # Collections have M2M with Products
+
+    ProductImages.objects.all().delete()
+    ProductDetails.objects.all().delete()
+    # Deleting Products will also clear its M2M with Features.
+    # Deleting Collections will also clear its M2M with Products.
+    # Need to ensure Products are deleted before Categories if Categories are protected.
+    # Or Collections before Products if there's a strict FK.
+    # Assuming standard CASCADE or M2M handling:
+    Products.objects.all().delete() # This should cascade to ProductDetails & ProductImages if using models.CASCADE
+    Collections.objects.all().delete()
+    Categories.objects.all().delete()
+    Features.objects.all().delete()
+    Color.objects.all().delete()
+
     fk = Faker()
 
     colors = [Color.objects.create(color_code=fk.hex_color()) for _ in repeat(None, 20)]
@@ -60,7 +83,7 @@ def main():
     ]
     images = [
         ProductImages.objects.create(
-            content="./media/Screenshot_From_2025-04-28_01-42-12.png",
+            content="placeholder.png",
             product_detail=product_details[i % len(product_details)],
         )
         for i in range(400)
