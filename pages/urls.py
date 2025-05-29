@@ -13,7 +13,6 @@ urlpatterns = [
     path("bag/<str:ids>", views.bag, name="bag"),
     path("catalog/<str:title>", views.catalog, name="catalog"),
     path("catalog/<str:title>/<str:search>", views.catalog, name="catalog"),
-    path("products/<int:product_id>", views.product, name="product"),
     path(
         "product-detail/<int:product_id>",
         views.product_detail_page,

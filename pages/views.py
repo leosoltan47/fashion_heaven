@@ -1,7 +1,6 @@
 from functools import reduce
 from django.db.models import Q, Prefetch, F
-from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
 from .models import ProductDetails, Products, ProductImages
 import re
 
@@ -79,20 +78,6 @@ def home(request):
 
     context = {"products": product_data}
     return render(request, "pages/home.html", context)
-
-
-def product(request, product_id):
-    """
-    View function that retrieves product information from get URL
-    """
-    obj = get_object_or_404(Products, pk=product_id)
-    product = {
-        "id": obj.pk,
-        "name": obj.name,
-        "price": obj.price_in_dollars,
-        "category": obj.category.name,
-    }
-    return JsonResponse(product)
 
 
 def empty_wishlist(request):
