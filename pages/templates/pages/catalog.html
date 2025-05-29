@@ -502,6 +502,7 @@
                     <!-- Added pt-4 for spacing -->
                     {% for product in products %}
                         <div class="group relative overflow-hidden">
+                            <a href="{% url 'pages:product' product.id %}">
                             <!-- Badge -->
                             <div class="absolute top-2 left-2 z-10 bg-black text-white text-xs px-2 py-1 font-bold uppercase">{{ product.badge }}</div>
                             <!-- Image Container -->
@@ -550,6 +551,7 @@
                                 <h3 class="text-sm text-gray-700">{{ product.name }}</h3>
                                 <!-- Price -->
                                 <p class="mt-1 text-sm font-medium text-gray-900">${{ product.price }}</p>
+                            </a>
                             </div>
                         </div>
                     {% endfor %}
@@ -773,10 +775,27 @@
                 e.preventDefault();
                 this.classList.toggle('active');
                 const heartPath = this.querySelector('svg path');
+                // Get id of wishlisted product
+                const urlSegments = this.parentNode.parentNode.href.split("/");
+                console.log(urlSegments);
+                const productId = urlSegments[urlSegments.length - 1];
+                console.log(productId);
+
+                // Product ids will be saved to local storage to persist on user device
+                var products = window.localStorage;
+
                 if (this.classList.contains('active')) {
+                    // If active, fill the heart
                     heartPath.setAttribute('fill', '#e11d48');
+
+                    // Save product id on user device to retrieve it wishlist page
+                    products.setItem(productId, productId);
                 } else {
+                    // If not active, remove the fill
                     heartPath.setAttribute('fill', 'none');
+
+                    // Remove item from local storage if user no longer wishlist it
+                    products.removeItem(productId);
                 }
                 this.style.transform = 'scale(1.2)';
                 setTimeout(() => {
