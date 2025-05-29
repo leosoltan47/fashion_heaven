@@ -139,7 +139,7 @@ def bag(request, ids: str = ""):
 def catalog(request, title):
     gender_filters = {"women": ["W", "U"], "men": ["M", "U"], "kids": ["K", "B", "G"]}
     gender_fullname = {
-        "W": "Womem",
+        "W": "Women",
         "M": "Men",
         "K": "Kids",
         "U": "Unisex",
