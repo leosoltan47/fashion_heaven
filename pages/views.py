@@ -185,19 +185,26 @@ def product_detail_page(request, product_id):
         details_prefetch = Prefetch(
             "productdetails_set",
             queryset=ProductDetails.objects.filter(stock__gt=0).prefetch_related(
-                Prefetch("productimages_set", queryset=ProductImages.objects.prefetch_related("color_set"))
+                Prefetch(
+                    "productimages_set",
+                    queryset=ProductImages.objects.prefetch_related("color_set"),
+                )
             ),
-            to_attr="fetched_details"
+            to_attr="fetched_details",
         )
 
-        product_instance = Products.objects.select_related("category").prefetch_related(details_prefetch).get(pk=product_id)
+        product_instance = (
+            Products.objects.select_related("category")
+            .prefetch_related(details_prefetch)
+            .get(pk=product_id)
+        )
 
         # Extract images and details from the prefetched data
-        if hasattr(product_instance, 'fetched_details'):
+        if hasattr(product_instance, "fetched_details"):
             details_list = product_instance.fetched_details
             for detail in details_list:
                 product_images.extend(list(detail.productimages_set.all()))
-        
+
     except Products.DoesNotExist:
         # Product not found, proceed with empty context to render a blank page
         pass
