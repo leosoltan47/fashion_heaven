@@ -6,7 +6,7 @@
         {% for product in products %}
         <div>
           <a
-            href="{% url 'pages:product' product.id %}"
+            href="{% url 'pages:product_detail_page' product.id %}"
             class="vf-c-product-card"
           >
             <div class="vf-c-product-card__badge">{{ product.badge }}</div>
@@ -88,7 +88,10 @@
         </div>
         {% empty %} {% for i in "1234567891011"|make_list %}
         <div>
-          <a href="{% url 'pages:product' i %}" class="vf-c-product-card">
+          <a
+            href="{% url 'pages:product_detail_page' i %}"
+            class="vf-c-product-card"
+          >
             <div class="vf-c-product-card__badge">BEST SELLER</div>
             <button
               class="vf-c-product-card__wishlist"

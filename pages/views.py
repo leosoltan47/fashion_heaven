@@ -30,6 +30,7 @@ def get_product_slider_data(products):
     for product in products:
         product_obj = products_dict.get(product.id)
         colors_list = []
+        badge = ""  # Initialize badge to an empty string
 
         if product_obj:
             # Flatten the structure to get all images
@@ -182,36 +183,41 @@ def product_detail_page(request, product_id):
     View function for the product detail page.
     Fetches the product and its details (images, colors, sizes)
     and renders the HTML template.
+    If product is not found, it renders the page with empty context.
     """
-    # Prefetch related details for efficiency
-    details_prefetch = Prefetch(
-        "details",
-        queryset=ProductDetails.objects.filter(stock__gt=0).prefetch_related(
-            "productimages_set", "color_set", "size_set"
-        ),
-    )
-
-    product = get_object_or_404(
-        Products.objects.select_related("category").prefetch_related(details_prefetch),
-        pk=product_id,
-    )
-
-    # Extract images from the prefetched details
+    product_instance = None
     product_images = []
-    details_list = []  # Also pass details to template for color/size info
-    if product.details.exists():
-        details_list = list(
-            product.details.all()
-        )  # Convert queryset to list for template
-        for detail in details_list:
-            product_images.extend(list(detail.productimages_set.all()))
+    details_list = []
+
+    try:
+        # Prefetch related details for efficiency
+        # Note: 'productdetails_set' is the reverse accessor for ProductDetails linked to Products
+        details_prefetch = Prefetch(
+            "productdetails_set",
+            queryset=ProductDetails.objects.filter(stock__gt=0).prefetch_related(
+                Prefetch("productimages_set", queryset=ProductImages.objects.prefetch_related("color_set"))
+            ),
+            to_attr="fetched_details"
+        )
+
+        product_instance = Products.objects.select_related("category").prefetch_related(details_prefetch).get(pk=product_id)
+
+        # Extract images and details from the prefetched data
+        if hasattr(product_instance, 'fetched_details'):
+            details_list = product_instance.fetched_details
+            for detail in details_list:
+                product_images.extend(list(detail.productimages_set.all()))
+        
+    except Products.DoesNotExist:
+        # Product not found, proceed with empty context to render a blank page
+        pass
 
     context = {
-        "product": product,
+        "product": product_instance,
         "product_images": product_images,
         "details": details_list,  # Pass details for color/size buttons
     }
-    return render(request, "pages/product_detail.html", context)
+    return render(request, "pages/product_details.html", context)
 
 
 def support_page(request):
