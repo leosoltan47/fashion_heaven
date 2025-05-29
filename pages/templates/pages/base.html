@@ -1072,6 +1072,19 @@
         const clearButton = document.getElementById("clearSearch");
         const wishlistLink = document.getElementById("wishlistLink");
 
+        searchInput.addEventListener("keyup", function (e) {
+          if (e.keyCode === 13) {
+            const search = this.value;
+            window.location.href = "{% url 'pages:catalog' 'featured' %}/" + search;
+
+            if (search) {
+              clearButton.classList.remove("hidden");
+            } else {
+              clearButton.classList.add("hidden");
+            }
+          }
+        });
+
         searchInput.addEventListener("input", function () {
           if (this.value) {
             clearButton.classList.remove("hidden");
