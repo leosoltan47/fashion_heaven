@@ -1068,7 +1068,54 @@
     <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
     {% block scripts_extra %}{% endblock %}
-
     {% block modals %}{% endblock %}
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        const clearButton = document.getElementById("clearSearch");
+        const wishlistLink = document.getElementById("wishlistLink");
+
+        searchInput.addEventListener("input", function () {
+          if (this.value) {
+            clearButton.classList.remove("hidden");
+          } else {
+            clearButton.classList.add("hidden");
+          }
+        });
+
+        clearButton.addEventListener("click", function () {
+          searchInput.value = "";
+          this.classList.add("hidden");
+          searchInput.focus();
+        });
+        wishlistLink.addEventListener("click", function () {
+          let storedIds = [];
+          const products = window.localStorage;
+          console.log(products);
+          for (let i = 0; i < products.length; ++i) {
+            const key = products.key(i);
+            const item = products.getItem(key);
+            if (!Number.isNaN(Number.parseInt(item))) {
+              storedIds.push(item);
+            }
+          }
+          if (!storedIds || !Array.isArray(storedIds)) {
+            console.error("No valid IDs found in localStorage");
+            return;
+          }
+          const queryString = storedIds
+            .map((id) => `ids[]=${encodeURIComponent(id)}`)
+            .join("&");
+
+          const newUrl = `/wishlist/${queryString}`;
+          console.log(newUrl);
+          const myLink = document.getElementById("wishlistLink");
+          if (myLink) {
+            myLink.href = newUrl;
+          }
+        });
+      });
+    </script>
   </body>
 </html>
