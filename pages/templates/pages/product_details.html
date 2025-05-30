@@ -250,11 +250,11 @@
                 <ol class="flex">
                     <li>
                         <a href="{% url 'pages:home' %}"
-                           class="text-gray-500 hover:text-gray-700">Shoes</a>
+                           class="text-gray-500 hover:text-gray-700">{{ product.category.parent.name|default:"" }}</a>
                     </li>
                     <li class="mx-2 text-gray-500">•</li>
                     <li>
-                        <a href="#" class="text-gray-500 hover:text-gray-700">Sportswear</a>
+                        <a href="#" class="text-gray-500 hover:text-gray-700">{{ product.category.name|default:"" }}</a>
                     </li>
                 </ol>
             </nav>
@@ -267,8 +267,10 @@
                         <!-- Main Image -->
                         <div class="product-image-container aspect-[555/650]">
                             <img id="product-placeholder"
-                                 src="https://placehold.co/555x650/e0e0e0/a0a0a0?text=UA+Fat+Tire"
-                                 alt="UA Fat Tire Venture Pro"
+                                 {% with color_batches|make_list|first as colors %}
+                                 src="https://placehold.co/555x650/{{ colors|first|slice:'1:' }}/{% if colors|length == 2 %}{{ colors|last|slice:'1:' }}{% else %}3333333{% endif %}"
+                                 {% endwith %}
+                                 alt="{{ product.name }}"
                                  class="w-full h-full object-cover" />
                         </div>
                         <!-- Navigation Buttons -->
@@ -302,19 +304,13 @@
                 <div class="lg:w-1/2 px-4">
                     <div class="mb-4">
                         <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500 uppercase">
-                                {% if product.category %}
-                                    {{ product.category.name }}
-                                {% else %}
-                                    Sportswear
-                                {% endif %}
-                            </span>
+                            <span class="text-sm text-gray-500 uppercase">{{ product.category.name|default:"Sportswear" }}</span>
                             <!-- Badge from image: 🔥 NEW - this is now on the image -->
                         </div>
-                        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">UA Fat Tire Venture Pro</h1>
-                        <p class="text-sm text-gray-600 mt-1">Unisex Shoes</p>
+                        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">{{ product.name }}</h1>
+                        <p class="text-sm text-gray-600 mt-1">{{ gender }} {{ product.category.parent|default:"Sportswear" }}</p>
                         <div class="flex items-center mt-2">
-                            <p class="text-2xl font-semibold text-gray-900 mr-4">$130</p>
+                            <p class="text-2xl font-semibold text-gray-900 mr-4">${{ product.price_in_dollars }}</p>
                             <div class="flex text-yellow-400">
                                 <!-- 4.6 (156) rating - approx 4.5 stars -->
                                 <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
@@ -341,36 +337,26 @@
                     <div class="mb-6 product-information-container">
                         <p class="text-sm font-medium text-gray-900 mb-2">Color:</p>
                         <div class="flex flex-wrap items-center">
-                            <button class="product-color-swatch-btn"
-                                    title="Bright Green"
-                                    data-image-src="https://placehold.co/555x650/66FF00/333333?text=Green+Tire">
-                                <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
-                                    <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#66FF00"></rect>
-                                </svg>
-                            </button>
-                            <button class="product-color-swatch-btn selected-color-swatch"
-                                    title="Sky Blue / Maroon"
-                                    data-image-src="https://placehold.co/555x650/33CCFF/990033?text=Blue/Red+Tire">
-                                <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
-                                    <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#33CCFF"></path>
-                                    <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#990033"></path>
-                                </svg>
-                            </button>
-                            <button class="product-color-swatch-btn"
-                                    title="Another Green"
-                                    data-image-src="https://placehold.co/555x650/50C878/FFFFFF?text=Emerald+Tire">
-                                <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
-                                    <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#50C878"></rect>
-                                </svg>
-                            </button>
-                            <button class="product-color-swatch-btn"
-                                    title="Dusty Rose / Indigo"
-                                    data-image-src="https://placehold.co/555x650/D8BFD8/4B0082?text=Rose/Indigo+Tire">
-                                <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
-                                    <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#D8BFD8"></path>
-                                    <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#4B0082"></path>
-                                </svg>
-                            </button>
+                            {% for colors in color_batches %}
+                                {% if colors|length < 2 %}
+                                    <button class="product-color-swatch-btn"
+                                            title="{{ colors|first }}"
+                                            data-image-src="https://placehold.co/555x650/{{ colors|first|slice:"1:" }}/333333">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="{{ colors|first }}"></rect>
+                                        </svg>
+                                    </button>
+                                {% else %}
+                                    <button class="product-color-swatch-btn selected-color-swatch"
+                                            title="{{ colors|join:"|" }}"
+                                            data-image-src="https://placehold.co/555x650/{{ colors|first|slice:"1:" }}/{{ colors|last|slice:"1:" }}">
+                                        <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="{{ colors|first }}"></path>
+                                            <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="{{ colors|last }}"></path>
+                                        </svg>
+                                    </button>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                     <!-- Gender Options -->
@@ -380,34 +366,22 @@
                         </div>
                         <div class="flex space-x-2">
                             <button class="flex-1 px-4 py-2 border rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 border-gray-900 text-gray-900 bg-white">
-                                Mens
-                            </button>
-                            <button class="flex-1 px-4 py-2 border rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 border-gray-300 text-gray-500 bg-gray-50 hover:bg-gray-100">
-                                Womens
+                                {{ gender }}
                             </button>
                         </div>
                     </div>
                     <!-- Size Options -->
+                    {# TODO: Populate this section with variant sizes #}
                     <div class="mb-6">
                         <div class="flex justify-between items-center mb-2">
                             <h3 class="text-sm font-medium text-gray-900">Size</h3>
                         </div>
                         <div class="grid grid-cols-4 gap-2">
-                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">3.5</button>
-                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">4</button>
-                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">4.5</button>
-                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">5</button>
-                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none selected border-black">
-                                5.5
-                            </button>
-                            <!-- Example selected size -->
-                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">6</button>
-                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">6.5</button>
-                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">7</button>
-                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">7.5</button>
-                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">8</button>
-                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">8.5</button>
-                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">9</button>
+                            {% for size in sizes %}
+                                <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">
+                                    {{ size }}
+                                </button>
+                            {% endfor %}
                         </div>
                         <button class="mt-2 text-sm font-medium text-gray-900 flex items-center">
                             Show More
@@ -485,7 +459,8 @@
         {% endif %}
     </div>
 {% endblock %}
-{% block modals %}{% endblock %}
+{% block modals %}
+{% endblock %}
 {% block scripts_extra %}
     <!-- Removed Swiper JS import as it's not used -->
     <script>
@@ -496,10 +471,9 @@
     const nextButton = document.getElementById("next-placeholder");
 
     const placeholders = [
-      "https://placehold.co/555x650/e0e0e0/a0a0a0?text=UA+Fat+Tire",
-      "https://placehold.co/555x650/cccccc/888888?text=View+2",
-      "https://placehold.co/555x650/f0f0f0/777777?text=View+3",
-      "https://placehold.co/555x650/d8d8d8/666666?text=View+4",
+        {% for colors in color_batches %}
+        "https://placehold.co/555x650/{{ colors|first|slice:'1:' }}/{% if colors|length == 2 %}{{ colors|last|slice:'1:' }}{% else %}3333333{% endif %}",
+        {% endfor %}
     ];
 
     let currentIndex = 0;

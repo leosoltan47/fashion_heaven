@@ -178,6 +178,14 @@ def product_detail_page(request, product_id):
     product_instance = None
     product_images = []
     details_list = []
+    gender_fullname = {
+        "W": "Women",
+        "M": "Men",
+        "K": "Kids",
+        "U": "Unisex",
+        "B": "Boys",
+        "G": "Girls",
+    }
 
     try:
         # Prefetch related details for efficiency
@@ -204,6 +212,14 @@ def product_detail_page(request, product_id):
             details_list = product_instance.fetched_details
             for detail in details_list:
                 product_images.extend(list(detail.productimages_set.all()))
+        get_colors = lambda color_list: (
+            colors[0] if len(colors) == 1 else colors for colors in color_list
+        )
+        colors = {
+            tuple(sorted(get_colors(image.color_set.values_list("color_code"))))
+            for image in product_images
+        }
+        sizes = {detail.size for detail in product_instance.fetched_details}
 
     except Products.DoesNotExist:
         # Product not found, proceed with empty context to render a blank page
@@ -212,7 +228,10 @@ def product_detail_page(request, product_id):
     context = {
         "product": product_instance,
         "product_images": product_images,
+        "gender": gender_fullname[product_instance.gender_and_age],
         "details": details_list,  # Pass details for color/size buttons
+        "color_batches": colors,
+        "sizes": sizes,
     }
     return render(request, "pages/product_details.html", context)
 
