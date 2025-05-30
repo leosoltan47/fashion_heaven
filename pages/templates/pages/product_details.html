@@ -1,7 +1,10 @@
-{% extends "pages/base.html" %} {% load static %} {% block title %}
-{{ product.name|default:"Product Not Found" }}{% endblock %} {% block head_extra %}
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-<style>
+{% extends "pages/base.html" %}
+{% load static %}
+{% block title %}{{ product.name|default:"Product Not Found" }}{% endblock %}
+{% block head_extra %}
+    <link rel="stylesheet"
+          href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
   .swiper-button-next,
   .swiper-button-prev {
     color: #333; /* Darker arrow color for better visibility */
@@ -237,440 +240,255 @@
     display: block; /* Ensure SVG behaves correctly */
     border-radius: 0.25rem; /* rounded-sm, for inner rect if needed */
   }
-</style>
-{% endblock %} {% block content %}
-<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  {% if product %}
-  <!-- Breadcrumb -->
-  <nav class="mb-4 text-sm">
-    <ol class="flex">
-      <li>
-        <a
-          href="{% url 'pages:home' %}"
-          class="text-gray-500 hover:text-gray-700"
-          >Shoes</a
-        >
-      </li>
-      <li class="mx-2 text-gray-500">•</li>
-      <li>
-        <a href="#" class="text-gray-500 hover:text-gray-700">Sportswear</a>
-      </li>
-    </ol>
-  </nav>
-
-  <div class="flex flex-col lg:flex-row -mx-4">
-    <!-- Image Gallery (Left Column) -->
-    <div class="lg:w-1/2 px-4 mb-8 lg:mb-0">
-      <!-- Product Image in Main Page Style -->
-      <div class="relative overflow-hidden bg-gray-100 rounded-md">
-        <div class="vf-c-product-card__badge">🔥 NEW</div>
-        <!-- Main Image -->
-        <div class="product-image-container aspect-[555/650]">
-          <img
-            id="product-placeholder"
-            src="https://placehold.co/555x650/e0e0e0/a0a0a0?text=UA+Fat+Tire"
-            alt="UA Fat Tire Venture Pro"
-            class="w-full h-full object-cover"
-          />
-        </div>
-
-        <!-- Navigation Buttons -->
-        <div class="absolute bottom-4 left-4 flex space-x-2 z-10">
-          <button
-            id="prev-placeholder"
-            class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center focus:outline-none hover:bg-gray-100"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-5 h-5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15.75 19.5L8.25 12l7.5-7.5"
-              />
-            </svg>
-          </button>
-          <button
-            id="next-placeholder"
-            class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center focus:outline-none hover:bg-gray-100"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-5 h-5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {% if product %}
+            <!-- Breadcrumb -->
+            <nav class="mb-4 text-sm">
+                <ol class="flex">
+                    <li>
+                        <a href="{% url 'pages:home' %}"
+                           class="text-gray-500 hover:text-gray-700">Shoes</a>
+                    </li>
+                    <li class="mx-2 text-gray-500">•</li>
+                    <li>
+                        <a href="#" class="text-gray-500 hover:text-gray-700">Sportswear</a>
+                    </li>
+                </ol>
+            </nav>
+            <div class="flex flex-col lg:flex-row -mx-4">
+                <!-- Image Gallery (Left Column) -->
+                <div class="lg:w-1/2 px-4 mb-8 lg:mb-0">
+                    <!-- Product Image in Main Page Style -->
+                    <div class="relative overflow-hidden bg-gray-100 rounded-md">
+                        <div class="vf-c-product-card__badge">🔥 NEW</div>
+                        <!-- Main Image -->
+                        <div class="product-image-container aspect-[555/650]">
+                            <img id="product-placeholder"
+                                 src="https://placehold.co/555x650/e0e0e0/a0a0a0?text=UA+Fat+Tire"
+                                 alt="UA Fat Tire Venture Pro"
+                                 class="w-full h-full object-cover" />
+                        </div>
+                        <!-- Navigation Buttons -->
+                        <div class="absolute bottom-4 left-4 flex space-x-2 z-10">
+                            <button id="prev-placeholder"
+                                    class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center focus:outline-none hover:bg-gray-100">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="2"
+                                     stroke="currentColor"
+                                     class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                </svg>
+                            </button>
+                            <button id="next-placeholder"
+                                    class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center focus:outline-none hover:bg-gray-100">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke-width="2"
+                                     stroke="currentColor"
+                                     class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Information (Right Column) -->
+                <div class="lg:w-1/2 px-4">
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500 uppercase">
+                                {% if product.category %}
+                                    {{ product.category.name }}
+                                {% else %}
+                                    Sportswear
+                                {% endif %}
+                            </span>
+                            <!-- Badge from image: 🔥 NEW - this is now on the image -->
+                        </div>
+                        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">UA Fat Tire Venture Pro</h1>
+                        <p class="text-sm text-gray-600 mt-1">Unisex Shoes</p>
+                        <div class="flex items-center mt-2">
+                            <p class="text-2xl font-semibold text-gray-900 mr-4">$130</p>
+                            <div class="flex text-yellow-400">
+                                <!-- 4.6 (156) rating - approx 4.5 stars -->
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                </svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                </svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                </svg>
+                                <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                </svg>
+                                <svg class="w-5 h-5 text-gray-300 fill-current" viewBox="0 0 20 20">
+                                    <!-- Empty star for .6 -->
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                </svg>
+                            </div>
+                            <span class="ml-2 text-sm text-gray-600">4.6 (156)</span>
+                        </div>
+                    </div>
+                    <!-- New SVG Icon Color Swatches -->
+                    <div class="mb-6 product-information-container">
+                        <p class="text-sm font-medium text-gray-900 mb-2">Color:</p>
+                        <div class="flex flex-wrap items-center">
+                            <button class="product-color-swatch-btn"
+                                    title="Bright Green"
+                                    data-image-src="https://placehold.co/555x650/66FF00/333333?text=Green+Tire">
+                                <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                    <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#66FF00"></rect>
+                                </svg>
+                            </button>
+                            <button class="product-color-swatch-btn selected-color-swatch"
+                                    title="Sky Blue / Maroon"
+                                    data-image-src="https://placehold.co/555x650/33CCFF/990033?text=Blue/Red+Tire">
+                                <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                    <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#33CCFF"></path>
+                                    <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#990033"></path>
+                                </svg>
+                            </button>
+                            <button class="product-color-swatch-btn"
+                                    title="Another Green"
+                                    data-image-src="https://placehold.co/555x650/50C878/FFFFFF?text=Emerald+Tire">
+                                <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                    <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke-width="0.75" stroke="#d0d0d0" fill="#50C878"></rect>
+                                </svg>
+                            </button>
+                            <button class="product-color-swatch-btn"
+                                    title="Dusty Rose / Indigo"
+                                    data-image-src="https://placehold.co/555x650/D8BFD8/4B0082?text=Rose/Indigo+Tire">
+                                <svg width="100%" height="100%" viewBox="0 0 20 20" aria-hidden="true">
+                                    <path d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z" fill="#D8BFD8"></path>
+                                    <path d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z" fill="#4B0082"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Gender Options -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-sm font-medium text-gray-900">Gender</h3>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 px-4 py-2 border rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 border-gray-900 text-gray-900 bg-white">
+                                Mens
+                            </button>
+                            <button class="flex-1 px-4 py-2 border rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 border-gray-300 text-gray-500 bg-gray-50 hover:bg-gray-100">
+                                Womens
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Size Options -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-sm font-medium text-gray-900">Size</h3>
+                        </div>
+                        <div class="grid grid-cols-4 gap-2">
+                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">3.5</button>
+                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">4</button>
+                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">4.5</button>
+                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">5</button>
+                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none selected border-black">
+                                5.5
+                            </button>
+                            <!-- Example selected size -->
+                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">6</button>
+                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">6.5</button>
+                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">7</button>
+                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">7.5</button>
+                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">8</button>
+                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">8.5</button>
+                            <button class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">9</button>
+                        </div>
+                        <button class="mt-2 text-sm font-medium text-gray-900 flex items-center">
+                            Show More
+                            <svg class="w-4 h-4 ml-1"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                        </button>
+                        <p class="mt-2 text-sm text-red-600 hidden">Only a Few Left!</p>
+                        <!-- Hidden as per image -->
+                    </div>
+                    <!-- Shipping/Pickup Options -->
+                    <div class="mb-6 grid grid-cols-2 gap-4">
+                        <div class="border border-black rounded-lg p-4 text-center">
+                            <div class="flex items-center justify-center mb-1">
+                                <!-- Truck Icon -->
+                                <svg class="w-5 h-5 mr-1"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     viewBox="0 0 24 24"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <!-- Placeholder, needs actual truck icon -->
+                                <span class="font-medium">Ship</span>
+                            </div>
+                            <span class="text-xs text-gray-500">In Stock Online</span>
+                        </div>
+                        <div class="border border-gray-300 rounded-lg p-4 text-center">
+                            <!-- Store Icon -->
+                            <svg class="w-5 h-5 mx-auto mb-1 text-gray-400"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg>
+                            <!-- Placeholder, needs actual store icon -->
+                            <span class="block font-medium">Pick Up</span>
+                            <span class="text-xs text-gray-500">Select A Store</span>
+                        </div>
+                    </div>
+                    <!-- Action Buttons -->
+                    <button class="w-full bg-red-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 mb-3">
+                        Add to Bag
+                    </button>
+                    <button class="w-full bg-gray-100 text-gray-700 font-semibold py-3 px-6 rounded-lg hover:bg-gray-200 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2 fill-current" viewBox="0 0 20 20">
+                            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" fill-rule="evenodd">
+                            </path>
+                        </svg>
+                        Favorite
+                    </button>
+                    <!-- Collapsible Details Sections Wrapper - Hidden in this layout but kept for functional purposes -->
+                    <div class="mt-8 pt-6 border-t border-gray-200 max-h-[60vh] overflow-y-auto pr-2 hidden">
+                        <!-- All the accordion content is hidden but preserved -->
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="text-center py-12">
+                <h1 class="text-2xl font-semibold text-gray-700 mb-4">Product Not Found</h1>
+                <p class="text-gray-500 mb-8">The product you are looking for does not exist or is no longer available.</p>
+                <a href="{% url 'pages:home' %}"
+                   class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700">
+                    Go to Homepage
+                </a>
+            </div>
+        {% endif %}
     </div>
-
-    <!-- Product Information (Right Column) -->
-    <div class="lg:w-1/2 px-4">
-      <div class="mb-4">
-        <div class="flex justify-between items-center">
-          <span class="text-sm text-gray-500 uppercase"
-            >{% if product.category %}{{ product.category.name }}{% else
-            %}Sportswear{% endif %}</span
-          >
-          <!-- Badge from image: 🔥 NEW - this is now on the image -->
-        </div>
-        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1">
-          UA Fat Tire Venture Pro
-        </h1>
-        <p class="text-sm text-gray-600 mt-1">Unisex Shoes</p>
-        <div class="flex items-center mt-2">
-          <p class="text-2xl font-semibold text-gray-900 mr-4">$130</p>
-          <div class="flex text-yellow-400">
-            <!-- 4.6 (156) rating - approx 4.5 stars -->
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
-              <path
-                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"
-              />
-            </svg>
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
-              <path
-                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"
-              />
-            </svg>
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
-              <path
-                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"
-              />
-            </svg>
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
-              <path
-                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"
-              />
-            </svg>
-            <svg class="w-5 h-5 text-gray-300 fill-current" viewBox="0 0 20 20">
-              <!-- Empty star for .6 -->
-              <path
-                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"
-              />
-            </svg>
-          </div>
-          <span class="ml-2 text-sm text-gray-600">4.6 (156)</span>
-        </div>
-      </div>
-
-      <!-- New SVG Icon Color Swatches -->
-      <div class="mb-6 product-information-container">
-        <p class="text-sm font-medium text-gray-900 mb-2">Color:</p>
-        <div class="flex flex-wrap items-center">
-          <button
-            class="product-color-swatch-btn"
-            title="Bright Green"
-            data-image-src="https://placehold.co/555x650/66FF00/333333?text=Green+Tire"
-          >
-            <svg
-              width="100%"
-              height="100%"
-              viewBox="0 0 20 20"
-              aria-hidden="true"
-            >
-              <rect
-                x="0.5"
-                y="0.5"
-                width="19"
-                height="19"
-                rx="3.5"
-                stroke-width="0.75"
-                stroke="#d0d0d0"
-                fill="#66FF00"
-              ></rect>
-            </svg>
-          </button>
-          <button
-            class="product-color-swatch-btn selected-color-swatch"
-            title="Sky Blue / Maroon"
-            data-image-src="https://placehold.co/555x650/33CCFF/990033?text=Blue/Red+Tire"
-          >
-            <svg
-              width="100%"
-              height="100%"
-              viewBox="0 0 20 20"
-              aria-hidden="true"
-            >
-              <path
-                d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z"
-                fill="#33CCFF"
-              ></path>
-              <path
-                d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z"
-                fill="#990033"
-              ></path>
-            </svg>
-          </button>
-          <button
-            class="product-color-swatch-btn"
-            title="Another Green"
-            data-image-src="https://placehold.co/555x650/50C878/FFFFFF?text=Emerald+Tire"
-          >
-            <svg
-              width="100%"
-              height="100%"
-              viewBox="0 0 20 20"
-              aria-hidden="true"
-            >
-              <rect
-                x="0.5"
-                y="0.5"
-                width="19"
-                height="19"
-                rx="3.5"
-                stroke-width="0.75"
-                stroke="#d0d0d0"
-                fill="#50C878"
-              ></rect>
-            </svg>
-          </button>
-          <button
-            class="product-color-swatch-btn"
-            title="Dusty Rose / Indigo"
-            data-image-src="https://placehold.co/555x650/D8BFD8/4B0082?text=Rose/Indigo+Tire"
-          >
-            <svg
-              width="100%"
-              height="100%"
-              viewBox="0 0 20 20"
-              aria-hidden="true"
-            >
-              <path
-                d="M 0 4 a 4 4 0 0 1 4 -4 h 6 v 20 h -6 a 4 4 0 0 1 -4 -4 Z"
-                fill="#D8BFD8"
-              ></path>
-              <path
-                d="M 10 0 h 6 a 4 4 0 0 1 4 4 v 12 a 4 4 0 0 1 -4 4 h -6 Z"
-                fill="#4B0082"
-              ></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Gender Options -->
-      <div class="mb-6">
-        <div class="flex justify-between items-center mb-2">
-          <h3 class="text-sm font-medium text-gray-900">Gender</h3>
-        </div>
-        <div class="flex space-x-2">
-          <button
-            class="flex-1 px-4 py-2 border rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 border-gray-900 text-gray-900 bg-white"
-          >
-            Mens
-          </button>
-          <button
-            class="flex-1 px-4 py-2 border rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 border-gray-300 text-gray-500 bg-gray-50 hover:bg-gray-100"
-          >
-            Womens
-          </button>
-        </div>
-      </div>
-
-      <!-- Size Options -->
-      <div class="mb-6">
-        <div class="flex justify-between items-center mb-2">
-          <h3 class="text-sm font-medium text-gray-900">Size</h3>
-        </div>
-        <div class="grid grid-cols-4 gap-2">
-          <button
-            class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none"
-          >
-            3.5
-          </button>
-          <button
-            class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none"
-          >
-            4
-          </button>
-          <button
-            class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none"
-          >
-            4.5
-          </button>
-          <button
-            class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none"
-          >
-            5
-          </button>
-          <button
-            class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none selected border-black"
-          >
-            5.5
-          </button>
-          <!-- Example selected size -->
-          <button
-            class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none"
-          >
-            6
-          </button>
-          <button
-            class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none"
-          >
-            6.5
-          </button>
-          <button
-            class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none"
-          >
-            7
-          </button>
-          <button
-            class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none"
-          >
-            7.5
-          </button>
-          <button
-            class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none"
-          >
-            8
-          </button>
-          <button
-            class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none"
-          >
-            8.5
-          </button>
-          <button
-            class="px-2 py-2 border rounded-md text-sm text-gray-700 hover:bg-gray-100 focus:outline-none"
-          >
-            9
-          </button>
-        </div>
-
-        <button
-          class="mt-2 text-sm font-medium text-gray-900 flex items-center"
-        >
-          Show More
-          <svg
-            class="w-4 h-4 ml-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            ></path>
-          </svg>
-        </button>
-
-        <p class="mt-2 text-sm text-red-600 hidden">Only a Few Left!</p>
-        <!-- Hidden as per image -->
-      </div>
-
-      <!-- Shipping/Pickup Options -->
-      <div class="mb-6 grid grid-cols-2 gap-4">
-        <div class="border border-black rounded-lg p-4 text-center">
-          <div class="flex items-center justify-center mb-1">
-            <!-- Truck Icon -->
-            <svg
-              class="w-5 h-5 mr-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              ></path>
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              ></path>
-            </svg>
-            <!-- Placeholder, needs actual truck icon -->
-            <span class="font-medium">Ship</span>
-          </div>
-          <span class="text-xs text-gray-500">In Stock Online</span>
-        </div>
-        <div class="border border-gray-300 rounded-lg p-4 text-center">
-          <!-- Store Icon -->
-          <svg
-            class="w-5 h-5 mx-auto mb-1 text-gray-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-            ></path>
-          </svg>
-          <!-- Placeholder, needs actual store icon -->
-          <span class="block font-medium">Pick Up</span>
-          <span class="text-xs text-gray-500">Select A Store</span>
-        </div>
-      </div>
-
-      <!-- Action Buttons -->
-      <button
-        class="w-full bg-red-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 mb-3"
-      >
-        Add to Bag
-      </button>
-      <button
-        class="w-full bg-gray-100 text-gray-700 font-semibold py-3 px-6 rounded-lg hover:bg-gray-200 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 flex items-center justify-center"
-      >
-        <svg class="w-5 h-5 mr-2 fill-current" viewBox="0 0 20 20">
-          <path
-            d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-            clip-rule="evenodd"
-            fill-rule="evenodd"
-          ></path>
-        </svg>
-        Favorite
-      </button>
-
-      <!-- Collapsible Details Sections Wrapper - Hidden in this layout but kept for functional purposes -->
-      <div
-        class="mt-8 pt-6 border-t border-gray-200 max-h-[60vh] overflow-y-auto pr-2 hidden"
-      >
-        <!-- All the accordion content is hidden but preserved -->
-      </div>
-    </div>
-  </div>
-  {% else %}
-  <div class="text-center py-12">
-    <h1 class="text-2xl font-semibold text-gray-700 mb-4">Product Not Found</h1>
-    <p class="text-gray-500 mb-8">
-      The product you are looking for does not exist or is no longer available.
-    </p>
-    <a
-      href="{% url 'pages:home' %}"
-      class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700"
-    >
-      Go to Homepage
-    </a>
-  </div>
-  {% endif %}
-</div>
-{% endblock %} {% block modals %} {% endblock %} {% block scripts_extra %}
-<!-- Removed Swiper JS import as it's not used -->
-<script>
+{% endblock %}
+{% block modals %}{% endblock %}
+{% block scripts_extra %}
+    <!-- Removed Swiper JS import as it's not used -->
+    <script>
   document.addEventListener("DOMContentLoaded", () => {
     // Placeholder image slider functionality
     const placeholderImage = document.getElementById("product-placeholder");
@@ -762,5 +580,5 @@
       }
     }
   });
-</script>
+    </script>
 {% endblock %}
