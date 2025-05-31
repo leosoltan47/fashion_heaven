@@ -160,7 +160,9 @@
 
         <!-- Guest Button -->
         <button type="button" class="guest-btn mb-6">
+          <a href="{% url 'pages:home' %}">
           Continue as a Guest
+          </a>
         </button>
       </form>
 
@@ -168,16 +170,15 @@
       <div class="text-center mb-6">
         <p class="text-sm text-gray-600 mb-1">New to Under Armour?</p>
         <a href="{% url 'register' %}" class="register-link text-sm"
-          >Register</a
-        >
+          >Register</a>
       </div>
 
       <!-- Terms & Conditions -->
       <div class="terms-text mt-4">
         <p>
           By logging in, you agree to all Benefits Terms & Conditions and<br />
-          Under Armour's <a href="#" class="terms-link">Privacy Policy</a> and
-          <a href="#" class="terms-link">Terms & Conditions</a>.
+          Under Armour's <a href="{% url 'pages:support' %}" class="terms-link">Privacy Policy</a> and
+          <a href="{% url 'pages:support' %}" class="terms-link">Terms & Conditions</a>.
         </p>
       </div>
     </div>
