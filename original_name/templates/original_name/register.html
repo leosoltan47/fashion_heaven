@@ -1,15 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register Account | Under Armour</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <style>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Register Account | Under Armour</title>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+              rel="stylesheet" />
+        <style>
       body {
         font-family: "Arial", sans-serif;
         background-color: #f8f8f8;
@@ -82,121 +80,90 @@
         margin-right: 8px;
         font-size: 10px;
       }
-    </style>
-  </head>
-  <body class="flex items-center justify-center min-h-screen">
-    <div class="register-container">
-      <!-- Under Armour Logo -->
-      <div class="text-center">
-        <img
-          src="{% static 'icons8-bmw-30.svg' %}"
-          alt="Under Armour Logo"
-          class="ua-logo"
-        />
-      </div>
-
-      <!-- Register Heading -->
-      <h1 class="text-xl font-bold text-center mb-6">Register Account</h1>
-
-      <!-- Register Form -->
-      <form action="{% url 'register' %}" method="post">
-        {% csrf_token %}
-
-        <!-- Email Field -->
-        <div class="mb-4">
-          <label for="email" class="text-sm text-gray-600 block mb-1"
-            >Email Address</label
-          >
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="input-field"
-            required
-          />
+        </style>
+    </head>
+    <body class="flex items-center justify-center min-h-screen">
+        <div class="register-container">
+            <!-- Under Armour Logo -->
+            <div class="text-center">
+                <img src="{% static 'icons8-bmw-30.svg' %}"
+                     alt="Under Armour Logo"
+                     class="ua-logo" />
+            </div>
+            <!-- Register Heading -->
+            <h1 class="text-xl font-bold text-center mb-6">Register Account</h1>
+            <!-- Register Form -->
+            <form action="{% url 'register' %}" method="post">
+                {% csrf_token %}
+                <!-- Email Field -->
+                <div class="mb-4">
+                    <label for="email" class="text-sm text-gray-600 block mb-1">Email Address</label>
+                    <input type="email" id="email" name="email" class="input-field" required />
+                </div>
+                <!-- Password Field -->
+                <div class="mb-2">
+                    <label for="password" class="text-sm text-gray-600 block mb-1">Password</label>
+                    <div class="password-container">
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               class="input-field"
+                               required />
+                        <span class="password-toggle" onclick="togglePassword()">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="16"
+                                 height="16"
+                                 fill="currentColor"
+                                 viewBox="0 0 16 16">
+                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <!-- Password Requirements -->
+                <div class="requirements">
+                    <p class="text-xs text-gray-600 mb-2">Requirements:</p>
+                    <div class="requirement">
+                        <span class="check-icon">✓</span>
+                        <span>8 or more characters</span>
+                    </div>
+                    <div class="requirement">
+                        <span class="check-icon">✓</span>
+                        <span>1 lowercase letter</span>
+                    </div>
+                    <div class="requirement">
+                        <span class="check-icon">✓</span>
+                        <span>1 uppercase letter</span>
+                    </div>
+                    <div class="requirement">
+                        <span class="check-icon">✓</span>
+                        <span>1 number</span>
+                    </div>
+                    <div class="requirement">
+                        <span class="check-icon">✓</span>
+                        <span>1 special character</span>
+                    </div>
+                </div>
+                <!-- Register Button -->
+                <button type="submit" class="register-btn mb-6">Register Account</button>
+            </form>
+            <!-- Login Section -->
+            <div class="text-center mb-6">
+                <p class="text-sm text-gray-600 mb-1">Already have an account?</p>
+                <a href="{% url 'login' %}" class="login-link text-sm">Log In</a>
+            </div>
+            <!-- Terms & Conditions -->
+            <div class="terms-text mt-4">
+                <p>
+                    By creating an account and joining UA Rewards, you agree to UA Rewards
+                    <a href="{% url 'pages:support' %}" class="terms-link">Terms & Conditions</a> and Under
+                    Armour's <a href="{% url 'pages:support' %}" class="terms-link">Privacy Policy</a> and
+                    <a href="{% url 'pages:support' %}" class="terms-link">Terms & Conditions</a>.
+                </p>
+            </div>
         </div>
-
-        <!-- Password Field -->
-        <div class="mb-2">
-          <label for="password" class="text-sm text-gray-600 block mb-1"
-            >Password</label
-          >
-          <div class="password-container">
-            <input
-              type="password"
-              id="password"
-              name="password"
-              class="input-field"
-              required
-            />
-            <span class="password-toggle" onclick="togglePassword()">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
-                />
-                <path
-                  d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
-                />
-              </svg>
-            </span>
-          </div>
-        </div>
-
-        <!-- Password Requirements -->
-        <div class="requirements">
-          <p class="text-xs text-gray-600 mb-2">Requirements:</p>
-          <div class="requirement">
-            <span class="check-icon">✓</span>
-            <span>8 or more characters</span>
-          </div>
-          <div class="requirement">
-            <span class="check-icon">✓</span>
-            <span>1 lowercase letter</span>
-          </div>
-          <div class="requirement">
-            <span class="check-icon">✓</span>
-            <span>1 uppercase letter</span>
-          </div>
-          <div class="requirement">
-            <span class="check-icon">✓</span>
-            <span>1 number</span>
-          </div>
-          <div class="requirement">
-            <span class="check-icon">✓</span>
-            <span>1 special character</span>
-          </div>
-        </div>
-
-        <!-- Register Button -->
-        <button type="submit" class="register-btn mb-6">
-          Register Account
-        </button>
-      </form>
-
-      <!-- Login Section -->
-      <div class="text-center mb-6">
-        <p class="text-sm text-gray-600 mb-1">Already have an account?</p>
-        <a href="{% url 'login' %}" class="login-link text-sm">Log In</a>
-      </div>
-
-      <!-- Terms & Conditions -->
-      <div class="terms-text mt-4">
-        <p>
-          By creating an account and joining UA Rewards, you agree to UA Rewards
-          <a href="{% url 'pages:support' %}" class="terms-link">Terms & Conditions</a> and Under
-          Armour's <a href="{% url 'pages:support' %}" class="terms-link">Privacy Policy</a> and
-          <a href="{% url 'pages:support' %}" class="terms-link">Terms & Conditions</a>.
-        </p>
-      </div>
-    </div>
-
-    <script>
+        <script>
       function togglePassword() {
         const passwordInput = document.getElementById("password");
         if (passwordInput.type === "password") {
@@ -205,6 +172,6 @@
           passwordInput.type = "password";
         }
       }
-    </script>
-  </body>
+        </script>
+    </body>
 </html>
