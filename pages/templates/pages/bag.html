@@ -13,7 +13,7 @@
                 <div class="space-y-10">
                     {% for product in products %}
                     <!-- Item 1 -->
-                    <div class="border-b pb-10">
+                    <div id="product-{{ product.id }}" class="border-b pb-10">
                         <div class="flex gap-8">
                             <div class="w-36 h-36 bg-gray-50">
                                 <img src="https://placehold.co/400x500"
@@ -81,7 +81,7 @@
                                         Add Gift Option
                                     </button>
                                     <button class="text-base text-gray-500 hover:text-gray-700">Save For Later</button>
-                                    <button class="text-base text-gray-500 hover:text-gray-700">Remove Item</button>
+                                    <button id="remove-item-button" class="text-base text-gray-500 hover:text-gray-700">Remove Item</button>
                                 </div>
                             </div>
                         </div>
@@ -380,6 +380,22 @@
                 input.addEventListener('focus', function() {
                     this.select();
                 });
+            });
+
+            /*** Remove products from bag ***/
+            const removeItemButton = document.getElementById("remove-item-button");
+            console.assert(removeItemButton != null, "'Remove Item's button's id hasn't been found");
+
+            removeItemButton.addEventListener("click", () => {
+                // Remove product from local storage
+                const productId = removeItemButton.parentNode.parentNode.parentNode.parentNode.id.split("-")[1];
+                console.assert(!Number.isNaN(Number.parseInt(productId)), `Product Id is non numeric value ${productId}`);
+                window.localStorage.removeItem(`bag-${productId}`);
+
+                // Remove product from the screen
+                const bagButton = document.getElementById("bagButton");
+                console.assert(bagButton != null, "Bag Button wasn't found. Check if it's id remains bagButton");
+                bagButton.click();
             });
         });
     </script>
