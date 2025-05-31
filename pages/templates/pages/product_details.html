@@ -464,11 +464,11 @@
 {% block scripts_extra %}
     <!-- Removed Swiper JS import as it's not used -->
     <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    // Placeholder image slider functionality
-    const placeholderImage = document.getElementById("product-placeholder");
-    const prevButton = document.getElementById("prev-placeholder");
-    const nextButton = document.getElementById("next-placeholder");
+        document.addEventListener("DOMContentLoaded", () => {
+            // Placeholder image slider functionality
+            const placeholderImage = document.getElementById("product-placeholder");
+            const prevButton = document.getElementById("prev-placeholder");
+            const nextButton = document.getElementById("next-placeholder");
 
             const addToBagButton = document.getElementById("add-to-bag-button");
             addToBagButton.addEventListener("click", () => {
@@ -487,81 +487,89 @@
                 console.log(window.localStorage);
             });
 
-    function updatePlaceholder() {
-      if (placeholderImage) {
-        placeholderImage.src = placeholders[currentIndex];
-        placeholderImage.style.opacity = "0";
-        setTimeout(() => {
-          placeholderImage.style.opacity = "1";
-        }, 50);
-      }
-    }
-    if (prevButton)
-      prevButton.addEventListener("click", () => {
-        currentIndex =
-          (currentIndex - 1 + placeholders.length) % placeholders.length;
-        updatePlaceholder();
-      });
+            const placeholders = [
+                {% for colors in color_batches %}
+                "https://placehold.co/555x650/{{ colors|first|slice:'1:' }}/{% if colors|length == 2 %}{{ colors|last|slice:'1:' }}{% else %}3333333{% endif %}",
+                {% endfor %}
+            ];
 
-    if (nextButton)
-      nextButton.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % placeholders.length;
-        updatePlaceholder();
-      });
+            let currentIndex = 0;
 
-    if (placeholderImage)
-      placeholderImage.style.transition = "opacity 0.3s ease-in-out";
+            function updatePlaceholder() {
+                if (placeholderImage) {
+                    placeholderImage.src = placeholders[currentIndex];
+                    placeholderImage.style.opacity = "0";
+                    setTimeout(() => {
+                        placeholderImage.style.opacity = "1";
+                    }, 50);
+                }
+            }
+            if (prevButton)
+                prevButton.addEventListener("click", () => {
+                    currentIndex =
+                        (currentIndex - 1 + placeholders.length) % placeholders.length;
+                    updatePlaceholder();
+                });
 
-    // New SVG Icon Color Swatch Interaction
-    const productInfoContainer = document.querySelector(
-      ".product-information-container"
-    );
-    if (productInfoContainer) {
-      // Check if the container exists
-      const colorSwatchButtons = productInfoContainer.querySelectorAll(
-        ".product-color-swatch-btn"
-      );
-      const mainProductImage = document.getElementById("product-placeholder");
+            if (nextButton)
+                nextButton.addEventListener("click", () => {
+                    currentIndex = (currentIndex + 1) % placeholders.length;
+                    updatePlaceholder();
+                });
 
-      colorSwatchButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          // Remove selected state from all buttons in this group
-          colorSwatchButtons.forEach((btn) =>
-            btn.classList.remove("selected-color-swatch")
-          );
-          // Add selected state to the clicked button
-          button.classList.add("selected-color-swatch");
+            if (placeholderImage)
+                placeholderImage.style.transition = "opacity 0.3s ease-in-out";
 
-          // Update main product image
-          const newImageSrc = button.dataset.imageSrc;
-          if (mainProductImage && newImageSrc) {
-            mainProductImage.style.opacity = "0"; // Start fade out
-            setTimeout(() => {
-              // Wait for fade out before changing src and fading in
-              mainProductImage.src = newImageSrc;
-              mainProductImage.style.opacity = "1"; // Start fade in
-            }, 150); // Match this to half of the transition duration if possible
-          }
-          console.log(
-            "Selected color:",
-            button.title,
-            "New image src:",
-            newImageSrc
-          );
+            // New SVG Icon Color Swatch Interaction
+            const productInfoContainer = document.querySelector(
+                ".product-information-container"
+            );
+            if (productInfoContainer) {
+                // Check if the container exists
+                const colorSwatchButtons = productInfoContainer.querySelectorAll(
+                    ".product-color-swatch-btn"
+                );
+                const mainProductImage = document.getElementById("product-placeholder");
+
+                colorSwatchButtons.forEach((button) => {
+                    button.addEventListener("click", () => {
+                        // Remove selected state from all buttons in this group
+                        colorSwatchButtons.forEach((btn) =>
+                            btn.classList.remove("selected-color-swatch")
+                        );
+                        // Add selected state to the clicked button
+                        button.classList.add("selected-color-swatch");
+
+                        // Update main product image
+                        const newImageSrc = button.dataset.imageSrc;
+                        if (mainProductImage && newImageSrc) {
+                            mainProductImage.style.opacity = "0"; // Start fade out
+                            setTimeout(() => {
+                                // Wait for fade out before changing src and fading in
+                                mainProductImage.src = newImageSrc;
+                                mainProductImage.style.opacity = "1"; // Start fade in
+                            }, 150); // Match this to half of the transition duration if possible
+                        }
+                        console.log(
+                            "Selected color:",
+                            button.title,
+                            "New image src:",
+                            newImageSrc
+                        );
+                    });
+                });
+
+                // Set initial image based on the default selected swatch
+                const initiallySelectedSwatch = productInfoContainer.querySelector(
+                    ".product-color-swatch-btn.selected-color-swatch"
+                );
+                if (initiallySelectedSwatch && mainProductImage) {
+                    const initialImageSrc = initiallySelectedSwatch.dataset.imageSrc;
+                    if (initialImageSrc) {
+                        mainProductImage.src = initialImageSrc;
+                    }
+                }
+            }
         });
-      });
-
-      // Set initial image based on the default selected swatch
-      const initiallySelectedSwatch = productInfoContainer.querySelector(
-        ".product-color-swatch-btn.selected-color-swatch"
-      );
-      if (initiallySelectedSwatch && mainProductImage) {
-        const initialImageSrc = initiallySelectedSwatch.dataset.imageSrc;
-        if (initialImageSrc) {
-          mainProductImage.src = initialImageSrc;
-        }
-      }
-    }
-  });
     </script>
 {% endblock %}
