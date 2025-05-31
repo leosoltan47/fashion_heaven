@@ -99,7 +99,7 @@
       <h1 class="text-xl font-bold text-center mb-6">Register Account</h1>
 
       <!-- Register Form -->
-      <form action="#" method="post">
+      <form action="{% url 'register' %}" method="post">
         {% csrf_token %}
 
         <!-- Email Field -->
