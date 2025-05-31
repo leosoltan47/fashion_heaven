@@ -272,6 +272,7 @@
           <!-- Shopping Bag Icon - Positioned absolutely at the extreme RIGHT with maximum negative margin -->
           <a
             href="{% url 'pages:bag' %}"
+            id="bagButton"
             class="absolute right-0 top-1/2 transform -translate-y-1/2 -mr-12 lg:-mr-24 z-10 flex-shrink-0 text-gray-300 hover:text-white transition-colors duration-200"
           >
             <svg
@@ -1127,6 +1128,37 @@
           if (myLink) {
             myLink.href = newUrl;
           }
+        });
+
+        const bagButton = document.getElementById("bagButton");
+        console.assert(bagButton != null, "Button id for bag was removed or changes; therefore, functionality depending on it wouldn't work");
+        bagButton.addEventListener("click", () => {
+          const products = window.localStorage;
+          let storedIds = [];
+
+          for (let i = 0; i < products.length; ++i) {
+            const key = products.key(i);
+            if (!key.startsWith("bag-")) { continue; }
+            const item = products.getItem(key);
+            if (!Number.isNaN(Number.parseInt(item))) {
+              storedIds.push(item);
+            } else {
+              // This branch should never fire unless something broke in `bag.html`'s JS
+              console.error(`Non numerical value '${item}' was stored for bag page`);
+            }
+          }
+          if (!storedIds || !Array.isArray(storedIds)) {
+            console.error("No valid IDs found in localStorage");
+            return;
+          }
+          const queryString = storedIds
+            .map((id) => encodeURIComponent(id))
+            .join("&");
+
+          const newUrl = `{% url 'pages:bag' %}${queryString}`;
+          console.log(newUrl);
+          const bagLink = document.getElementById("bagButton");
+          if (bagLink) { bagLink.href = newUrl; }
         });
       });
     </script>
